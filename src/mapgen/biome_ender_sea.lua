@@ -1,8 +1,8 @@
 
-local YMAX = -26000
-local YMIN = -26920
+local YMAX = -26920
+local YMIN = -26970
 local BLOB_SCALE = 30  -- Adjust the scale of the blobs
-local SMOOTH_FACTOR = 0.5  -- Adjust the smoothing factor
+local SMOOTH_FACTOR = 0.8  -- Adjust the smoothing factor
 local TRANSITION_RADIUS = 30  -- Radius for smooth sea surface transition
 
 local function smooth_transition(distance, radius)
@@ -43,11 +43,9 @@ local function generate_custom_end_island(minp, maxp, seed)
                     -- Get the noise value
                     local noise_center = perlin:get3d({x = x, y = y, z = z})
 
-                    -- Calculate distance from the sea level
-                    local distance_from_sea = math.abs(y - YMAX)
 
                     -- Calculate smooth transition based on distance from the sea level
-                    local transition = smooth_transition(distance_from_sea, TRANSITION_RADIUS)
+                    local transition = smooth_transition(y, TRANSITION_RADIUS)
                     local final_value = noise_center * transition
 
                     -- Set the node based on the final value and sea level
