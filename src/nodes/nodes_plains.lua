@@ -15,7 +15,7 @@ minetest.register_node("mcl_better_end:end_stone_plains_turf", {
 
     _mcl_blast_resistance = 9,
     _mcl_hardness = 3,
-    light_source = 4,
+    light_source = 2,
 
     groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
 })
@@ -31,6 +31,7 @@ minetest.register_node("mcl_better_end:end_stone_plains_grass", {
 	sunlight_propagates = true,
 	walkable = false,
 	buildable_to = true,
+    light_source = 4,
 	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
 	sounds = mcl_sounds.node_sound_leaves_defaults(),
 	selection_box = {
