@@ -1,9 +1,9 @@
 
-local YMAX = -26920
+local YMAX = -26700
 local YMIN = -26970
-local BLOB_SCALE = 30  -- Adjust the scale of the blobs
+local BLOB_SCALE = 40  -- Adjust the scale of the blobs
 local SMOOTH_FACTOR = 0.8  -- Adjust the smoothing factor
-local TRANSITION_RADIUS = 30  -- Radius for smooth sea surface transition
+local TRANSITION_RADIUS = 10  -- Radius for smooth sea surface transition
 
 local function smooth_transition(distance, radius)
     local t = math.min(distance / radius, 1)
