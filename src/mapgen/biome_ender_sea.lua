@@ -10,7 +10,7 @@ local function smooth_transition(distance, radius)
     return 1 - t * t * (3 - 2 * t)
 end
 
-local function generate_custom_end_island(minp, maxp, seed)
+local function gen_sea(minp, maxp, seed)
     -- Check if the current Y range is within the desired bounds
     if maxp.y < YMIN or minp.y > YMAX then
         return
@@ -64,4 +64,4 @@ local function generate_custom_end_island(minp, maxp, seed)
 end
 
 
-minetest.register_on_generated(generate_custom_end_island)
+minetest.register_on_generated(gen_sea)
