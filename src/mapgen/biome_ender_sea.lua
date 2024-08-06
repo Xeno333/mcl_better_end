@@ -1,4 +1,3 @@
-
 local YMAX = -26700
 local YMIN = -26960
 local BLOB_SCALE = 40  -- Adjust the scale of the blobs
@@ -34,30 +33,27 @@ local function gen_sea(minp, maxp, seed)
     })
 
     -- Loop through the area and set nodes
-    for z = minp.z, maxp.z do
-        for y = minp.y, maxp.y do
-            if y >= YMIN and y <= YMAX then
-                for x = minp.x, maxp.x do
-                    -- Get the noise value
-                    local noise_center = perlin:get3d({x = x, y = y, z = z})
+    local index = area.index
+    for y = math.max(minp.y, YMIN), math.min(maxp.y, YMAX) do
+        local transition = smooth_transition(y, TRANSITION_RADIUS)
+        for z = minp.z, maxp.z do
+            for x = minp.x, maxp.x do
+                -- Get the noise value
+                local noise_center = perlin:get3d({x = x, y = y, z = z})
+                local final_value = noise_center * transition
 
-                    -- Calculate smooth transition based on distance from the sea level
-                    local transition = smooth_transition(y, TRANSITION_RADIUS)
-                    local final_value = noise_center * transition
-
-                    -- Set the node based on the final value and sea level
-                    if final_value > 0.3 then  -- Adjust the threshold for sea size and shape
-                        local vi = area:index(x, y, z)
-                        data[vi] = filler
-                    end
+                -- Set the node based on the final value and sea level
+                if final_value > 0.3 then  -- Adjust the threshold for sea size and shape
+                    local vi = index(area, x, y, z)
+                    data[vi] = filler
                 end
             end
         end
     end
+
     vm:set_data(data)
     vm:write_to_map()
     vm:update_map()
 end
-
 
 minetest.register_on_generated(gen_sea)

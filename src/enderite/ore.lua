@@ -37,16 +37,14 @@ local function gen_enderite_ore(minp, maxp, seed)
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
     -- Loop through the area and set nodes
-    for z = minp.z, maxp.z do
-        for y = minp.y, maxp.y do
-            if y >= YMIN and y <= YMAX then
-                for x = minp.x, maxp.x do
-                    if pr:next(1, 1000) == 5 then
-                        if pr:next(1, 10) == 5 then
-                            local vi = area:index(x, y, z)
-                            if data[vi] == bye then  -- Adjust the threshold for sea size and shape
-                                    data[vi] = filler
-                            end
+    for y = math.max(minp.y, YMIN), math.min(maxp.y, YMAX) do
+        for z = minp.z, maxp.z do
+            for x = minp.x, maxp.x do
+                if pr:next(1, 1000) == 5 then
+                    if pr:next(1, 10) == 5 then
+                        local vi = area:index(x, y, z)
+                        if data[vi] == bye then  -- Adjust the threshold for sea size and shape
+                                data[vi] = filler
                         end
                     end
                 end
