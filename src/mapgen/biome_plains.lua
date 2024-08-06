@@ -3,8 +3,6 @@ local YMAX = -26990--mcl_vars.mg_end_max
 local YMIN = -27010--mcl_vars.mg_end_min
 
 
-
-
 local function gen_plains(minp, maxp, seed)
     -- Check if the current Y range is within the desired bounds
     if maxp.y < YMIN or minp.y > YMAX then
