@@ -14,15 +14,16 @@ local function gen_plains_turf(minp, maxp, seed)
     local data = vm:get_data()
 
     local filler = minetest.get_content_id("mcl_better_end:end_stone_plains_turf")
+    local air = minetest.get_content_id("air")
 
     -- Loop through the area and set nodes
     for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
             if y >= YMIN and y <= YMAX then
                 for x = minp.x, maxp.x do
-                    if minetest.get_node({x = x, y = y, z = z}).name == "air" then
+                    local vi = area:index(x, y, z)
+                    if data[vi] == air then
                         if minetest.get_node({x = x, y = y-1, z = z}).name == "mcl_end:end_stone" then  -- Adjust the threshold for sea size and shape
-                            local vi = area:index(x, y, z)
                             data[vi] = filler
                       end
                     end
@@ -51,16 +52,19 @@ local function gen_plains_grass(minp, maxp, seed)
     local data = vm:get_data()
 
     local filler = minetest.get_content_id("mcl_better_end:end_stone_plains_grass")
+    local air = minetest.get_content_id("air")
+
+    local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
     -- Loop through the area and set nodes
     for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
             if y >= YMIN and y <= YMAX then
                 for x = minp.x, maxp.x do
-                    if math.random(1, 10) == 5 then
-                        if minetest.get_node({x = x, y = y, z = z}).name == "air" then
+                    if pr:next(1, 10) == 5 then
+                        local vi = area:index(x, y, z)
+                        if data[vi] == air then
                             if minetest.get_node({x = x, y = y-1, z = z}).name == "mcl_better_end:end_stone_plains_turf" then  -- Adjust the threshold for sea size and shape
-                                    local vi = area:index(x, y, z)
                                     data[vi] = filler
                             end
                         end

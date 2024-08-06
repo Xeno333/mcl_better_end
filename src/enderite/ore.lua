@@ -15,14 +15,53 @@ minetest.register_node("mcl_better_end:enderite_ore", {
 })
 
 
---need new mapgen code
-minetest.register_ore({
-	ore_type = "scatter",
-	ore = "mcl_better_end:enderite_ore",
-	wherein = "air",
-	clust_scarcity = 327680,
-	clust_num_ores = 1,
-	clust_size = 1,
-	y_max = -27020,
-	y_min = -27060,
-})
+
+
+local function gen_enderite_ore(minp, maxp, seed)
+    local YMAX = mcl_vars.mg_end_max
+    local YMIN = mcl_vars.mg_end_min
+
+    -- Check if the current Y range is within the desired bounds
+    if maxp.y < YMIN or minp.y > YMAX then
+        return
+    end
+
+
+    local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
+    local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
+    local data = vm:get_data()
+
+    local filler = minetest.get_content_id("mcl_better_end:enderite_ore")
+    local bye = minetest.get_content_id("mcl_end:end_stone")
+    
+    local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
+
+    -- Loop through the area and set nodes
+    for z = minp.z, maxp.z do
+        for y = minp.y, maxp.y do
+            if y >= YMIN and y <= YMAX then
+                for x = minp.x, maxp.x do
+                    if pr:next(1, 1000) == 5 then
+                        if pr:next(1, 10) == 5 then
+                            local vi = area:index(x, y, z)
+                            if data[vi] == bye then  -- Adjust the threshold for sea size and shape
+                                    data[vi] = filler
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    vm:set_data(data)
+    vm:write_to_map()
+    vm:update_map()
+end
+
+
+minetest.register_on_generated(
+    function(minp, maxp, seed)
+        gen_enderite_ore(minp, maxp, seed)
+    end
+)

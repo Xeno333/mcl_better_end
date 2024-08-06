@@ -38,11 +38,8 @@ local function gen_sea(minp, maxp, seed)
         for y = minp.y, maxp.y do
             if y >= YMIN and y <= YMAX then
                 for x = minp.x, maxp.x do
-                    local vi = area:index(x, y, z)
-
                     -- Get the noise value
                     local noise_center = perlin:get3d({x = x, y = y, z = z})
-
 
                     -- Calculate smooth transition based on distance from the sea level
                     local transition = smooth_transition(y, TRANSITION_RADIUS)
@@ -50,9 +47,8 @@ local function gen_sea(minp, maxp, seed)
 
                     -- Set the node based on the final value and sea level
                     if final_value > 0.3 then  -- Adjust the threshold for sea size and shape
+                        local vi = area:index(x, y, z)
                         data[vi] = filler
-                    else
-                        data[vi] = c_air
                     end
                 end
             end
