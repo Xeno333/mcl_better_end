@@ -1,3 +1,7 @@
+local YMAX = -27000
+local YMIN = -27020
+
+
 
 minetest.register_node("mcl_better_end:enderite_ore", {
     description = "Ore of Enderite",
@@ -18,9 +22,6 @@ minetest.register_node("mcl_better_end:enderite_ore", {
 
 
 local function gen_enderite_ore(minp, maxp, seed)
-    local YMAX = mcl_vars.mg_end_max
-    local YMIN = mcl_vars.mg_end_min
-
     -- Check if the current Y range is within the desired bounds
     if maxp.y < YMIN or minp.y > YMAX then
         return
