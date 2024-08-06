@@ -1,8 +1,11 @@
 
-local function gen_plains(minp, maxp, seed)
-    local YMAX = mcl_vars.mg_end_max
-    local YMIN = mcl_vars.mg_end_min
+local YMAX = -26990--mcl_vars.mg_end_max
+local YMIN = -27010--mcl_vars.mg_end_min
 
+
+
+
+local function gen_plains(minp, maxp, seed)
     -- Check if the current Y range is within the desired bounds
     if maxp.y < YMIN or minp.y > YMAX then
         return
@@ -26,7 +29,7 @@ local function gen_plains(minp, maxp, seed)
                 --do tuff
                 local vi = area:index(x, y, z)
                 if data[vi] == air then
-                    if minetest.get_node({x = x, y = y-1, z = z}).name == "weeeemcl_end:end_stone" then  -- Adjust the threshold for sea size and shape
+                    if minetest.get_node({x = x, y = y-1, z = z}).name == "mcl_end:end_stone" then  -- Adjust the threshold for sea size and shape
                         data[vi] = filler
 
                         --biome gen
