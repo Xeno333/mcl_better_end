@@ -44,7 +44,7 @@ function mcl_better_end.mapgen.gen_sea(minp, maxp, seed)
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
                 -- Get the noise value
-                local noise_center = perlin:get3d({x = x, y = y, z = z})
+                local noise_center = perlin:get_3d({x = x, y = y, z = z})
                 local final_value = noise_center * transition
 
                 -- Set the node based on the final value and sea level
