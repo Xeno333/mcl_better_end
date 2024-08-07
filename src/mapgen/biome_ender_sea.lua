@@ -4,6 +4,21 @@ local BLOB_SCALE = 40  -- Adjust the scale of the blobs
 local SMOOTH_FACTOR = 0.8  -- Adjust the smoothing factor
 local TRANSITION_RADIUS = 10  -- Radius for smooth sea surface transition
 
+--Needed for context for some reason
+local perlin
+minetest.register_on_joinplayer(
+    function()
+        perlin = minetest.get_perlin({
+            offset = 0,
+            scale = 1,
+            spread = {x = BLOB_SCALE, y = BLOB_SCALE, z = BLOB_SCALE},
+            seed = minetest.get_mapgen_setting("seed"),
+            octaves = 3,
+            persist = 0.5
+        })
+    end
+)
+
 local function smooth_transition(distance, radius)
     local t = math.min(distance / radius, 1)
     return 1 - t * t * (3 - 2 * t)
@@ -21,16 +36,6 @@ function mcl_better_end.mapgen.gen_sea(minp, maxp, seed)
 
     local c_air = minetest.get_content_id("air")
     local filler = minetest.get_content_id("mcl_better_end:ender_water")
-
-    -- Create a Perlin noise map for sea-like blobs
-    local perlin = minetest.get_perlin({
-        offset = 0,
-        scale = 1,
-        spread = {x = BLOB_SCALE, y = BLOB_SCALE, z = BLOB_SCALE},
-        seed = seed,
-        octaves = 3,
-        persist = 0.5
-    })
 
     -- Loop through the area and set nodes
     local index = area.index

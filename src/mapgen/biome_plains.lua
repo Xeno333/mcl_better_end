@@ -2,24 +2,26 @@
 local YMAX = -26990--mcl_vars.mg_end_max
 local YMIN = -27010--mcl_vars.mg_end_min
 
+--Needed for context for some reason
+local perlin
+minetest.register_on_joinplayer(
+    function() 
+        perlin = minetest.get_perlin({
+            offset = 0,
+            scale = 1,
+            spread = {x = 100, y = 1, z = 100},
+            seed = minetest.get_mapgen_setting("seed"),
+            octaves = 3,
+            persist = 0.5
+        })
+    end
+)
 
 function mcl_better_end.mapgen.gen_plains(minp, maxp, seed)
     -- Check if the current Y range is within the desired bounds
     if maxp.y < YMIN or minp.y > YMAX then
         return
     end
-
-
-    -- Create a Perlin noise map for sea-like blobs
-    local perlin = minetest.get_perlin({
-        offset = 0,
-        scale = 1,
-        spread = {x = 100, y = 1, z = 100},
-        seed = minetest.get_mapgen_setting("seed"),
-        octaves = 3,
-        persist = 0.5
-    })
-
 
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
@@ -40,7 +42,7 @@ function mcl_better_end.mapgen.gen_plains(minp, maxp, seed)
                 if data[vi] == air then
                     if minetest.get_node({x = x, y = y-1, z = z}).name == "mcl_end:end_stone" then  -- Adjust the threshold for sea size and shape
 
-                        local noise_center = perlin:get3d({x = x, y = 1, z = z})
+                        local noise_center = perlin:get_3d({x = x, y = 1, z = z})
                         if noise_center > 0 then
                             data[vi] = filler
 
@@ -71,4 +73,5 @@ minetest.register_on_generated(
     function(minp, maxp, seed)
         mcl_better_end.mapgen.gen_plains(minp, maxp, seed)
     end
+    
 )
