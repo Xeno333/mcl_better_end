@@ -21,8 +21,17 @@ minetest.register_on_joinplayer(
 mcl_better_end.mapgen.registered_nodes = {
     air = minetest.get_content_id("air"),
     end_stone = minetest.get_content_id("mcl_end:end_stone"),
-    enderite_ore = minetest.get_content_id("mcl_better_end:enderite_ore")
 }
+
+--API
+mcl_better_end.api.register_biome = function(e)
+    mcl_better_end.biomes[#mcl_better_end.biomes + 1] = e
+end
+
+
+
+
+--Gen
 
 
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
@@ -48,10 +57,13 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         --biome
                         local noise_center = perlin:get_3d({x = x, y = 1, z = z})
 
-                        --plains
-                        if noise_center > 0 then
-                            mcl_better_end.biomes.plains.gen(data, vi, area, pr, x, y, z)
+                        --do biomes
+                        for _, p in pairs(mcl_better_end.biomes) do
+                            if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                p.gen(data, vi, area, pr, x, y, z)
+                            end
                         end
+
                     end
 
                 --ores
