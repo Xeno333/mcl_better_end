@@ -9,7 +9,7 @@ local function smooth_transition(distance, radius)
     return 1 - t * t * (3 - 2 * t)
 end
 
-local function gen_sea(minp, maxp, seed)
+function mcl_better_end.mapgen.gen_sea(minp, maxp, seed)
     -- Check if the current Y range is within the desired bounds
     if maxp.y < YMIN or minp.y > YMAX then
         return
@@ -56,4 +56,4 @@ local function gen_sea(minp, maxp, seed)
     vm:update_map()
 end
 
-minetest.register_on_generated(gen_sea)
+minetest.register_on_generated(mcl_better_end.mapgen.gen_sea)

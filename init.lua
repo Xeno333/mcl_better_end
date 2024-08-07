@@ -1,5 +1,6 @@
 mcl_better_end = {}
 mcl_better_end.api = {}
+mcl_better_end.mapgen = {}
 
 mcl_better_end.code_loc = minetest.get_modpath("mcl_better_end") .. "/src"
 

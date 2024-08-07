@@ -3,11 +3,22 @@ local YMAX = -26990--mcl_vars.mg_end_max
 local YMIN = -27010--mcl_vars.mg_end_min
 
 
-local function gen_plains(minp, maxp, seed)
+function mcl_better_end.mapgen.gen_plains(minp, maxp, seed)
     -- Check if the current Y range is within the desired bounds
     if maxp.y < YMIN or minp.y > YMAX then
         return
     end
+
+
+    -- Create a Perlin noise map for sea-like blobs
+    local perlin = minetest.get_perlin({
+        offset = 0,
+        scale = 1,
+        spread = {x = 100, y = 1, z = 100},
+        seed = minetest.get_mapgen_setting("seed"),
+        octaves = 3,
+        persist = 0.5
+    })
 
 
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
@@ -28,20 +39,23 @@ local function gen_plains(minp, maxp, seed)
                 local vi = area:index(x, y, z)
                 if data[vi] == air then
                     if minetest.get_node({x = x, y = y-1, z = z}).name == "mcl_end:end_stone" then  -- Adjust the threshold for sea size and shape
-                        data[vi] = filler
 
-                        --biome gen
+                        local noise_center = perlin:get3d({x = x, y = 1, z = z})
+                        if noise_center > 0 then
+                            data[vi] = filler
 
-                        --add top
-                        if pr:next(1, 10) == 5 then
-                            local vi = area:index(x, y+1, z)
-                            if data[vi] == air then
-                                data[vi] = topper
+                            --biome gen
+
+                            --add top
+                            if pr:next(1, 10) == 5 then
+                                local vi = area:index(x, y+1, z)
+                                if data[vi] == air then
+                                    data[vi] = topper
+                                end
                             end
+
+                            --end biome gen
                         end
-
-                        --end biome gen
-
                     end
                 end
             end
@@ -55,6 +69,6 @@ end
 
 minetest.register_on_generated(
     function(minp, maxp, seed)
-        gen_plains(minp, maxp, seed)
+        mcl_better_end.mapgen.gen_plains(minp, maxp, seed)
     end
 )
