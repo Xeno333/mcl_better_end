@@ -21,3 +21,4 @@ dofile(mcl_better_end.code_loc .. "/mapgen/biome_oasis.lua")
 dofile(mcl_better_end.code_loc .. "/mapgen/biome_ender_sea.lua")
 
 dofile(mcl_better_end.code_loc .. "/enderite/ore.lua")
+dofile(mcl_better_end.code_loc .. "/enderite/enderite.lua")
