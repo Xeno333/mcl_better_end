@@ -27,11 +27,19 @@ end
 
 
 
-
-
 --Needed for context for some reason
 local perlin
 local perlin_l
+
+
+mcl_better_end.api.is_island = function(x, y, z)
+    if perlin_l:get_3d({x = x, y = y, z = z}) > 0.5 then
+        return true
+    end
+    return false
+end
+
+
 
 minetest.register_on_joinplayer(
     function() 
@@ -56,6 +64,11 @@ minetest.register_on_joinplayer(
 
 
 
+
+
+
+
+
 --Gen
 
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
@@ -70,6 +83,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
+    local is_island = mcl_better_end.api.is_island
     -- Loop through the area and set nodes
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
@@ -77,21 +91,23 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 --do tuff
                 local vi = area:index(x, y, z)
 
-                local noise_center_l = perlin_l:get_3d({x = x, y = y, z = z})
-                if noise_center_l > 0.5 then
-                    data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
-                    for _, f in pairs(mcl_better_end.mapgen.ores) do
-                        f(data, vi, area, pr, x, y, z)
-                    end
-                else
-                    if data[area:index(x, y-1, z)] == mcl_better_end.mapgen.registered_nodes.end_stone then
-                        --biome
-                        local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                --if not generated
+                if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
+                    if is_island(x, y, z) then
+                        data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
+                        for _, f in pairs(mcl_better_end.mapgen.ores) do
+                            f(data, vi, area, pr, x, y, z)
+                        end
+                    else
+                        if data[area:index(x, y-1, z)] == mcl_better_end.mapgen.registered_nodes.end_stone then
+                            --biome
+                            local noise_center = perlin:get_3d({x = x, y = y, z = z})
 
-                        --do biomes
-                        for _, p in pairs(mcl_better_end.biomes) do
-                            if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
-                                p.gen(data, vi, area, pr, x, y, z)
+                            --do biomes
+                            for _, p in pairs(mcl_better_end.biomes) do
+                                if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                    p.gen(data, vi, area, pr, x, y, z)
+                                end
                             end
                         end
                     end

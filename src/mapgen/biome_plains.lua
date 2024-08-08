@@ -12,6 +12,7 @@ local filler = mcl_better_end.mapgen.registered_nodes.plains_filler
 local magibulb = mcl_better_end.mapgen.registered_nodes.plains_magibulb
 
 
+
 mcl_better_end.api.register_biome({
     gen = function(data, vi, area, pr, x, y, z)
         data[vi] = filler
@@ -22,7 +23,7 @@ mcl_better_end.api.register_biome({
             if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
                 data[vi] = topper
             end
-        elseif pr:next(1, 200) == 46 then
+        elseif pr:next(1, 500) == 46 then
             local vi = area:index(x, y+1, z)
             if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
                 data[vi] = magibulb
