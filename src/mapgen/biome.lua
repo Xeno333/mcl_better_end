@@ -4,32 +4,28 @@ local YMIN = -27050--mcl_vars.mg_end_min
 
 local biome_size = 200
 
+--Needed for context for some reason
+local perlin
+local perlin_l
 
 
---remove old mapgen
-mcl_mapgen_core.unregister_generator("end_island")
---needed for light
---mcl_mapgen_core.unregister_generator("end_fixes")
+
 
 
 
 --api
 
 mcl_better_end.mapgen.registered_nodes = {
-    air = minetest.get_content_id("air"),
     end_stone = minetest.get_content_id("mcl_end:end_stone"),
+    old_chorus_plant = minetest.get_content_id("mcl_end:chorus_plant"),
+    old_chorus_plant_top = minetest.get_content_id("mcl_end:chorus_flower_dead"),
+    air = minetest.get_content_id("air"),
 }
 
 --API
 mcl_better_end.api.register_biome = function(e)
     mcl_better_end.biomes[#mcl_better_end.biomes + 1] = e
 end
-
-
-
---Needed for context for some reason
-local perlin
-local perlin_l
 
 
 mcl_better_end.api.is_island = function(x, y, z)
@@ -39,6 +35,11 @@ mcl_better_end.api.is_island = function(x, y, z)
     return false
 end
 
+
+
+
+
+--mapgen
 
 
 minetest.register_on_joinplayer(
@@ -92,26 +93,27 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 local vi = area:index(x, y, z)
 
                 --if not generated
-                if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
-                    if is_island(x, y, z) then
-                        data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
-                        for _, f in pairs(mcl_better_end.mapgen.ores) do
-                            f(data, vi, area, pr, x, y, z)
-                        end
-                    else
-                        if data[area:index(x, y-1, z)] == mcl_better_end.mapgen.registered_nodes.end_stone then
-                            --biome
-                            local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                if is_island(x, y, z) then
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
 
-                            --do biomes
-                            for _, p in pairs(mcl_better_end.biomes) do
-                                if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
-                                    p.gen(data, vi, area, pr, x, y, z)
-                                end
+                    for _, f in pairs(mcl_better_end.mapgen.ores) do
+                        f(data, vi, area, pr, x, y, z)
+                    end
+
+                    if not is_island(x, y+1, z) then
+                        local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                        --do biomes
+                        for _, p in pairs(mcl_better_end.biomes) do
+                            if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                p.gen(data, vi, area, pr, x, y, z)
                             end
                         end
                     end
+                    
+                elseif data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant_top or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant then
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
                 end
+
             end
         end
     end

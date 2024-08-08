@@ -19,13 +19,13 @@ mcl_better_end.api.register_biome({
 
         --add top
         if pr:next(1, 10) == 5 then
-            local vi = area:index(x, y+1, z)
-            if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
+            if not mcl_better_end.api.is_island(x, y+1, z) then
+                local vi = area:index(x, y+1, z)
                 data[vi] = topper
             end
         elseif pr:next(1, 500) == 46 then
-            local vi = area:index(x, y+1, z)
-            if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
+            if not mcl_better_end.api.is_island(x, y+1, z) then
+                local vi = area:index(x, y+1, z)
                 data[vi] = magibulb
             end
         end
