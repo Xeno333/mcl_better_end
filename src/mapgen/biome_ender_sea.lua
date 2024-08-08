@@ -13,7 +13,7 @@ minetest.register_on_joinplayer(
             scale = 1,
             spread = {x = BLOB_SCALE, y = BLOB_SCALE, z = BLOB_SCALE},
             seed = minetest.get_mapgen_setting("seed"),
-            octaves = 3,
+            octaves = 1,
             persist = 0.5
         })
     end

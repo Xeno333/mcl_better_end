@@ -2,6 +2,8 @@
 local YMAX = -26990--mcl_vars.mg_end_max
 local YMIN = -27010--mcl_vars.mg_end_min
 
+local biome_size = 200
+
 --Needed for context for some reason
 local perlin
 minetest.register_on_joinplayer(
@@ -9,9 +11,9 @@ minetest.register_on_joinplayer(
         perlin = minetest.get_perlin({
             offset = 0,
             scale = 1,
-            spread = {x = 100, y = 1, z = 100},
+            spread = {x = biome_size, y = 1, z = biome_size},
             seed = minetest.get_mapgen_setting("seed"),
-            octaves = 3,
+            octaves = 5,
             persist = 0.5
         })
     end
@@ -53,7 +55,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 --do tuff
                 local vi = area:index(x, y, z)
                 if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
-                    if minetest.get_node({x = x, y = y-1, z = z}).name == "mcl_end:end_stone" then  -- Adjust the threshold for sea size and shape
+                    if minetest.get_node({x = x, y = y-1, z = z}).name == "mcl_end:end_stone" then
                         --biome
                         local noise_center = perlin:get_3d({x = x, y = 1, z = z})
 

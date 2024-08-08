@@ -15,7 +15,7 @@ minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
 
     _mcl_blast_resistance = 9,
     _mcl_hardness = 3,
-    light_source = 2,
+    light_source = 1,
 
     groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
 })
