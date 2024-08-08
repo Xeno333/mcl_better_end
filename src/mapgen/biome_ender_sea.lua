@@ -61,4 +61,4 @@ function mcl_better_end.mapgen.gen_sea(minp, maxp, seed)
     vm:update_map()
 end
 
-minetest.register_on_generated(mcl_better_end.mapgen.gen_sea)
+--minetest.register_on_generated(mcl_better_end.mapgen.gen_sea)

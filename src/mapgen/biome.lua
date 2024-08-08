@@ -13,7 +13,7 @@ minetest.register_on_joinplayer(
             scale = 1,
             spread = {x = biome_size, y = 1, z = biome_size},
             seed = minetest.get_mapgen_setting("seed"),
-            octaves = 5,
+            octaves = 3,
             persist = 0.5
         })
     end
@@ -63,9 +63,9 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         for _, p in pairs(mcl_better_end.biomes) do
                             if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
                                 p.gen(data, vi, area, pr, x, y, z)
+                                t = true
                             end
                         end
-
                     end
 
                 --ores
