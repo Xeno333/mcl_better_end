@@ -15,7 +15,7 @@ minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
 
     _mcl_blast_resistance = 9,
     _mcl_hardness = 3,
-    light_source = 1,
+    light_source = 0,
 
     groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
 })
@@ -38,4 +38,115 @@ minetest.register_node("mcl_better_end:end_oasis_grass", {
 		type = "fixed",
 		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
 	},
+})
+
+
+
+
+--liquid
+
+minetest.register_node("mcl_better_end:ender_water_real", {
+    description = "Ender Water",
+
+	drawtype = "liquid",
+	paramtype = "light",
+	liquidtype = "source",
+	use_texture_alpha = "blend",
+	drop = "",
+	post_effect_color = {a = 64, r = 100, g = 100, b = 200},
+    
+	tiles = {{
+		name = "ender_water.png", 
+		animation = {
+			type = "vertical_frames", 
+			aspect_w = 32, 
+			aspect_h = 32, 
+			length = 3,
+		},
+	}, },
+	special_tiles = { {
+		name = "ender_water.png", 
+		animation = {
+			type = "vertical_frames", 
+			aspect_w = 32, 
+			aspect_h = 32, 
+			length = 3,
+		},
+		backface_culling = false,
+	}, },
+	
+    liquid_alternative_flowing = "mcl_better_end:ender_water_real_flowing",
+    liquid_alternative_source = "mcl_better_end:ender_water_real",
+    
+	drowning = 0,
+    liquid_range = 5,
+
+	sounds = mcl_sounds.node_sound_water_defaults(),
+    
+    liquid_renewable = false,
+	is_ground_content = false,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+    light_source = 4,  -- This makes the block emit light
+
+	liquid_viscosity = 2,
+	groups = { water=3, liquid=3, puts_out_fire=1, not_in_creative_inventory=1, melt_around=1, dig_by_piston=1, mbe_ender_sea=1},
+	_mcl_blast_resistance = 100,
+	_mcl_hardness = -1,
+
+})
+
+minetest.register_node("mcl_better_end:ender_water_real_flowing", {
+    description = "Ender Water",
+
+	drawtype = "flowingliquid",
+	paramtype = "light",
+	liquidtype = "flowing",
+	use_texture_alpha = "blend",
+	drop = "",
+	post_effect_color = {a = 64, r = 100, g = 100, b = 200},
+    
+	tiles = {{
+		name = "ender_water.png", 
+		animation = {
+			type = "vertical_frames", 
+			aspect_w = 32, 
+			aspect_h = 32, 
+			length = 3,
+		},
+	}, },
+	special_tiles = { {
+		name = "ender_water.png", 
+		animation = {
+			type = "vertical_frames", 
+			aspect_w = 32, 
+			aspect_h = 32, 
+			length = 3,
+		},
+		backface_culling = false,
+	}, },
+	
+    liquid_alternative_flowing = "mcl_better_end:ender_water_real_flowing",
+    liquid_alternative_source = "mcl_better_end:ender_water_real",
+    
+	drowning = 0,
+    liquid_range = 5,
+
+	sounds = mcl_sounds.node_sound_water_defaults(),
+    
+    liquid_renewable = false,
+	is_ground_content = false,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+    light_source = 4,  -- This makes the block emit light
+
+	liquid_viscosity = 2,
+	groups = { water=3, liquid=3, puts_out_fire=1, not_in_creative_inventory=1, melt_around=1, dig_by_piston=1, mbe_ender_sea=1},
+	_mcl_blast_resistance = 100,
+	_mcl_hardness = -1,
+
 })
