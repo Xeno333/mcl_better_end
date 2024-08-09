@@ -2,7 +2,7 @@
 local YMAX = -26900--mcl_vars.mg_end_max
 local YMIN = -27050--mcl_vars.mg_end_min
 
-local light_level = 4
+--local cave_light_level = 1
 
 local biome_size = 200
 
@@ -149,6 +149,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
+                    --param2_data[vi] = cave_light_level
 
                 elseif is_sea(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
@@ -166,9 +167,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 --elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
                 elseif data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                    
                 end
 
-                --param2_data[vi] = light_level
+                
             end
         end
     end
