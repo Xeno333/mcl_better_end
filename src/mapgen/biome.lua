@@ -122,9 +122,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         end
                     end
 
-                elseif data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant_top or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant then
+                elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
-
 
                 end
 
