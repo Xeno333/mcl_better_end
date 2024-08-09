@@ -6,6 +6,7 @@ mcl_better_end.mapgen.ores = {}
 mcl_better_end.biomes = {}
 
 mcl_better_end.code_loc = minetest.get_modpath("mcl_better_end") .. "/src"
+mcl_better_end.schematic_loc = minetest.get_modpath("mcl_better_end") .. "/schems"
 
 
 

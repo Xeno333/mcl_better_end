@@ -90,6 +90,7 @@ minetest.register_on_joinplayer(
 
 
 
+
 --Gen
 
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
@@ -114,7 +115,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     for y = maxp.y, minp.y, -1 do
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
-                --do tuff
                 local vi = area:index(x, y, z)
 
                 --if not generated
@@ -130,8 +130,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         --do biomes
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" then
-                                if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
-                                    p.gen(data, vi, area, pr, x, y, z)
+                                if p.gen then
+                                    if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                        p.gen(data, vi, area, pr, x, y, z)
+                                    end
                                 end
                             end
                         end
@@ -140,12 +142,16 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 elseif is_cave(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
 
-                    local noise_center = perlin:get_3d({x = x, y = y, z = z})
-                    --do biomes
-                    for _, p in pairs(mcl_better_end.biomes) do
-                        if p.type == "cave" then
-                            if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
-                                p.gen(data, vi, area, pr, x, y, z)
+                    if is_free(x, y+1, z) then
+                        local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                        --do biomes
+                        for _, p in pairs(mcl_better_end.biomes) do
+                            if p.type == "cave" then
+                                if p.gen then
+                                    if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                        p.gen(data, vi, area, pr, x, y, z)
+                                    end
+                                end
                             end
                         end
                     end
@@ -158,12 +164,14 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     --do biomes
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "sea" then
-                            if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
-                                p.gen(data, vi, area, pr, x, y, z)
+                            if p.gen then
+                                if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                    p.gen(data, vi, area, pr, x, y, z)
+                                end
                             end
                         end
                     end
-
+    
                 --elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
                 elseif data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -181,8 +189,80 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     vm:update_map()
 end
 
+
+
+
+function mcl_better_end.mapgen.dec(minp, maxp, seed)
+    -- Check if the current Y range is within the desired bounds
+    if maxp.y < YMIN or minp.y > YMAX then
+        return
+    end
+
+    local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
+
+    local is_island = mcl_better_end.api.is_island
+    local is_sea = mcl_better_end.api.is_sea
+    local is_free = mcl_better_end.api.is_free
+    local is_cave = mcl_better_end.api.is_cave
+
+    -- Loop through the area and set nodes
+    for y = minp.y, maxp.y do
+        for z = minp.z, maxp.z do
+            for x = minp.x, maxp.x do
+
+                --if not generated
+                if is_island(x, y, z) then
+                    if is_free(x, y+1, z) then
+                        local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                        --do biomes
+                        for _, p in pairs(mcl_better_end.biomes) do
+                            if p.type == "island" then
+                                if p.dec then
+                                    if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                        p.dec(pr, x, y, z)
+                                    end
+                                end
+                            end
+                        end
+                    end
+
+                --[[elseif is_cave(x, y, z) then
+                    local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                    --do biomes
+                    if is_free(x, y+1, z) then
+                        for _, p in pairs(mcl_better_end.biomes) do
+                            if p.type == "cave" then
+                                if p.dec then
+                                    if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                        p.dec(pr, x, y, z)
+                                    end
+                                end
+                            end
+                        end
+                    end]]--
+
+                --[[elseif is_sea(x, y, z) then
+                    local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                    --do biomes
+                    for _, p in pairs(mcl_better_end.biomes) do
+                        if p.type == "sea" then
+                            if p.dec then
+                                if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                                    p.dec(pr, x, y, z)
+                                end
+                            end
+                        end
+                    end]]--
+                end
+            end
+        end
+    end
+end
+
+
 minetest.register_on_generated(
     function(minp, maxp, seed)
         mcl_better_end.mapgen.gen(minp, maxp, seed)
+        mcl_better_end.mapgen.dec(minp, maxp, seed)
     end
 )
