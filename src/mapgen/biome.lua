@@ -100,9 +100,9 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local is_sea = mcl_better_end.api.is_sea
 
     -- Loop through the area and set nodes
-    for y = minp.y, maxp.y do
-        for z = minp.z, maxp.z do
-            for x = minp.x, maxp.x do
+    for y = maxp.y, minp.y, -1 do
+        for z = maxp.z, minp.z, -1 do
+            for x = maxp.x, minp.x, -1 do
                 --do tuff
                 local vi = area:index(x, y, z)
 
@@ -126,12 +126,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         end
                     end
 
-                elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
-                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
-
-                end
-
-                if is_sea(x, y, z) then
+                elseif is_sea(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
 
                     local noise_center = perlin:get_3d({x = x, y = y, z = z})
@@ -143,7 +138,12 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
+
+                --elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
+                elseif data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
                 end
+
                 --param2_data[vi] = light_level
             end
         end
