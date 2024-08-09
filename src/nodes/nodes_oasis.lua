@@ -51,7 +51,7 @@ minetest.register_node("mcl_better_end:end_stone_oasis_leaves", {
         "blue_end_tree_leaves.png",   -- Top texture
     },
     stack_max = 64,
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = mcl_sounds.node_sound_leaves_defaults(),
 
     light_source = 5,
 
