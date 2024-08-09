@@ -1,11 +1,23 @@
 -- Enregistrement du minerai Nephrite
 minetest.register_node("mcl_better_end:nephrite_ore", {
     description = "Nephrite Ore",
-    tiles = {"end_stone_with_nephrite.png"},
-    is_ground_content = true,
-    groups = {cracky = 3},
+    tiles = {
+        "mcl_end_end_stone.png^end_stone_with_nephrite.png",
+    },
     drop = 'mcl_better_end:nephrite_raw', -- Le minerai laisse tomber un morceau brut
+
+    stack_max = 64,
+
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 1200,
+    _mcl_hardness = 70,
+    light_source = 10,  -- This makes the block emit light
+
+    groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
 })
+
+
+
 -- Enregistrement du minerai brut
 minetest.register_craftitem("mcl_better_end:nephrite_raw", {
     description = "Raw Nephrite",
