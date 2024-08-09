@@ -167,7 +167,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 --elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
                 elseif data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                    
+
                 end
 
                 
@@ -185,5 +185,4 @@ minetest.register_on_generated(
     function(minp, maxp, seed)
         mcl_better_end.mapgen.gen(minp, maxp, seed)
     end
-    
 )
