@@ -25,10 +25,10 @@ minetest.register_node("mcl_better_end:end_stone_oasis_trunk", {
     tiles = {
         "blue_end_wood_top.png",   -- Top texture
         "blue_end_wood_top.png",   -- Bottom texture
-        "blue_end_wood.png",   -- Side texture 1
-        "blue_end_wood.png",   -- Side texture 2
-        "blue_end_wood.png",   -- Side texture 3
-        "blue_end_wood.png",   -- Side texture 4
+        "blue_end_wood_side.png",   -- Side texture 1
+        "blue_end_wood_side.png",   -- Side texture 2
+        "blue_end_wood_side.png",   -- Side texture 3
+        "blue_end_wood_side.png",   -- Side texture 4
     },
     stack_max = 64,
 
