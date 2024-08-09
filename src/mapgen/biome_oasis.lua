@@ -12,12 +12,15 @@ local filler = mcl_better_end.mapgen.registered_nodes.oasis_filler
 local water = mcl_better_end.mapgen.registered_nodes.oasis_water
 
 
+local function gen_pond(data, vi, area, pr, x, y, z)
+end
+
 mcl_better_end.api.register_biome({
     gen = function(data, vi, area, pr, x, y, z)
         data[vi] = filler
 
         --add topww
-        if pr:next(1, 5) == 3 then
+        if pr:next(1, 20) == 3 then
             if not mcl_better_end.api.is_island(x, y+1, z) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = topper

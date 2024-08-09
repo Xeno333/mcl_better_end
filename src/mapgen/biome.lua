@@ -2,6 +2,8 @@
 local YMAX = -26900--mcl_vars.mg_end_max
 local YMIN = -27050--mcl_vars.mg_end_min
 
+local light_level = 3
+
 local biome_size = 200
 
 --Needed for context for some reason
@@ -81,6 +83,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local data = vm:get_data()
+    local param2_data = vm:get_param2_data()
 
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
@@ -109,16 +112,18 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
-                    
+
                 elseif data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant_top or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
                 end
 
+                param2_data[vi] = light_level
             end
         end
     end
 
     vm:set_data(data)
+    vm:set_param2_data(param2_data)
     vm:write_to_map()
     vm:update_map()
 end

@@ -20,6 +20,27 @@ minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
     groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
 })
 
+minetest.register_node("mcl_better_end:end_stone_oasis_trunk", {
+    description = "Blue Trunk",
+    tiles = {
+        "blue_end_wood_top.png",   -- Top texture
+        "blue_end_wood_top.png",   -- Bottom texture
+        "blue_end_wood.png",   -- Side texture 1
+        "blue_end_wood.png",   -- Side texture 2
+        "blue_end_wood.png",   -- Side texture 3
+        "blue_end_wood.png",   -- Side texture 4
+    },
+    stack_max = 64,
+
+    sounds = mcl_sounds.node_sound_wood_defaults(),
+
+    _mcl_blast_resistance = 9,
+    _mcl_hardness = 3,
+    light_source = 0,
+
+    groups = {axey=1, building_block=1, material_stone=1, mbe_plains=1},
+})
+
 minetest.register_node("mcl_better_end:end_oasis_grass", {
 	description = ("Ender Oasis Grass"),
 	drawtype = "plantlike",

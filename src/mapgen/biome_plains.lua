@@ -18,7 +18,7 @@ mcl_better_end.api.register_biome({
         data[vi] = filler
 
         --add top
-        if pr:next(1, 10) == 5 then
+        if pr:next(1, 20) == 5 then
             if not mcl_better_end.api.is_island(x, y+1, z) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = topper
