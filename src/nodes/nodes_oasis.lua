@@ -44,10 +44,14 @@ minetest.register_node("mcl_better_end:end_stone_oasis_trunk", {
 
 minetest.register_node("mcl_better_end:end_stone_oasis_leaves", {
     description = "Blue Leaves",
+    drawtype = "allfaces_optional",
+    paramtype = "light",
+    is_ground_content = false,
     tiles = {
         "blue_end_tree_leaves.png",   -- Top texture
     },
     stack_max = 64,
+    sounds = default.node_sound_leaves_defaults(),
 
     light_source = 5,
 
