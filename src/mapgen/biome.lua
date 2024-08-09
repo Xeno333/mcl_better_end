@@ -2,7 +2,7 @@
 local YMAX = -26900--mcl_vars.mg_end_max
 local YMIN = -27050--mcl_vars.mg_end_min
 
-local light_level = 3
+local light_level = 4
 
 local biome_size = 200
 
@@ -22,6 +22,7 @@ mcl_better_end.mapgen.registered_nodes = {
     old_chorus_plant = minetest.get_content_id("mcl_end:chorus_plant"),
     old_chorus_plant_top = minetest.get_content_id("mcl_end:chorus_flower_dead"),
     air = minetest.get_content_id("air"),
+    sea = minetest.get_content_id("mcl_better_end:ender_water"),
 }
 
 --API
@@ -37,7 +38,13 @@ mcl_better_end.api.is_island = function(x, y, z)
     return false
 end
 
-
+mcl_better_end.api.is_sea = function(x, y, z)
+    local noise = perlin_l:get_3d({x = x, y = y, z = z})
+    if noise < -0.5 then
+        return true
+    end
+    return false
+end
 
 
 
@@ -83,11 +90,13 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local data = vm:get_data()
-    local param2_data = vm:get_param2_data()
+    --local param2_data = vm:get_param2_data()
 
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
     local is_island = mcl_better_end.api.is_island
+    local is_sea = mcl_better_end.api.is_sea
+
     -- Loop through the area and set nodes
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
@@ -115,15 +124,21 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
                 elseif data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant_top or data[vi] == mcl_better_end.mapgen.registered_nodes.old_chorus_plant then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
+
+
                 end
 
-                param2_data[vi] = light_level
+                if is_sea(x, y, z) then
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.sea
+                end
+
+                --param2_data[vi] = light_level
             end
         end
     end
 
+    --vm:set_param2_data(param2_data)
     vm:set_data(data)
-    vm:set_param2_data(param2_data)
     vm:write_to_map()
     vm:update_map()
 end
