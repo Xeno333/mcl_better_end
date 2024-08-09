@@ -54,6 +54,7 @@ end
 
 
 mcl_better_end.api.register_biome({
+    type = "island",
     gen = function(data, vi, area, pr, x, y, z)
         data[vi] = filler
 

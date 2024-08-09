@@ -119,7 +119,9 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         --do biomes
                         for _, p in pairs(mcl_better_end.biomes) do
                             if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
-                                p.gen(data, vi, area, pr, x, y, z)
+                                if p.type == "island" then
+                                    p.gen(data, vi, area, pr, x, y, z)
+                                end
                             end
                         end
                     end
@@ -131,8 +133,17 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
                 if is_sea(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
-                end
 
+                    local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                    --do biomes
+                    for _, p in pairs(mcl_better_end.biomes) do
+                        if (noise_center <= p.noise_high) and (noise_center >= p.noise_low) then
+                            if p.type == "sea" then
+                                p.gen(data, vi, area, pr, x, y, z)
+                            end
+                        end
+                    end
+                end
                 --param2_data[vi] = light_level
             end
         end
