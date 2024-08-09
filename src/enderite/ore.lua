@@ -1,4 +1,4 @@
-local YMAX = -269720
+local YMAX = -27020
 
 minetest.register_node("mcl_better_end:enderite_ore", {
     description = "Ore of Enderite",
