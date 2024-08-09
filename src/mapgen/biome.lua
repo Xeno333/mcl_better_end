@@ -19,8 +19,6 @@ local perlin_l
 
 mcl_better_end.mapgen.registered_nodes = {
     end_stone = minetest.get_content_id("mcl_end:end_stone"),
-    old_chorus_plant = minetest.get_content_id("mcl_end:chorus_plant"),
-    old_chorus_plant_top = minetest.get_content_id("mcl_end:chorus_flower_dead"),
     air = minetest.get_content_id("air"),
     sea = minetest.get_content_id("mcl_better_end:ender_water"),
 }
@@ -46,6 +44,10 @@ mcl_better_end.api.is_sea = function(x, y, z)
     return false
 end
 
+
+mcl_better_end.api.is_free = function(x, y, z)
+    return not (mcl_better_end.api.is_island(x, y, z) or mcl_better_end.api.is_sea(x, y, z))
+end
 
 
 --mapgen
