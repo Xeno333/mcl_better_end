@@ -81,6 +81,29 @@ minetest.register_node("mcl_better_end:end_oasis_grass", {
 
 
 
+minetest.register_node("mcl_better_end:end_glow_berry_plant", {
+	description = ("Ender Glow Berry Plant"),
+	drawtype = "plantlike",
+	waving = 1,
+	tiles = {"end_glow_berry_plant.png"},
+	inventory_image = "end_glow_berry_plant.png",
+	wield_image = "end_glow_berry_plant.png",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	buildable_to = true,
+    light_source = 10,
+	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
+	sounds = mcl_sounds.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
+	},
+})
+
+
+
+
 --liquid
 
 minetest.register_node("mcl_better_end:ender_water_real", {

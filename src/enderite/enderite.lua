@@ -21,7 +21,7 @@ minetest.register_node("mcl_better_end:enderite_ore", {
 -- Enregistrement du minerai brut
 minetest.register_craftitem("mcl_better_end:enderite_raw", {
     description = "Raw enderite",
-    inventory_image = "enderite_raw.png",
+    inventory_image = "raw_enderite.png",
 })
 
 -- Enregistrement du lingot
