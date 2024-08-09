@@ -41,6 +41,19 @@ minetest.register_node("mcl_better_end:end_stone_oasis_trunk", {
     groups = {axey=1, building_block=1, material_stone=1, mbe_plains=1},
 })
 
+
+minetest.register_node("mcl_better_end:end_stone_oasis_leaves", {
+    description = "Blue Leaves",
+    tiles = {
+        "blue_end_tree_leaves.png",   -- Top texture
+    },
+    stack_max = 64,
+
+    light_source = 5,
+
+    groups = {building_block=1, material_stone=1, mbe_plains=1},
+})
+
 minetest.register_node("mcl_better_end:end_oasis_grass", {
 	description = ("Ender Oasis Grass"),
 	drawtype = "plantlike",
