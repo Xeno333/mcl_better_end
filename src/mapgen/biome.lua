@@ -1,5 +1,5 @@
 
-local YMAX = -26900--mcl_vars.mg_end_max
+local YMAX = -25000--mcl_vars.mg_end_max
 local YMIN = -27050--mcl_vars.mg_end_min
 
 --local cave_light_level = 1
