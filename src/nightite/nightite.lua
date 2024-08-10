@@ -2,7 +2,7 @@
 minetest.register_node("mcl_better_end:nightite_ore", {
     description = "nightite Ore",
     tiles = {
-        "mcl_end_end_stone.png^end_stone_with_nightite.png",
+        "nightite_ore.png",
     },
     drop = 'mcl_better_end:nightite_raw', -- Le minerai laisse tomber un morceau brut
 
