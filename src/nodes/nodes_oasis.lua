@@ -93,12 +93,24 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant", {
 	walkable = false,
 	buildable_to = true,
     light_source = 10,
+	drops = "mcl_better_end:end_glow_berry",
 	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
 	sounds = mcl_sounds.node_sound_leaves_defaults(),
 	selection_box = {
 		type = "fixed",
 		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
 	},
+})
+
+minetest.register_craftitem("mcl_better_end:end_glow_berry", {
+    description = "Glow Berry", -- The name of the food item
+    inventory_image = "end_glow_berry.png", -- The texture of the food item
+	_mcl_saturation = 1,
+	on_place = minetest.item_eat(1),
+	on_secondary_use = minetest.item_eat(1),
+    groups = {food = 1, eatable = 1}, -- Item groups, 'food' and 'eatable' are important for food items
+
+    stack_max = 64, -- Maximum number of items per stack
 })
 
 
