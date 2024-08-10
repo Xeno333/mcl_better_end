@@ -2,7 +2,7 @@
 local YMAX = -25000--mcl_vars.mg_end_max
 local YMIN = -27050--mcl_vars.mg_end_min
 
---local cave_light_level = 1
+local cave_light_level = 6
 
 local biome_size = 200
 
@@ -102,7 +102,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local data = vm:get_data()
-    --local param2_data = vm:get_param2_data()
+    local param2_data = vm:get_param2_data()
 
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
@@ -138,11 +138,12 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
+                    param2_data[vi] = 10
 
                 elseif is_cave(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
 
-                    if is_free(x, y+1, z) then
+                    if is_cave(x, y+1, z) then
                         local noise_center = perlin:get_3d({x = x, y = y, z = z})
                         --do biomes
                         for _, p in pairs(mcl_better_end.biomes) do
@@ -155,7 +156,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
-                    --param2_data[vi] = cave_light_level
+                    param2_data[vi] = cave_light_level
 
                 elseif is_sea(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
@@ -171,19 +172,20 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
+                    param2_data[vi] = 10
     
                 --elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
                 elseif data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                    param2_data[vi] = 10
 
                 end
-
                 
             end
         end
     end
 
-    --vm:set_param2_data(param2_data)
+    vm:set_param2_data(param2_data)
     vm:set_data(data)
     vm:write_to_map()
     vm:update_map()

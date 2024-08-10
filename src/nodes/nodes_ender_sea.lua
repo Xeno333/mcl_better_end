@@ -42,7 +42,7 @@ minetest.register_node("mcl_better_end:ender_water", {
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
-    light_source = 4,  -- This makes the block emit light
+    light_source = 6,  -- This makes the block emit light
 
 	liquid_viscosity = 2,
 	groups = { water=3, liquid=3, puts_out_fire=1, not_in_creative_inventory=1, melt_around=1, dig_by_piston=1, mbe_ender_sea=1},
