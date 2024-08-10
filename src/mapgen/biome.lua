@@ -34,6 +34,10 @@ end
 mcl_better_end.api.is_cave = function(x, y, z)
     if perlin_l:get_3d({x = x, y = y, z = z}) >= 0.8 then
         return true
+
+    elseif perlin_l:get_3d({x = x, y = y+1, z = z}) >= 0.8 then
+        return true
+
     end
     return false
 end

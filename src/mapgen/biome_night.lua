@@ -37,8 +37,6 @@ mcl_better_end.api.register_biome({
             end
         end
     end,
-    dec = function(pr, x, y, z)
-    end,
     noise_high = 1,
-    noise_low = 0
+    noise_low = -1
 })
