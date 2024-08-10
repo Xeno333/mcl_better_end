@@ -90,3 +90,30 @@ minetest.register_tool("mcl_better_end:enderite_shovel", {
         damage_groups = {fleshy=7},
     },
 })
+
+
+
+
+
+
+
+
+--armor
+
+mcl_armor.register_set({
+    name = "enderite",
+    description = "Enderite",
+    durability = 600,
+    enchantability = 10,
+    points = {
+            head = 4,
+            torso = 10,
+            legs = 7,
+            feet = 4,
+    },
+    groups = { fire_immune=1 },
+    toughness = 2,
+    craft_material = "mcl_better_end:enderite_ingot",
+    sound_equip = "mcl_armor_equip_diamond",
+    sound_unequip = "mcl_armor_unequip_diamond",
+})
