@@ -2,7 +2,7 @@
 minetest.register_node("mcl_better_end:enderite_ore", {
     description = "enderite Ore",
     tiles = {
-        "mcl_end_end_stone.png^end_stone_with_enderite.png",
+        "enderite_ore.png",
     },
     drop = 'mcl_better_end:enderite_raw', -- Le minerai laisse tomber un morceau brut
 
@@ -21,7 +21,7 @@ minetest.register_node("mcl_better_end:enderite_ore", {
 -- Enregistrement du minerai brut
 minetest.register_craftitem("mcl_better_end:enderite_raw", {
     description = "Raw enderite",
-    inventory_image = "raw_enderite.png",
+    inventory_image = "enderite_raw.png",
 })
 
 -- Enregistrement du lingot
@@ -41,7 +41,7 @@ minetest.register_craft({
 -- Outils
 minetest.register_tool("mcl_better_end:enderite_pickaxe", {
     description = "enderite Pickaxe",
-    inventory_image = "enderite_pick.png",
+    inventory_image = "enderite_pickaxe.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
