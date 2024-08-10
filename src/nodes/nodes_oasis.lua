@@ -1,3 +1,6 @@
+mcl_better_end.biomes.oasis = {}
+
+
 minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
     description = "End Stone with Blue Mold",
     tiles = {
@@ -20,7 +23,53 @@ minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
     groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
 })
 
-minetest.register_node("mcl_better_end:end_stone_oasis_trunk", {
+
+mcl_better_end.biomes.oasis.tree_schem = {
+    "/oasis_tree_1.mts",
+    "/oasis_tree_2.mts",
+    "/oasis_tree_3.mts",
+    "/oasis_tree_4.mts",
+}
+
+minetest.register_node("mcl_better_end:custom_sapling", {
+    description = "Oasis Sapling",
+    drawtype = "plantlike",
+    tiles = {"oasis_sapling.png"},
+
+    groups = {snappy = 2, dig_immediate = 3, attached_node = 1, sapling = 1, flammable = 2},
+
+    on_construct = function(pos)
+        minetest.get_node_timer(pos):start(math.random(300, 1500))
+    end,
+    on_timer = function(pos)
+        -- Check if the sapling is on the correct turf
+        local below_pos = {x = pos.x, y = pos.y - 1, z = pos.z}
+        local below_node = minetest.get_node(below_pos).name
+
+        if below_node == "mcl_better_end:end_stone_oasis_turf" then
+			minetest.set_node(pos, {name = "air"})
+            -- Randomly select a tree schematic
+            local schematics = mcl_better_end.biomes.oasis.tree_schem
+            local random_schem = mcl_better_end.schematic_loc .. schematics[math.random(#schematics)]
+
+            -- Place the schematic at the sapling's position
+            minetest.place_schematic(pos, random_schem, "random", nil, true)
+        end
+    end,
+
+    paramtype = "light",
+    sunlight_propagates = true,
+    walkable = false,
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.3, -0.5, -0.3, 0.3, 0.35, 0.3},
+    },
+    sounds = mcl_sounds.node_sound_leaves_defaults(),
+})
+
+
+
+minetest.register_node("mcl_better_end:end_oasis_trunk", {
     description = "Blue Trunk",
     tiles = {
         "blue_end_wood_top.png",   -- Top texture
@@ -38,11 +87,11 @@ minetest.register_node("mcl_better_end:end_stone_oasis_trunk", {
     _mcl_hardness = 3,
     light_source = 0,
 
-    groups = {axey=1, building_block=1, material_stone=1, mbe_plains=1},
+    groups = {axey=1, building_block=1, mbe_plains=1},
 })
 
 
-minetest.register_node("mcl_better_end:end_stone_oasis_leaves", {
+minetest.register_node("mcl_better_end:end_oasis_leaves", {
     description = "Blue Leaves",
     drawtype = "allfaces_optional",
     paramtype = "light",
@@ -55,7 +104,17 @@ minetest.register_node("mcl_better_end:end_stone_oasis_leaves", {
 
     light_source = 5,
 
-    groups = {building_block=1, material_stone=1, mbe_plains=1},
+    drop = {
+        max_items = 1,
+        items = {
+            {
+                items = {"mcl_better_end:custom_sapling"},
+                rarity = 20, -- 1 in 100 chance to drop
+            },
+        }
+    },
+
+    groups = {building_block=1, mbe_plains=1},
 })
 
 minetest.register_node("mcl_better_end:end_oasis_grass", {

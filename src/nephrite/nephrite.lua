@@ -2,7 +2,7 @@
 minetest.register_node("mcl_better_end:nephrite_ore", {
     description = "Nephrite Ore",
     tiles = {
-        "mcl_end_end_stone.png^end_stone_with_nephrite.png",
+        "mcl_end_end_stone.png^nephrite_ore.png",
     },
     drop = 'mcl_better_end:nephrite_raw', -- Le minerai laisse tomber un morceau brut
 
@@ -29,6 +29,18 @@ minetest.register_craftitem("mcl_better_end:nephrite_ingot", {
     description = "Nephrite Ingot",
     inventory_image = "nephrite_ingot.png",
 })
+
+
+
+minetest.register_craft({
+    output = 'mcl_better_end:nephrite_ingot',
+    recipe = {
+        {'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw'},
+        {'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw'},
+        {'', 'mcl_better_end:nephrite_raw', ''},
+    }
+})
+
 
 -- Recette de cuisson pour obtenir le lingot
 minetest.register_craft({

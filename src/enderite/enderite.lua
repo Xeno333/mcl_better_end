@@ -2,7 +2,7 @@
 minetest.register_node("mcl_better_end:enderite_ore", {
     description = "enderite Ore",
     tiles = {
-        "mcl_end_end_stone.png^end_stone_with_enderite.png",
+        "mcl_end_end_stone.png^enderite_ore.png",
     },
     drop = 'mcl_better_end:enderite_raw', -- Le minerai laisse tomber un morceau brut
 
