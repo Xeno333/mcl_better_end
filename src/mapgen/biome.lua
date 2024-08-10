@@ -177,7 +177,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         end
                     end
     
-                elseif data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
+                else
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
                     light_data[vi] = light_level
 
