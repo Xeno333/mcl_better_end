@@ -2,7 +2,7 @@
 minetest.register_node("mcl_better_end:nephrite_ore", {
     description = "Nephrite Ore",
     tiles = {
-        "mcl_end_end_stone.png^end_stone_with_nephrite.png",
+        "nephrite_ore.png",
     },
     drop = 'mcl_better_end:nephrite_raw', -- Le minerai laisse tomber un morceau brut
 
