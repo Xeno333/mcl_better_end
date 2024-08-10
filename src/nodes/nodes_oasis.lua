@@ -80,6 +80,7 @@ minetest.register_node("mcl_better_end:end_oasis_trunk", {
         "blue_end_wood_side.png",   -- Side texture 4
     },
     stack_max = 64,
+    paramtype2 = "facedir",
 
     sounds = mcl_sounds.node_sound_wood_defaults(),
 
