@@ -45,6 +45,25 @@ minetest.register_node("mcl_better_end:night_grass", {
 
 
 
+minetest.register_node("mcl_better_end:night_candle", {
+	description = ("Night Candle"),
+	drawtype = "plantlike",
+	tiles = {"night_candle.png"},
+	inventory_image = "night_candle.png",
+	wield_image = "night_candle.png",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	buildable_to = true,
+    light_source = 10,
+	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
+	sounds = mcl_sounds.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
+	},
+})
+
 
 minetest.register_node("mcl_better_end:night_candle_plant", {
 	description = ("Night Candle Plant"),

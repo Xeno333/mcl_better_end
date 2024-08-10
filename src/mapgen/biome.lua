@@ -107,7 +107,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local data = vm:get_data()
-    local param2_data = vm:get_param2_data()
+    local light_data = vm:get_light_data()
 
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
@@ -143,10 +143,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
-                    param2_data[vi] = light_level
 
                 elseif is_cave(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                    light_data[vi] = cave_light_level
 
                     if is_cave(x, y+1, z) then
                         local noise_center = perlin:get_3d({x = x, y = y, z = z})
@@ -161,7 +161,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
-                    param2_data[vi] = cave_light_level
 
                 elseif is_sea(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
@@ -177,12 +176,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                             end
                         end
                     end
-                    param2_data[vi] = light_level
     
-                --elseif (data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone) then
                 elseif data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                    param2_data[vi] = light_level
+                    light_data[vi] = light_level
 
                 end
                 
@@ -190,7 +187,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         end
     end
 
-    vm:set_param2_data(param2_data)
+    vm:set_light_data(light_data)
     vm:set_data(data)
     vm:write_to_map()
     vm:update_map()
