@@ -11,6 +11,7 @@ minetest.register_node("mcl_better_end:enderite_ore", {
     sounds = mcl_sounds.node_sound_stone_defaults(),
     _mcl_blast_resistance = 1200,
     _mcl_hardness = 70,
+    _mcl_silk_touch_drop = true,
     light_source = 10,  -- This makes the block emit light
 
     groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
@@ -20,23 +21,28 @@ minetest.register_node("mcl_better_end:enderite_ore", {
 
 -- Enregistrement du minerai brut
 minetest.register_craftitem("mcl_better_end:enderite_raw", {
+    stack_max = 64,
     description = "Raw enderite",
     inventory_image = "raw_enderite.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:enderite_ingot", {
-    description = "enderite Ingot",
+    stack_max = 64,
+    description = "Enderite Ingot",
     inventory_image = "enderite_ingot.png",
 })
 
 -- Recette de cuisson pour obtenir le lingot
 minetest.register_craft({
-    type = "cooking",
-    output = "mcl_better_end:enderite_ingot",
-    recipe = "mcl_better_end:enderite_raw",
-    cooktime = 1,
+    output = 'mcl_better_end:enderite_ingot',
+    recipe = {
+        {'mcl_better_end:enderite_raw', 'mcl_better_end:enderite_raw', 'mcl_better_end:enderite_raw'},
+        {'mcl_better_end:enderite_raw', 'mcl_better_end:ender_shard', 'mcl_better_end:enderite_raw'},
+        {'mcl_better_end:enderite_raw', 'mcl_better_end:enderite_raw', 'mcl_better_end:enderite_raw'},
+    }
 })
+
 
 -- Outils
 minetest.register_tool("mcl_better_end:enderite_pickaxe", {

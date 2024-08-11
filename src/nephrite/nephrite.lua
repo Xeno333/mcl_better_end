@@ -11,6 +11,7 @@ minetest.register_node("mcl_better_end:nephrite_ore", {
     sounds = mcl_sounds.node_sound_stone_defaults(),
     _mcl_blast_resistance = 1200,
     _mcl_hardness = 70,
+    _mcl_silk_touch_drop = true,
     light_source = 10,  -- This makes the block emit light
 
     groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
@@ -20,12 +21,14 @@ minetest.register_node("mcl_better_end:nephrite_ore", {
 
 -- Enregistrement du minerai brut
 minetest.register_craftitem("mcl_better_end:nephrite_raw", {
+    stack_max = 64,
     description = "Raw Nephrite",
     inventory_image = "nephrite_raw.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:nephrite_ingot", {
+    stack_max = 64,
     description = "Nephrite Ingot",
     inventory_image = "nephrite_ingot.png",
 })

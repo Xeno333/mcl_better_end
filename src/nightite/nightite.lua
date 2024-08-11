@@ -1,30 +1,16 @@
--- Enregistrement du minerai nightite
-minetest.register_node("mcl_better_end:nightite_ore", {
-    description = "nightite Ore",
-    tiles = {
-        "mcl_end_end_stone.png^end_stone_with_nightite.png",
-    },
-    drop = 'mcl_better_end:nightite_raw', -- Le minerai laisse tomber un morceau brut
 
-    stack_max = 64,
-
-    sounds = mcl_sounds.node_sound_stone_defaults(),
-    _mcl_blast_resistance = 1200,
-    _mcl_hardness = 70,
-    light_source = 10,  -- This makes the block emit light
-
-    groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
-})
 
 
 -- Enregistrement du minerai brut
 minetest.register_craftitem("mcl_better_end:nightite_raw", {
+    stack_max = 64,
     description = "Raw nightite",
     inventory_image = "nightite_raw.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:nightite_ingot", {
+    stack_max = 64,
     description = "nightite Ingot",
     inventory_image = "nightite_ingot.png",
 })

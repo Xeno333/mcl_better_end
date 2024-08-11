@@ -18,6 +18,7 @@ minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
 
     _mcl_blast_resistance = 9,
     _mcl_hardness = 3,
+    _mcl_silk_touch_drop = true,
     light_source = 0,
 
     groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
@@ -101,6 +102,7 @@ minetest.register_node("mcl_better_end:end_oasis_leaves", {
     tiles = {
         "blue_end_tree_leaves.png",   -- Top texture
     },
+    _mcl_silk_touch_drop = true,
     stack_max = 64,
     sounds = mcl_sounds.node_sound_leaves_defaults(),
 

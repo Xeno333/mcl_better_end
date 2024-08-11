@@ -10,12 +10,20 @@ minetest.register_node("mcl_better_end:end_stone_night_turf", {
     },
     stack_max = 64,
 
-    drop = "mcl_end:end_stone",
     sounds = mcl_sounds.node_sound_stone_defaults(),
 
     _mcl_blast_resistance = 9,
     _mcl_hardness = 3,
+    _mcl_silk_touch_drop = true,
     light_source = 0,
+
+    drop = {
+        max_items = 2,
+        items = {
+            {items = {"mcl_end:end_stone"}, rarity = 1},
+            {items = {"mcl_better_end:nightite_raw"}, rarity = 2000},
+        },
+    },
 
     groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
 })
