@@ -81,6 +81,7 @@ minetest.register_node("mcl_better_end:end_oasis_trunk", {
     },
     stack_max = 64,
     paramtype2 = "facedir",
+	on_place = mcl_util.rotate_axis,
 
     sounds = mcl_sounds.node_sound_wood_defaults(),
 
@@ -283,3 +284,58 @@ minetest.register_node("mcl_better_end:ender_water_real_flowing", {
 	_mcl_hardness = -1,
 
 })
+
+
+minetest.register_node("mcl_better_end:blublu_block", {
+    description = "Blublu Block",
+    tiles = {
+        "blublu_block.png",
+    },
+    stack_max = 64,
+	paramtype2 = "facedir",
+	on_place = mcl_util.rotate_axis,
+
+    drop = "mcl_end:end_stone",
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+
+    _mcl_blast_resistance = 5,
+    _mcl_hardness = 2,
+    light_source = 0,
+
+	groups = {pickaxey=1, building_block=1, material_stone=1, purpur_block=1},
+})
+
+minetest.register_node("mcl_better_end:blublu_pillar", {
+    description = "Blublu Piller",
+    tiles = {
+        "blublu_pillar_top.png",
+        "blublu_pillar_top.png",
+        "blublu_pillar.png",
+    },
+    stack_max = 64,
+	paramtype2 = "facedir",
+	on_place = mcl_util.rotate_axis,
+
+    drop = "mcl_end:end_stone",
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+
+    _mcl_blast_resistance = 5,
+    _mcl_hardness = 2,
+    light_source = 0,
+
+	groups = {pickaxey=1, building_block=1, material_stone=1, purpur_block=1},
+})
+
+
+mcl_stairs.register_stair("blublu_block", "mcl_better_end:blublu_block",
+                {pickaxey=1, material_stone=1},
+                {"blublu_block.png"},
+                "Blublu Stairs",
+                mcl_sounds.node_sound_stone_defaults(), 6, 1.5,
+                nil)
+mcl_stairs.register_slab("blublu_block", "mcl_better_end:blublu_block",
+                {pickaxey=1, material_stone=1},
+                {"blublu_block.png"},
+                "Blublu Slab",
+                mcl_sounds.node_sound_stone_defaults(), 6, 2,
+                "Double Blublu Slab")
