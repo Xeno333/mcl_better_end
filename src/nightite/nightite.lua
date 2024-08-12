@@ -5,7 +5,7 @@
 minetest.register_craftitem("mcl_better_end:nightite_raw", {
     stack_max = 64,
     description = "Raw Nightite",
-    inventory_image = "nightite_raw.png",
+    inventory_image = "raw_nightite.png",
 })
 
 -- Enregistrement du lingot

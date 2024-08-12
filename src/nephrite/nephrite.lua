@@ -23,14 +23,14 @@ minetest.register_node("mcl_better_end:nephrite_ore", {
 minetest.register_craftitem("mcl_better_end:nephrite_raw", {
     stack_max = 64,
     description = "Raw Nephrite",
-    inventory_image = "nephrite_raw.png",
+    inventory_image = "raw_nephrite.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:nephrite_ingot", {
     stack_max = 64,
     description = "Nephrite Ingot",
-    inventory_image = "nephrite_ingot.png",
+    inventory_image = "nephrite.png",
 })
 
 
