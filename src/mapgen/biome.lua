@@ -90,8 +90,6 @@ minetest.register_on_joinplayer(
 
 -- Mapgen Generation Function
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
-    if maxp.y < YMIN or minp.y > YMAX then return end
-
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local data = vm:get_data()
@@ -154,8 +152,6 @@ end
 
 -- Mapgen Decoration Function
 function mcl_better_end.mapgen.dec(minp, maxp, seed)
-    if maxp.y < YMIN or minp.y > YMAX then return end
-
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local light_data = vm:get_light_data()
@@ -217,6 +213,7 @@ end
 
 minetest.register_on_generated(
     function(minp, maxp, seed)
+        if maxp.y < YMIN or minp.y > YMAX then return end
         mcl_better_end.mapgen.gen(minp, maxp, seed)
         mcl_better_end.mapgen.dec(minp, maxp, seed)
     end
