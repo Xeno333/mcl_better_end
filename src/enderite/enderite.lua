@@ -1,6 +1,6 @@
 -- Enregistrement du minerai enderite
 minetest.register_node("mcl_better_end:enderite_ore", {
-    description = "enderite Ore",
+    description = "Enderite Ore",
     tiles = {
         "mcl_end_end_stone.png^enderite_ore.png",
     },
@@ -12,7 +12,7 @@ minetest.register_node("mcl_better_end:enderite_ore", {
     _mcl_blast_resistance = 1200,
     _mcl_hardness = 70,
     _mcl_silk_touch_drop = true,
-    light_source = 10,  -- This makes the block emit light
+    light_source = 2,  -- This makes the block emit light
 
     groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
 })
@@ -43,6 +43,31 @@ minetest.register_craft({
     }
 })
 
+
+minetest.register_node("mcl_better_end:enderite_block", {
+    description = "Enderite Blocke",
+    tiles = {
+        "enderite_block.png",
+    },
+    stack_max = 64,
+
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 1200,
+    _mcl_hardness = 70,
+
+    groups = {pickaxey=4, building_block=1, material_stone=1},
+})
+
+
+-- Recette de cuisson pour obtenir le lingot
+minetest.register_craft({
+    output = 'mcl_better_end:enderite_block',
+    recipe = {
+        {'mcl_better_end:enderite_ingot', 'mcl_better_end:enderite_ingot', 'mcl_better_end:enderite_ingot'},
+        {'mcl_better_end:enderite_ingot', 'mcl_better_end:enderite_ingot', 'mcl_better_end:enderite_ingot'},
+        {'mcl_better_end:enderite_ingot', 'mcl_better_end:enderite_ingot', 'mcl_better_end:enderite_ingot'},
+    }
+})
 
 -- Outils
 minetest.register_tool("mcl_better_end:enderite_pickaxe", {

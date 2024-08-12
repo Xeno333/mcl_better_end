@@ -21,7 +21,7 @@ minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
     _mcl_silk_touch_drop = true,
     light_source = 0,
 
-    groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
+    groups = {pickaxey=1, building_block=1, material_stone=1},
 })
 
 
@@ -90,7 +90,7 @@ minetest.register_node("mcl_better_end:end_oasis_trunk", {
     _mcl_hardness = 3,
     light_source = 0,
 
-    groups = {axey=1, building_block=1, mbe_plains=1},
+    groups = {axey=1, building_block=1},
 })
 
 

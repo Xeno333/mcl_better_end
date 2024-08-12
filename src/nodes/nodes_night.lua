@@ -25,7 +25,7 @@ minetest.register_node("mcl_better_end:end_stone_night_turf", {
         },
     },
 
-    groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
+    groups = {pickaxey=1, building_block=1, material_stone=1},
 })
 
 

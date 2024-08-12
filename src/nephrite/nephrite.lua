@@ -12,7 +12,7 @@ minetest.register_node("mcl_better_end:nephrite_ore", {
     _mcl_blast_resistance = 1200,
     _mcl_hardness = 70,
     _mcl_silk_touch_drop = true,
-    light_source = 10,  -- This makes the block emit light
+    light_source = 2,  -- This makes the block emit light
 
     groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
 })
@@ -39,11 +39,36 @@ minetest.register_craft({
     output = 'mcl_better_end:nephrite_ingot',
     recipe = {
         {'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw'},
-        {'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw', 'mcl_better_end:nephrite_raw'},
+        {'mcl_better_end:nephrite_raw', 'mcl_better_end:enderite_ingot', 'mcl_better_end:nephrite_raw'},
         {'', 'mcl_better_end:nephrite_raw', ''},
     }
 })
 
+
+minetest.register_node("mcl_better_end:nephrite_block", {
+    description = "Nephrite Blocke",
+    tiles = {
+        "nephrite_block.png",
+    },
+    stack_max = 64,
+
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 1200,
+    _mcl_hardness = 80,
+
+    groups = {pickaxey=4, building_block=1, material_stone=1},
+})
+
+
+-- Recette de cuisson pour obtenir le lingot
+minetest.register_craft({
+    output = 'mcl_better_end:nephrite_block',
+    recipe = {
+        {'mcl_better_end:nephrite_ingot', 'mcl_better_end:nephrite_ingot', 'mcl_better_end:nephrite_ingot'},
+        {'mcl_better_end:nephrite_ingot', 'mcl_better_end:nephrite_ingot', 'mcl_better_end:nephrite_ingot'},
+        {'mcl_better_end:nephrite_ingot', 'mcl_better_end:nephrite_ingot', 'mcl_better_end:nephrite_ingot'},
+    }
+})
 
 -- Recette de cuisson pour obtenir le lingot
 minetest.register_craft({

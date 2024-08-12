@@ -16,9 +16,8 @@ minetest.register_node("mcl_better_end:end_stone_plains_turf", {
     _mcl_blast_resistance = 9,
     _mcl_hardness = 3,
     _mcl_silk_touch_drop = true,
-    light_source = 0,
 
-    groups = {pickaxey=1, building_block=1, material_stone=1, mbe_plains=1},
+    groups = {pickaxey=1, building_block=1, material_stone=1},
 })
 
 

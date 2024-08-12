@@ -15,12 +15,39 @@ minetest.register_craftitem("mcl_better_end:nightite_ingot", {
     inventory_image = "nightite_ingot.png",
 })
 
+
+minetest.register_craft({
+    output = 'mcl_better_end:nightite_ingot',
+    recipe = {
+        {'', 'mcl_better_end:nightite_raw', ''},
+        {'mcl_better_end:nightite_raw', 'mcl_better_end:nephrite_ingot', 'mcl_better_end:nightite_raw'},
+        {'', 'mcl_better_end:nightite_raw', ''},
+    }
+})
+
+minetest.register_node("mcl_better_end:nightite_block", {
+    description = "Nightite Blocke",
+    tiles = {
+        "nightite_block.png",
+    },
+    stack_max = 64,
+
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 1200,
+    _mcl_hardness = 90,
+
+    groups = {pickaxey=4, building_block=1, material_stone=1},
+})
+
+
 -- Recette de cuisson pour obtenir le lingot
 minetest.register_craft({
-    type = "cooking",
-    output = "mcl_better_end:nightite_ingot",
-    recipe = "mcl_better_end:nightite_raw",
-    cooktime = 1,
+    output = 'mcl_better_end:nightite_block',
+    recipe = {
+        {'mcl_better_end:nightite_ingot', 'mcl_better_end:nightite_ingot', 'mcl_better_end:nightite_ingot'},
+        {'mcl_better_end:nightite_ingot', 'mcl_better_end:nightite_ingot', 'mcl_better_end:nightite_ingot'},
+        {'mcl_better_end:nightite_ingot', 'mcl_better_end:nightite_ingot', 'mcl_better_end:nightite_ingot'},
+    }
 })
 
 -- Outils
