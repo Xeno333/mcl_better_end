@@ -4,14 +4,14 @@
 -- Enregistrement du minerai brut
 minetest.register_craftitem("mcl_better_end:nightite_raw", {
     stack_max = 64,
-    description = "Raw nightite",
+    description = "Raw Nightite",
     inventory_image = "nightite_raw.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:nightite_ingot", {
     stack_max = 64,
-    description = "nightite Ingot",
+    description = "Nightite Ingot",
     inventory_image = "nightite_ingot.png",
 })
 
@@ -25,7 +25,7 @@ minetest.register_craft({
 
 -- Outils
 minetest.register_tool("mcl_better_end:nightite_pickaxe", {
-    description = "nightite Pickaxe",
+    description = "Nightite Pickaxe",
     inventory_image = "nightite_pick.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
@@ -38,7 +38,7 @@ minetest.register_tool("mcl_better_end:nightite_pickaxe", {
 })
 
 minetest.register_tool("mcl_better_end:nightite_axe", {
-    description = "nightite Axe",
+    description = "Nightite Axe",
     inventory_image = "nightite_axe.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
@@ -51,7 +51,7 @@ minetest.register_tool("mcl_better_end:nightite_axe", {
 })
 
 minetest.register_tool("mcl_better_end:nightite_sword", {
-    description = "nightite Sword",
+    description = "Nightite Sword",
     inventory_image = "nightite_sword.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
@@ -64,7 +64,7 @@ minetest.register_tool("mcl_better_end:nightite_sword", {
 })
 
 minetest.register_tool("mcl_better_end:nightite_shovel", {
-    description = "nightite Shovel",
+    description = "Nightite Shovel",
     inventory_image = "nightite_shovel.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
@@ -74,4 +74,24 @@ minetest.register_tool("mcl_better_end:nightite_shovel", {
         },
         damage_groups = {fleshy=7},
     },
+})
+
+
+
+mcl_armor.register_set({
+    name = "nightite",
+    description = "Nightite",
+    durability = 1000,
+    enchantability = 10,
+    points = {
+            head = 5,
+            torso = 11,
+            legs = 8,
+            feet = 5,
+    },
+    groups = { fire_immune=1 },
+    toughness = 2,
+    craft_material = "mcl_better_end:nightite_ingot",
+    sound_equip = "mcl_armor_equip_diamond",
+    sound_unequip = "mcl_armor_unequip_diamond",
 })

@@ -46,7 +46,7 @@ minetest.register_craft({
 
 -- Outils
 minetest.register_tool("mcl_better_end:enderite_pickaxe", {
-    description = "enderite Pickaxe",
+    description = "Enderite Pickaxe",
     inventory_image = "enderite_pick.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
@@ -59,7 +59,7 @@ minetest.register_tool("mcl_better_end:enderite_pickaxe", {
 })
 
 minetest.register_tool("mcl_better_end:enderite_axe", {
-    description = "enderite Axe",
+    description = "Enderite Axe",
     inventory_image = "enderite_axe.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
@@ -72,7 +72,7 @@ minetest.register_tool("mcl_better_end:enderite_axe", {
 })
 
 minetest.register_tool("mcl_better_end:enderite_sword", {
-    description = "enderite Sword",
+    description = "Enderite Sword",
     inventory_image = "enderite_sword.png",
     tool_capabilities = {
         full_punch_interval = 1.0,
@@ -85,7 +85,7 @@ minetest.register_tool("mcl_better_end:enderite_sword", {
 })
 
 minetest.register_tool("mcl_better_end:enderite_shovel", {
-    description = "enderite Shovel",
+    description = "Enderite Shovel",
     inventory_image = "enderite_shovel.png",
     tool_capabilities = {
         full_punch_interval = 1.0,

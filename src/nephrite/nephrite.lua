@@ -105,3 +105,22 @@ minetest.register_tool("mcl_better_end:nephrite_shovel", {
         damage_groups = {fleshy=7},
     },
 })
+
+
+mcl_armor.register_set({
+    name = "nephrite",
+    description = "Nephrite",
+    durability = 700,
+    enchantability = 10,
+    points = {
+            head = 4,
+            torso = 10,
+            legs = 7,
+            feet = 4,
+    },
+    groups = { fire_immune=1 },
+    toughness = 2,
+    craft_material = "mcl_better_end:nightite_ingot",
+    sound_equip = "mcl_armor_equip_diamond",
+    sound_unequip = "mcl_armor_unequip_diamond",
+})
