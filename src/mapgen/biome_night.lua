@@ -37,6 +37,11 @@ mcl_better_end.api.register_biome({
             end
         end
     end,
+    dec = function(pr, x, y, z)
+        if pr:next(1, 600) == 2 then 
+            minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:endermite", minetest.serialize({}))
+        end
+    end,
     noise_high = 1,
     noise_low = -1
 })

@@ -181,11 +181,9 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                 elseif mcl_better_end.api.is_cave(x, y, z) then
                     local vi = area:index(x, y, z)
                     light_data[vi] = cave_light_level
-                    if mcl_better_end.api.is_free(x, y + 1, z) then
-                        for _, p in pairs(mcl_better_end.biomes) do
-                            if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.dec(pr, x, y, z)
-                            end
+                    for _, p in pairs(mcl_better_end.biomes) do
+                        if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                            p.dec(pr, x, y, z)
                         end
                     end
                     goto keepitup
