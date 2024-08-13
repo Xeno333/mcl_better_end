@@ -81,7 +81,7 @@ mcl_better_end.api.register_biome({
     end,
     dec = function(pr, x, y, z)
         if pr:next(1, 600) == 2 then 
-            minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:enderman", minetest.serialize({}))
+            minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:rover", minetest.serialize({}))
 
         elseif pr:next(1, 800) == 2 then 
             minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:shulker", minetest.serialize({}))
