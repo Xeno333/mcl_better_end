@@ -1,5 +1,6 @@
 mcl_better_end = {}
 mcl_better_end.api = {}
+mcl_better_end.api.consts = {}
 
 mcl_better_end.mapgen = {}
 mcl_better_end.mapgen.ores = {}
@@ -16,7 +17,7 @@ dofile(mcl_better_end.code_loc .. "/nodes/nodes_night.lua")
 dofile(mcl_better_end.code_loc .. "/nodes/nodes_ender_sea.lua")
 
 
-dofile(mcl_better_end.code_loc .. "/mapgen/biome.lua")
+dofile(mcl_better_end.code_loc .. "/mapgen/mapgen.lua")
 
 dofile(mcl_better_end.code_loc .. "/items/items.lua")
 

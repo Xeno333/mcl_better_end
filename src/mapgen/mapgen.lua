@@ -35,6 +35,10 @@ end
 
 
 
+mcl_better_end.api.consts.sea_starts = -0.5
+mcl_better_end.api.consts.sea_ends = -1
+
+
 mcl_better_end.api.is_cave = function(x, y, z)
     local noise = get_perlin_noise(perlin_l, x, y, z)
     return (noise >= 0.8) or (get_perlin_noise(perlin_l, x, y + 1, z) >= 0.8)
@@ -46,7 +50,7 @@ mcl_better_end.api.is_island = function(x, y, z)
 end
 
 mcl_better_end.api.is_sea = function(x, y, z)
-    return get_perlin_noise(perlin_l, x, y, z) < -0.5
+    return get_perlin_noise(perlin_l, x, y, z) < mcl_better_end.api.consts.sea_starts
 end
 
 mcl_better_end.api.is_free = function(x, y, z)
@@ -112,12 +116,12 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 if mcl_better_end.api.is_island(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                     for _, f in pairs(mcl_better_end.mapgen.ores) do
-                        f(data, vi, area, pr, x, y, z)
+                        f(data, vi, area, pr, x, y, z, perlin_l)
                     end
                     if mcl_better_end.api.is_free(x, y + 1, z) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.gen(data, vi, area, pr, x, y, z)
+                                p.gen(data, vi, area, pr, x, y, z, perlin_l)
                             end
                         end
                     end
@@ -128,7 +132,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     if mcl_better_end.api.is_cave(x, y + 1, z) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "cave" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.gen(data, vi, area, pr, x, y, z)
+                                p.gen(data, vi, area, pr, x, y, z, perlin_l)
                             end
                         end
                     end
@@ -137,7 +141,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "sea" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.gen(data, vi, area, pr, x, y, z)
+                            p.gen(data, vi, area, pr, x, y, z, perlin_l)
                         end
                     end
                     goto keepitup
@@ -173,7 +177,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                     if mcl_better_end.api.is_free(x, y + 1, z) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.dec(pr, x, y, z)
+                                p.dec(pr, x, y, z, perlin_l)
                             end
                         end
                     end
@@ -183,7 +187,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                     local vi = area:index(x, y, z)
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.dec(pr, x, y, z)
+                            p.dec(pr, x, y, z, perlin_l)
                         end
                     end
                     goto keepitup
@@ -191,7 +195,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                 elseif mcl_better_end.api.is_sea(x, y, z) then
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "sea" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.dec(pr, x, y, z)
+                            p.dec(pr, x, y, z, perlin_l)
                         end
                     end
                     goto keepitup
