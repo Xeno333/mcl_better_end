@@ -68,7 +68,7 @@ mcl_better_end.api.register_biome({
     noise_low = 0
 })
 
-minetest.register_chatcommand("spawn_endsub", {
+--[[minetest.register_chatcommand("spawn_endsub", {
     params = "<radius>",
     description = "Check if the area around you is empty within a certain radius",
     func = function(player_name, param)
@@ -77,4 +77,4 @@ minetest.register_chatcommand("spawn_endsub", {
         local pos = player:get_pos()
         make_sub(pos, PseudoRandom(math.random(1, 1000)))
     end,
-})
+})]]--
