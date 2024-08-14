@@ -1,5 +1,6 @@
 
-local YMAX = -25000--mcl_vars.mg_end_max
+local YMAX = -10000--mcl_vars.mg_end_max
+local YMAX_biome = -25000--mcl_vars.mg_end_max
 local YMIN = -27050--mcl_vars.mg_end_min
 
 local cave_light_level = 4
@@ -100,10 +101,40 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
+    if minp.y > YMAX_biome then
+        for y = maxp.y, minp.y, -1 do
+            for z = maxp.z, minp.z, -1 do
+                for x = maxp.x, minp.x, -1 do
+                    local vi = area:index(x, y, z)
+
+                    if mcl_better_end.api.is_free(x, y, z) then
+                        data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                        light_data[vi] = light_level
+                    elseif mcl_better_end.api.is_island(x, y, z) then
+                        data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
+                    end
+                    
+                    for _, f in pairs(mcl_better_end.mapgen.ores) do
+                        if y >= f.ymin and y <= f.ymax then
+                            f.gen(data, vi, area, pr, x, y, z, perlin_l)
+                        end
+                    end
+                end
+            end
+        end
+    
+        vm:set_data(data)
+        vm:set_light_data(light_data)
+        vm:write_to_map()
+        vm:update_map()
+        return
+    end
+
     for y = maxp.y, minp.y, -1 do
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
                 local vi = area:index(x, y, z)
+                local noise_center = get_perlin_noise(perlin, x, y, z)
 
                 if mcl_better_end.api.is_free(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -111,13 +142,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup
                 end
 
-                local noise_center = get_perlin_noise(perlin, x, y, z)
-
                 if mcl_better_end.api.is_island(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
-                    for _, f in pairs(mcl_better_end.mapgen.ores) do
-                        f(data, vi, area, pr, x, y, z, perlin_l)
-                    end
                     if mcl_better_end.api.is_free(x, y + 1, z) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
@@ -148,6 +174,11 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 end
 
                 ::keepitup::
+                for _, f in pairs(mcl_better_end.mapgen.ores) do
+                    if y >= f.ymin and y <= f.ymax then
+                        f.gen(data, vi, area, pr, x, y, z, perlin_l)
+                    end
+                end
             end
         end
     end
@@ -214,6 +245,7 @@ minetest.register_on_generated(
     function(minp, maxp, seed)
         if maxp.y < YMIN or minp.y > YMAX then return end
         mcl_better_end.mapgen.gen(minp, maxp, seed)
+        if maxp.y < YMIN or minp.y > YMAX_biome then return end
         mcl_better_end.mapgen.dec(minp, maxp, seed)
     end
 )

@@ -21,7 +21,7 @@ minetest.register_node("mcl_better_end:end_stone_night_turf", {
         max_items = 2,
         items = {
             {items = {"mcl_end:end_stone"}, rarity = 1},
-            {items = {"mcl_better_end:nightite_raw"}, rarity = 2000},
+            {items = {"mcl_better_end:nightite_raw"}, rarity = 4000},
         },
     },
 
