@@ -281,8 +281,6 @@ minetest.register_node("mcl_better_end:ender_water_real_flowing", {
 	_mcl_hardness = -1,
 
 })
-
-
 minetest.register_node("mcl_better_end:blublu_block", {
     description = "Blublu Block",
     tiles = {
@@ -301,6 +299,16 @@ minetest.register_node("mcl_better_end:blublu_block", {
 
 	groups = {pickaxey=1, building_block=1, material_stone=1, purpur_block=1},
 })
+
+minetest.register_craft({
+    output = 'mcl_better_end:blublu_block',
+    recipe = {
+        {'', 'mcl_better_end:end_glow_berry', ''},
+        {'mcl_better_end:end_glow_berry', 'mcl_end:end_stone', 'mcl_better_end:end_glow_berry'},
+        {'', 'mcl_better_end:end_glow_berry', ''},
+    }
+})
+
 
 minetest.register_node("mcl_better_end:blublu_pillar", {
     description = "Blublu Piller",
