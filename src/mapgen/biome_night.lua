@@ -13,7 +13,7 @@ local night_candle_plant = mcl_better_end.mapgen.registered_nodes.night_candle_p
 
 mcl_better_end.api.register_biome({
     type = "cave",
-    gen = function(data, vi, area, pr, x, y, z)
+    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
         if mcl_better_end.api.is_island(x, y-1, z) then
             data[vi] = filler
 
@@ -37,7 +37,7 @@ mcl_better_end.api.register_biome({
             end
         end
     end,
-    dec = function(pr, x, y, z)
+    dec = function(pr, x, y, z, perlin_l, noise_center)
         if pr:next(1, 600) == 2 then 
             minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:endermite", minetest.serialize({}))
         end

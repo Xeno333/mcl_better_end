@@ -8,6 +8,12 @@ local items_to_add = {
     {i = "mcl_armor:elytra", c = 1, x = 100},
 }
 
+
+--due to migration to mineclonia
+minetest.register_alias("mcl_end:end_rod_cyan", "mcl_end:end_rod")
+
+
+
 -- Function to place a schematic and a chest, then fill the chest with items
 local function make_sub(pos, pr)
     -- Place the schematic
@@ -57,9 +63,9 @@ end
 
 mcl_better_end.api.register_biome({
     type = "sea",
-    dec = function(pr, x, y, z, perlin)
+    dec = function(pr, x, y, z, perlin_l, noise_center)
         if pr:next(1, 4000) == 5 then
-            if perlin:get_3d({x = x, y = y, z = z}) < (mcl_better_end.api.consts.sea_ends + 0.00001) then
+            if perlin_l:get_3d({x = x, y = y, z = z}) < (mcl_better_end.api.consts.sea_ends + 0.00001) then
                 make_sub({x=x,y=y,z=z}, pr)
             end
         end

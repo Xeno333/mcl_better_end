@@ -58,7 +58,7 @@ end
 
 mcl_better_end.api.register_biome({
     type = "island",
-    gen = function(data, vi, area, pr, x, y, z)
+    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
         data[vi] = filler
 
         if pr:next(1, 20) == 5 then
@@ -79,9 +79,9 @@ mcl_better_end.api.register_biome({
         end
         
     end,
-    dec = function(pr, x, y, z)
+    dec = function(pr, x, y, z, perlin_l, noise_center)
         if pr:next(1, 600) == 2 then 
-            minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:rover", minetest.serialize({}))
+            minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:enderman", minetest.serialize({}))
 
         elseif pr:next(1, 800) == 2 then 
             minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:shulker", minetest.serialize({}))

@@ -139,6 +139,15 @@ minetest.register_node("mcl_better_end:end_oasis_grass", {
 
 
 
+
+
+
+
+
+
+
+
+
 minetest.register_node("mcl_better_end:end_glow_berry_plant", {
 	description = ("Ender Glow Berry Plant"),
 	drawtype = "plantlike",
@@ -151,7 +160,24 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant", {
 	walkable = false,
 	buildable_to = true,
     light_source = 10,
-	drop = "mcl_better_end:end_glow_berry",
+    _mcl_silk_touch_drop = true,
+    drop = {
+        max_items = 3,
+        items = {
+            {
+                items = {"mcl_better_end:end_glow_berry"},
+                rarity = 1, -- 1 in 100 chance to drop
+            },
+            {
+                items = {"mcl_better_end:end_glow_berry"},
+                rarity = 20, -- 1 in 100 chance to drop
+            },
+            {
+                items = {"mcl_better_end:end_glow_berry"},
+                rarity = 40, -- 1 in 100 chance to drop
+            },
+        }
+    },
 	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
 	sounds = mcl_sounds.node_sound_leaves_defaults(),
 	selection_box = {
@@ -160,16 +186,137 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant", {
 	},
 })
 
+minetest.register_node("mcl_better_end:end_glow_berry_plant_1", {
+	description = ("Ender Glow Berry Plant"),
+	drawtype = "plantlike",
+	waving = 1,
+	tiles = {"end_glow_berry_plant_1.png"},
+	inventory_image = "end_glow_berry_plant_1.png",
+	wield_image = "end_glow_berry_plant_1.png",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	buildable_to = true,
+    light_source = 4,
+    drop = nil,
+    _mcl_silk_touch_drop = true,
+	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
+	sounds = mcl_sounds.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
+	},
+})
+
+minetest.register_node("mcl_better_end:end_glow_berry_plant_2", {
+	description = ("Ender Glow Berry Plant"),
+	drawtype = "plantlike",
+	waving = 1,
+	tiles = {"end_glow_berry_plant_2.png"},
+	inventory_image = "end_glow_berry_plant_2.png",
+	wield_image = "end_glow_berry_plant_2.png",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	buildable_to = true,
+    light_source = 6,
+    drop = {
+        max_items = 1,
+        items = {
+            {
+                items = {"mcl_better_end:end_glow_berry"},
+                rarity = 20, -- 1 in 100 chance to drop
+            },
+        }
+    },
+    _mcl_silk_touch_drop = true,
+	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
+	sounds = mcl_sounds.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
+	},
+})
+
+minetest.register_node("mcl_better_end:end_glow_berry_plant_3", {
+	description = ("Ender Glow Berry Plant"),
+	drawtype = "plantlike",
+	waving = 1,
+	tiles = {"end_glow_berry_plant_3.png"},
+	inventory_image = "end_glow_berry_plant_3.png",
+	wield_image = "end_glow_berry_plant_3.png",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	buildable_to = true,
+    light_source = 8,
+    drop = {
+        max_items = 2,
+        items = {
+            {
+                items = {"mcl_better_end:end_glow_berry"},
+                rarity = 20, -- 1 in 100 chance to drop
+            },
+            {
+                items = {"mcl_better_end:end_glow_berry"},
+                rarity = 40, -- 1 in 100 chance to drop
+            },
+        }
+    },
+    _mcl_silk_touch_drop = true,
+	groups = {dig_immediate=3, shearsy=1, dig_by_water=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
+	sounds = mcl_sounds.node_sound_leaves_defaults(),
+	selection_box = {
+		type = "fixed",
+		fixed = {-6 / 16, -0.5, -6 / 16, 6 / 16, 0.5, 6 / 16},
+	},
+})
+
+minetest.register_abm({
+	label = "Grow Glow Berry Plant",
+	nodenames = {"mcl_better_end:end_glow_berry_plant_1", "mcl_better_end:end_glow_berry_plant_2", "mcl_better_end:end_glow_berry_plant_3"},
+	interval = 1,
+	chance = 2,
+	action = function(pos, node)
+		if node.name == "mcl_better_end:end_glow_berry_plant_1" then
+			minetest.set_node(pos, {name = "mcl_better_end:end_glow_berry_plant_2"})
+		elseif node.name == "mcl_better_end:end_glow_berry_plant_2" then
+			minetest.set_node(pos, {name = "mcl_better_end:end_glow_berry_plant_3"})
+		elseif node.name == "mcl_better_end:end_glow_berry_plant_3" then
+			minetest.set_node(pos, {name = "mcl_better_end:end_glow_berry_plant"})
+		end
+	end,
+})
+
+
 minetest.register_craftitem("mcl_better_end:end_glow_berry", {
     description = "Glow Berry", -- The name of the food item
     inventory_image = "end_glow_berry.png", -- The texture of the food item
 	_mcl_saturation = 1,
-	on_place = minetest.item_eat(1),
+	on_place = function(itemstack, placer, pointed_thing)
+            if pointed_thing.type == "node" then
+                if minetest.get_node(pointed_thing.under).name == "mcl_better_end:end_stone_oasis_turf" and minetest.get_node(pointed_thing.above).name == "air" then
+                    minetest.set_node(pointed_thing.above, {name = "mcl_better_end:end_glow_berry_plant_1"})
+                    itemstack:take_item(1)
+                    return itemstack
+                end
+            else
+                minetest.item_eat(1)
+            end
+        end,
 	on_secondary_use = minetest.item_eat(1),
     groups = {food = 2, eatable = 1}, -- Item groups, 'food' and 'eatable' are important for food items
 
     stack_max = 64, -- Maximum number of items per stack
 })
+
+
+
+
+
+
+
+
 
 
 
