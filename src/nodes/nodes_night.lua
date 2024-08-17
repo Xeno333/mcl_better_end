@@ -31,6 +31,48 @@ minetest.register_node("mcl_better_end:end_stone_night_turf", {
 
 
 
+minetest.register_node("mcl_better_end:night_vines", {
+	description = ("Night Vines"),
+	drawtype = "plantlike",
+	tiles = {"night_vines.png"},
+	paramtype = "light",
+	sunlight_propagates = true,
+    walkable = false,
+    is_ground_content = false,
+	climbable = false,
+	buildable_to = false,
+    light_source = 4,
+	groups = {shearsy=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
+	sounds = mcl_sounds.node_sound_leaves_defaults(),
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3}, -- Adjust the size for the vine
+    },
+})
+
+
+minetest.register_node("mcl_better_end:night_vines_bottom", {
+	description = ("Night Vines"),
+	drawtype = "plantlike",
+	tiles = {"night_vines_bottom.png"},
+	paramtype = "light",
+	sunlight_propagates = true,
+    walkable = false,
+    is_ground_content = false,
+	climbable = false,
+	buildable_to = false,
+    light_source = 4,
+	groups = {shearsy=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
+	sounds = mcl_sounds.node_sound_leaves_defaults(),
+    selection_box = {
+        type = "fixed",
+        fixed = {-0.3, -0.5, -0.3, 0.3, 0.5, 0.3}, -- Adjust the size for the vine
+    },
+})
+
+
+
+
 minetest.register_node("mcl_better_end:night_grass", {
 	description = ("Night Grass"),
 	drawtype = "plantlike",
