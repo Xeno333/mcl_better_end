@@ -30,3 +30,72 @@ minetest.register_node("mcl_better_end:end_glass", {
     _mcl_blast_resistance = 0.1,
     _mcl_hardness = 0.1,
 })
+
+
+
+
+--end berry rock
+
+minetest.register_node("mcl_better_end:end_berry_rock", {
+    description = "End Berry Rock",
+    tiles = {"end_berry_rock.png"},
+    stack_max = 64,
+
+    groups = {pickaxey=1, building_block=1, material_stone=1},
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+
+    _mcl_blast_resistance = 9,
+    _mcl_hardness = 3,
+})
+
+
+minetest.register_craft({
+    output = 'mcl_better_end:enderite_swoend_berry_rockrd',
+    recipe = {
+        {'', 'mcl_end:end_stone', ''},
+        {'mcl_end:end_stone', 'mcl_better_end:end_glow_berry', 'mcl_end:end_stone'},
+        {'', 'mcl_end:end_stone', ''},
+    }
+})
+
+minetest.register_node("mcl_better_end:end_berry_rock_bricks", {
+    description = "End Berry Rock Bricks",
+    tiles = {"end_berry_rock_bricks.png"},
+    stack_max = 64,
+
+    groups = {pickaxey=1, building_block=1, material_stone=1},
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+
+    _mcl_blast_resistance = 9,
+    _mcl_hardness = 3,
+})
+
+minetest.register_craft({
+    output = 'mcl_better_end:end_berry_rock_bricks',
+    recipe = {
+        {'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock'},
+        {'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock'},
+        {'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock'},
+    }
+})
+
+minetest.register_node("mcl_better_end:end_berry_rock_tailled", {
+    description = "End Berry Rock Tailled",
+    tiles = {"end_berry_rock_tailled.png"},
+    stack_max = 64,
+
+    groups = {pickaxey=1, building_block=1, material_stone=1},
+    sounds = mcl_sounds.node_sound_stone_defaults(),
+
+    _mcl_blast_resistance = 9,
+    _mcl_hardness = 3,
+})
+
+minetest.register_craft({
+    output = 'mcl_better_end:end_berry_rock_tailled',
+    recipe = {
+        {'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock'},
+        {'mcl_better_end:end_berry_rock', 'mcl_better_end:end_glow_berry', 'mcl_better_end:end_berry_rock'},
+        {'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock', 'mcl_better_end:end_berry_rock'},
+    }
+})
