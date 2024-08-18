@@ -1,6 +1,6 @@
 minetest.register_node("mcl_better_end:end_sand", {
     description = "End Sand",
-    tiles = {"end_sand.png"}
+    tiles = {"end_sand.png"},
     stack_max = 64,
 
     drop = "mcl_better_end:end_sand",
@@ -14,7 +14,7 @@ minetest.register_node("mcl_better_end:end_sand", {
 
 minetest.register_node("mcl_better_end:end_glass", {
     description = "End Glass",
-    tiles = {"end_glass.png"}
+    tiles = {"end_glass.png"},
     drawtype = "glasslike_framed_optional",
     sunlight_propagates = true,
     stack_max = 64,
