@@ -50,7 +50,7 @@ minetest.register_node("mcl_better_end:end_berry_rock", {
 
 
 minetest.register_craft({
-    output = 'mcl_better_end:enderite_swoend_berry_rockrd',
+    output = 'mcl_better_end:end_berry_rock',
     recipe = {
         {'', 'mcl_end:end_stone', ''},
         {'mcl_end:end_stone', 'mcl_better_end:end_glow_berry', 'mcl_end:end_stone'},
