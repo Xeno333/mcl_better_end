@@ -162,7 +162,7 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant", {
     light_source = 10,
     _mcl_silk_touch_drop = true,
     drop = {
-        max_items = 3,
+        max_items = 4,
         items = {
             {
                 items = {"mcl_better_end:end_glow_berry"},
@@ -170,11 +170,15 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant", {
             },
             {
                 items = {"mcl_better_end:end_glow_berry"},
-                rarity = 20, -- 1 in 100 chance to drop
+                rarity = 2, -- 1 in 100 chance to drop
             },
             {
                 items = {"mcl_better_end:end_glow_berry"},
-                rarity = 40, -- 1 in 100 chance to drop
+                rarity = 4, -- 1 in 100 chance to drop
+            },
+            {
+                items = {"mcl_better_end:end_glow_berry"},
+                rarity = 6, -- 1 in 100 chance to drop
             },
         }
     },
@@ -275,8 +279,8 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant_3", {
 minetest.register_abm({
 	label = "Grow Glow Berry Plant",
 	nodenames = {"mcl_better_end:end_glow_berry_plant_1", "mcl_better_end:end_glow_berry_plant_2", "mcl_better_end:end_glow_berry_plant_3"},
-	interval = 1,
-	chance = 2,
+	interval = 20,
+	chance = 5,
 	action = function(pos, node)
 		if node.name == "mcl_better_end:end_glow_berry_plant_1" then
 			minetest.set_node(pos, {name = "mcl_better_end:end_glow_berry_plant_2"})
