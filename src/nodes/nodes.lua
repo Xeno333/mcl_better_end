@@ -4,7 +4,7 @@ minetest.register_node("mcl_better_end:end_sand", {
     stack_max = 64,
 
     drop = "mcl_better_end:end_sand",
-    groups = {handy=1, shovely=1, falling_node=1, sand=1, enderman_takable=1, building_block=1, material_sand=1}
+    groups = {handy=1, shovely=1, falling_node=1, sand=1, enderman_takable=1, building_block=1, material_sand=1},
     sounds = mcl_sounds.node_sound_sand_defaults(),
 
     _mcl_blast_resistance = 0.7,
@@ -24,7 +24,7 @@ minetest.register_node("mcl_better_end:end_glass", {
     drop = "",
 
     drop = "mcl_better_end:end_sand",
-    groups = {handy=1, glass=1, enderman_takable=1, building_block=1, material_glass=1}
+    groups = {handy=1, glass=1, enderman_takable=1, building_block=1, material_glass=1},
     sounds = mcl_sounds.node_sound_glass_defaults(),
 
     _mcl_blast_resistance = 0.1,
