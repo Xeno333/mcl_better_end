@@ -12,6 +12,8 @@ minetest.register_node("mcl_better_end:end_sand", {
     _mcl_cooking_output = "mcl_better_end:end_glass"
 })
 
+print("AAAAAAAAAAAAAAAAAAAAAAAa")
+
 minetest.register_node("mcl_better_end:end_glass", {
     description = "End Glass",
     tiles = {"end_glass.png"}
