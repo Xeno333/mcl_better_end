@@ -19,7 +19,7 @@ minetest.register_node("mcl_better_end:end_glass", {
     sunlight_propagates = true,
     stack_max = 64,
     paramtype = "light",
-    paramtype2 = "glasslikeliquidlevel"
+    paramtype2 = "glasslikeliquidlevel",
     _mcl_silk_touch_drop = true,
     drop = "",
 
