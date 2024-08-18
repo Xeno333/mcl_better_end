@@ -54,6 +54,7 @@ minetest.register_craft({
 minetest.register_tool("mcl_better_end:nightite_pickaxe", {
     description = "Nightite Pickaxe",
     inventory_image = "nightite_pick.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
@@ -67,6 +68,7 @@ minetest.register_tool("mcl_better_end:nightite_pickaxe", {
 minetest.register_tool("mcl_better_end:nightite_axe", {
     description = "Nightite Axe",
     inventory_image = "nightite_axe.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
@@ -80,6 +82,7 @@ minetest.register_tool("mcl_better_end:nightite_axe", {
 minetest.register_tool("mcl_better_end:nightite_sword", {
     description = "Nightite Sword",
     inventory_image = "nightite_sword.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
@@ -93,6 +96,7 @@ minetest.register_tool("mcl_better_end:nightite_sword", {
 minetest.register_tool("mcl_better_end:nightite_shovel", {
     description = "Nightite Shovel",
     inventory_image = "nightite_shovel.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,

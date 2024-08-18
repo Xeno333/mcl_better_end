@@ -82,6 +82,7 @@ minetest.register_craft({
 minetest.register_tool("mcl_better_end:nephrite_pickaxe", {
     description = "Nephrite Pickaxe",
     inventory_image = "nephrite_pick.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
@@ -95,6 +96,7 @@ minetest.register_tool("mcl_better_end:nephrite_pickaxe", {
 minetest.register_tool("mcl_better_end:nephrite_axe", {
     description = "Nephrite Axe",
     inventory_image = "nephrite_axe.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
@@ -108,6 +110,7 @@ minetest.register_tool("mcl_better_end:nephrite_axe", {
 minetest.register_tool("mcl_better_end:nephrite_sword", {
     description = "Nephrite Sword",
     inventory_image = "nephrite_sword.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
@@ -121,6 +124,7 @@ minetest.register_tool("mcl_better_end:nephrite_sword", {
 minetest.register_tool("mcl_better_end:nephrite_shovel", {
     description = "Nephrite Shovel",
     inventory_image = "nephrite_shovel.png",
+    _mcl_toollike_wield = true,
     tool_capabilities = {
         full_punch_interval = 1.0,
         max_drop_level = 1,
