@@ -56,7 +56,7 @@ minetest.register_tool("mcl_better_end:nightite_axe", {
     description = "Nightite Axe",
     inventory_image = "nightite_axe.png",
     _mcl_toollike_wield = true,
-	wield_scale = wield_scale,
+	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -76,7 +76,7 @@ minetest.register_tool("mcl_better_end:nightite_sword", {
     description = "Nightite Sword",
     inventory_image = "nightite_sword.png",
     _mcl_toollike_wield = true,
-	wield_scale = cl_vars.tool_wield_scale,
+	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { weapon=1, sword=1, dig_speed_class=5, enchantability=10 },
 	tool_capabilities = {
 		full_punch_interval = 0.600,

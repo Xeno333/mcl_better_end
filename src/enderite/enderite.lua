@@ -73,7 +73,7 @@ minetest.register_tool("mcl_better_end:enderite_axe", {
     description = "Enderite Axe",
     inventory_image = "enderite_axe.png",
     _mcl_toollike_wield = true,
-	wield_scale = wield_scale,
+	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
 	tool_capabilities = {
 		full_punch_interval = 1.0,
@@ -93,7 +93,7 @@ minetest.register_tool("mcl_better_end:enderite_sword", {
     description = "Enderite Sword",
     inventory_image = "enderite_sword.png",
     _mcl_toollike_wield = true,
-	wield_scale = cl_vars.tool_wield_scale,
+	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { weapon=1, sword=1, dig_speed_class=5, enchantability=10 },
 	tool_capabilities = {
 		full_punch_interval = 0.600,
