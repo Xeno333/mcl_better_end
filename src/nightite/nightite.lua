@@ -50,61 +50,47 @@ minetest.register_craft({
     }
 })
 
--- Outils
-minetest.register_tool("mcl_better_end:nightite_pickaxe", {
-    description = "Nightite Pickaxe",
-    inventory_image = "nightite_pick.png",
-    _mcl_toollike_wield = true,
-    tool_capabilities = {
-        full_punch_interval = 1.0,
-        max_drop_level = 1,
-        groupcaps = {
-            cracky = {times={[1]=0.1, [2]=0.1, [3]=0.1}, uses=300, maxlevel=30},
-        },
-        damage_groups = {fleshy=7},
-    },
-})
+
 
 minetest.register_tool("mcl_better_end:nightite_axe", {
     description = "Nightite Axe",
     inventory_image = "nightite_axe.png",
     _mcl_toollike_wield = true,
-    tool_capabilities = {
-        full_punch_interval = 1.0,
-        max_drop_level = 1,
-        groupcaps = {
-            choppy = {times={[1]=0.1, [2]=0.1, [3]=0.1}, uses=3000, maxlevel=30},
-        },
-        damage_groups = {fleshy=11},
-    },
+	wield_scale = wield_scale,
+	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=5,
+		damage_groups = {fleshy=15},
+		punch_attack_uses = 3000,
+	},
+	on_place = mcl_tools.tool_place_funcs.axe,
+	sound = { breaks = "default_tool_breaks" },
+	_repair_material = "mcl_better_end:nightite_ingot",
+	_mcl_diggroups = {
+		axey = { speed = 9, level = 6, uses = 3000 }
+	},
 })
 
 minetest.register_tool("mcl_better_end:nightite_sword", {
     description = "Nightite Sword",
     inventory_image = "nightite_sword.png",
     _mcl_toollike_wield = true,
-    tool_capabilities = {
-        full_punch_interval = 1.0,
-        max_drop_level = 1,
-        groupcaps = {
-            choppy = {times={[1]=0.1, [2]=0.1, [3]=0.1}, uses=3000, maxlevel=30},
-        },
-        damage_groups = {fleshy=10},
-    },
-})
-
-minetest.register_tool("mcl_better_end:nightite_shovel", {
-    description = "Nightite Shovel",
-    inventory_image = "nightite_shovel.png",
-    _mcl_toollike_wield = true,
-    tool_capabilities = {
-        full_punch_interval = 1.0,
-        max_drop_level = 1,
-        groupcaps = {
-            choppy = {times={[1]=0.1, [2]=0.1, [3]=0.1}, uses=300, maxlevel=30},
-        },
-        damage_groups = {fleshy=7},
-    },
+	wield_scale = cl_vars.tool_wield_scale,
+	groups = { weapon=1, sword=1, dig_speed_class=5, enchantability=10 },
+	tool_capabilities = {
+		full_punch_interval = 0.600,
+		max_drop_level=5,
+		damage_groups = {fleshy=14},
+		punch_attack_uses = 3000,
+	},
+	sound = { breaks = "default_tool_breaks" },
+	on_place = mcl_tools.tool_place_funcs.sword,
+	_repair_material = "mcl_better_end:nightite_ingot",
+	_mcl_diggroups = {
+		swordy = { speed = 8, level = 5, uses = 3000 },
+		swordy_cobweb = { speed = 8, level = 5, uses = 3000 }
+	},
 })
 
 

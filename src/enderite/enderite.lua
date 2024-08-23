@@ -12,7 +12,6 @@ minetest.register_node("mcl_better_end:enderite_ore", {
     _mcl_blast_resistance = 1200,
     _mcl_hardness = 70,
     _mcl_silk_touch_drop = true,
-    light_source = 2,  -- This makes the block emit light
 
     groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
 })
@@ -69,33 +68,25 @@ minetest.register_craft({
     }
 })
 
--- Outils
-minetest.register_tool("mcl_better_end:enderite_pickaxe", {
-    description = "Enderite Pickaxe",
-    inventory_image = "enderite_pick.png",
-    _mcl_toollike_wield = true,
-    tool_capabilities = {
-        full_punch_interval = 1.0,
-        max_drop_level = 1,
-        groupcaps = {
-            cracky = {times={[1]=0.1, [2]=0.1, [3]=0.1}, uses=300, maxlevel=30},
-        },
-        damage_groups = {fleshy=7},
-    },
-})
 
 minetest.register_tool("mcl_better_end:enderite_axe", {
     description = "Enderite Axe",
     inventory_image = "enderite_axe.png",
     _mcl_toollike_wield = true,
-    tool_capabilities = {
-        full_punch_interval = 1.0,
-        max_drop_level = 1,
-        groupcaps = {
-            choppy = {times={[1]=0.1, [2]=0.1, [3]=0.1}, uses=3000, maxlevel=30},
-        },
-        damage_groups = {fleshy=11},
-    },
+	wield_scale = wield_scale,
+	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
+	tool_capabilities = {
+		full_punch_interval = 1.0,
+		max_drop_level=5,
+		damage_groups = {fleshy=13},
+		punch_attack_uses = 2100,
+	},
+	on_place = mcl_tools.tool_place_funcs.axe,
+	sound = { breaks = "default_tool_breaks" },
+	_repair_material = "mcl_better_end:enderite_ingot",
+	_mcl_diggroups = {
+		axey = { speed = 9, level = 6, uses = 2100 }
+	},
 })
 
 minetest.register_tool("mcl_better_end:enderite_sword", {
@@ -107,43 +98,17 @@ minetest.register_tool("mcl_better_end:enderite_sword", {
 	tool_capabilities = {
 		full_punch_interval = 0.600,
 		max_drop_level=5,
-		damage_groups = {fleshy=10},
+		damage_groups = {fleshy=12},
 		punch_attack_uses = 2100,
 	},
 	sound = { breaks = "default_tool_breaks" },
 	on_place = mcl_tools.tool_place_funcs.sword,
 	_repair_material = "mcl_better_end:enderite_ingot",
-	_mcl_toollike_wield = true,
 	_mcl_diggroups = {
 		swordy = { speed = 8, level = 5, uses = 2100 },
 		swordy_cobweb = { speed = 8, level = 5, uses = 2100 }
 	},
 })
-
-minetest.register_tool("mcl_better_end:enderite_shovel", {
-    description = "Enderite Shovel",
-    inventory_image = "enderite_shovel.png",
-    _mcl_toollike_wield = true,
-	groups = { tool=1, shovel=1, dig_speed_class=6, enchantability=10},
-	tool_capabilities = {
-		full_punch_interval = 1,
-		max_drop_level=5,
-		damage_groups = {fleshy=5},
-		punch_attack_uses = 2100,
-	},
-	on_place = mcl_tools.tool_place_funcs.shovel,
-	sound = { breaks = "default_tool_breaks" },
-	_repair_material = "mcl_better_end:enderite_ingot",
-	_mcl_toollike_wield = true,
-	_mcl_diggroups = {
-		shovely = { speed = 10, level = 6, uses = 2100 }
-	},
-})
-
-
-
-
-
 
 
 
