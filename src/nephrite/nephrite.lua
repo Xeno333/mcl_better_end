@@ -13,7 +13,7 @@ minetest.register_node("mcl_better_end:nephrite_ore", {
     _mcl_hardness = 70,
     _mcl_silk_touch_drop = true,
 
-    groups = {pickaxey=7, building_block=1, material_stone=1, mbe_plains=1},
+    groups = {pickaxey=4, building_block=1, material_stone=1, mbe_plains=1},
 })
 
 
