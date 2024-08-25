@@ -5,7 +5,7 @@ local items_to_add = {
     {i = "mcl_end:crystal", c = 32, x = 20},
     {i = "mcl_throwing:ender_pearl", c = 4, x = 3},
     {i = "mcl_throwing:ender_pearl", c = 16, x = 10},
-    {i = "mcl_armor:elytra", c = 1, x = 100},
+    {i = "mcl_armor:elytra", c = 1, x = 10},
 }
 
 
