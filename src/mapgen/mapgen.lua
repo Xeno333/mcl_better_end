@@ -98,7 +98,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local data = vm:get_data()
-    --local light_data = vm:get_light_data()
+    local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
     if minp.y > YMAX_biome then
@@ -109,7 +109,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
                     if mcl_better_end.api.is_free(x, y, z) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                        --light_data[vi] = light_level
+                        light_data[vi] = light_level
                     elseif mcl_better_end.api.is_island(x, y, z) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                     end
@@ -124,7 +124,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         end
     
         vm:set_data(data)
-        --vm:set_light_data(light_data)
+        vm:set_light_data(light_data)
         vm:write_to_map()
         vm:update_map()
         return
@@ -138,7 +138,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
                 if mcl_better_end.api.is_free(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                    --light_data[vi] = light_level
+                    light_data[vi] = light_level
                     goto keepitup2
                 end
 
@@ -154,7 +154,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup
                 elseif mcl_better_end.api.is_cave(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                    --light_data[vi] = cave_light_level
+                    light_data[vi] = cave_light_level
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
                             p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center)
@@ -184,7 +184,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     end
 
     vm:set_data(data)
-    --vm:set_light_data(light_data)
+    vm:set_light_data(light_data)
     vm:write_to_map()
     vm:update_map()
 end
