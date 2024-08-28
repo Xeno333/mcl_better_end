@@ -241,7 +241,8 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                     noise2 = noises.l[x][y+1][z]
                 else
                     noise2 = perlin_l:get_3d({x = x, y = y+1, z = z})
-                    
+                end
+
                 if mcl_better_end.api.is_free(noise) or mcl_better_end.api.is_island(noise2) then
                     goto keepitup
                 end
