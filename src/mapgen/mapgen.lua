@@ -41,21 +41,21 @@ mcl_better_end.api.consts.sea_ends = -1
 
 
 mcl_better_end.api.is_cave = function(x, y, z)
-    local noise = get_perlin_noise(perlin_l, x, y, z)
+    local noise = perlin_l:get_3d({x = x, y = y, z = z})
     return (noise >= 0.8) or (get_perlin_noise(perlin_l, x, y + 1, z) >= 0.8)
 end
 
 mcl_better_end.api.is_island = function(x, y, z)
-    local noise = get_perlin_noise(perlin_l, x, y, z)
+    local noise = perlin_l:get_3d({x = x, y = y, z = z})
     return (noise > 0.5 and noise < 0.8)
 end
 
 mcl_better_end.api.is_sea = function(x, y, z)
-    return get_perlin_noise(perlin_l, x, y, z) < mcl_better_end.api.consts.sea_starts
+    return perlin_l:get_3d({x = x, y = y, z = z}) < mcl_better_end.api.consts.sea_starts
 end
 
 mcl_better_end.api.is_free = function(x, y, z)
-    local noise = get_perlin_noise(perlin_l, x, y, z)
+    local noise = perlin_l:get_3d({x = x, y = y, z = z})
     return not (noise >= 0.8 or (noise > 0.5 and noise < 0.8) or noise < -0.5)
 end
 
