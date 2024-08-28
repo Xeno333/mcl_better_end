@@ -210,7 +210,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                     end
                     goto keepitup
 
-                elseif mcl_better_end.api.is_cave(noise) then
+                elseif mcl_better_end.api.is_cave(noise, noise2) then
                     local vi = area:index(x, y, z)
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
