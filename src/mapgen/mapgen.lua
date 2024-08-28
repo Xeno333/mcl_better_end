@@ -99,19 +99,19 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 for x = maxp.x, minp.x, -1 do
                     local vi = area:index(x, y, z)
                     local noise = perlin_l:get_3d({x = x, y = y, z = z})
-
-                    if mcl_better_end.api.is_free(noise) then
+                    
+                    if not mcl_better_end.api.is_island(noise) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.air
                         light_data[vi] = light_level
-                    elseif mcl_better_end.api.is_island(noise) then
+                    else
                         data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
-                    end
-                    
-                    for _, f in pairs(mcl_better_end.mapgen.ores) do
-                        if y >= f.ymin and y <= f.ymax then
-                            f.gen(data, vi, area, pr, x, y, z, perlin_l)
+                        for _, f in pairs(mcl_better_end.mapgen.ores) do
+                            if y >= f.ymin and y <= f.ymax then
+                                f.gen(data, vi, area, pr, x, y, z, perlin_l)
+                            end
                         end
                     end
+                    
                 end
             end
         end
@@ -130,30 +130,24 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
                 local vi = area:index(x, y, z)
-                data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                light_data[vi] = light_level
-                local function init_noises()
-                    if not noises.l[x] then
-                        noises.l[x] = {}
-                        noises.m[x] = {}
-                    end
-                    if not noises.l[x][y] then
-                        noises.l[x][y] = {}
-                        noises.m[x][y] = {}
-                    end
-                    if not noises.l[x][y][z] then
-                        noises.l[x][y][z] = {}
-                        noises.m[x][y][z] = {}
-                    end
-                    if not noises.l[x][y + 1] then
-                        noises.l[x][y + 1] = {}
-                    end
-                    if not noises.l[x][y + 1][z] then
-                        noises.l[x][y + 1][z] = perlin_l:get_3d({x = x, y = y + 1, z = z})
-                    end
+                if not noises.l[x] then
+                    noises.l[x] = {}
+                    noises.m[x] = {}
                 end
-
-                init_noises()
+                if not noises.l[x][y] then
+                    noises.l[x][y] = {}
+                    noises.m[x][y] = {}
+                end
+                if not noises.l[x][y][z] then
+                    noises.l[x][y][z] = {}
+                    noises.m[x][y][z] = {}
+                end
+                if not noises.l[x][y + 1] then
+                    noises.l[x][y + 1] = {}
+                end
+                if not noises.l[x][y + 1][z] then
+                    noises.l[x][y + 1][z] = perlin_l:get_3d({x = x, y = y + 1, z = z})
+                end
 
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
                 local noise = perlin_l:get_3d({x = x, y = y, z = z})
@@ -164,10 +158,11 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
 
                 if mcl_better_end.api.is_free(noise) then
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                    light_data[vi] = light_level
                     goto keepitup2
-                end
 
-                if mcl_better_end.api.is_island(noise) then
+                elseif mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                     if mcl_better_end.api.is_free(noise2) then
                         for _, p in pairs(mcl_better_end.biomes) do
@@ -194,10 +189,12 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         end
                     end
                     goto keepitup
+                else
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                    light_data[vi] = light_level
+                    goto keepitup2
                 end
-
-                print("This should never happen...")
-
+                
                 ::keepitup::
                 for _, f in pairs(mcl_better_end.mapgen.ores) do
                     if y >= f.ymin and y <= f.ymax then
