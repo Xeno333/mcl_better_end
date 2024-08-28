@@ -1,7 +1,7 @@
 
 local YMAX = -10000--mcl_vars.mg_end_max
 local YMAX_biome = -25000--mcl_vars.mg_end_max
-local YMIN = -27100--mcl_vars.mg_end_min
+local YMIN = -27070--mcl_vars.mg_end_min
 
 local cave_light_level = 4
 local light_level = 10
