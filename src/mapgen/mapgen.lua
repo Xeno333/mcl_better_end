@@ -1,7 +1,7 @@
 
 local YMAX = -10000--mcl_vars.mg_end_max
 local YMAX_biome = -25000--mcl_vars.mg_end_max
-local YMIN = -27070--mcl_vars.mg_end_min
+local YMIN = -27050--mcl_vars.mg_end_min
 
 local cave_light_level = 4
 local light_level = 10
@@ -126,7 +126,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     noises.l = {}
     noises.m = {}
 
-    for y = maxp.y, minp.y, -1 do
+    for y = maxp.y, math.max(minp.y, YMIN), -1 do
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
                 local vi = area:index(x, y, z)
@@ -216,7 +216,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
-    for y = minp.y, maxp.y do
+    for y = math.max(minp.y, YMIN), maxp.y do
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
                 local noise = noises.l[x][y][z]
