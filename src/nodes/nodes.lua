@@ -1,6 +1,6 @@
 minetest.register_node("mcl_better_end:end_sand", {
     description = "End Sand",
-    tiles = {"end_sand.png"},
+    tiles = {"mcl_better_end_end_sand.png"},
     stack_max = 64,
 
     drop = "mcl_better_end:end_sand",
