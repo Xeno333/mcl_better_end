@@ -145,13 +145,9 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 if not noises.l[x][y + 1] then
                     noises.l[x][y + 1] = {}
                 end
-                if not noises.l[x][y + 1][z] then
-                    noises.l[x][y + 1][z] = perlin_l:get_3d({x = x, y = y + 1, z = z})
-                end
 
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
                 local noise = perlin_l:get_3d({x = x, y = y, z = z})
-                local noise2 = noises.l[x][y + 1][z]
 
                 noises.l[x][y][z] = noise
                 noises.m[x][y][z] = noise_center
@@ -161,8 +157,14 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
                     light_data[vi] = light_level
                     goto keepitup2
+                end
 
-                elseif mcl_better_end.api.is_island(noise) then
+                if not noises.l[x][y + 1][z] then
+                    noises.l[x][y + 1][z] = perlin_l:get_3d({x = x, y = y + 1, z = z})
+                end
+                local noise2 = noises.l[x][y + 1][z]
+
+                if mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                     if mcl_better_end.api.is_free(noise2) then
                         for _, p in pairs(mcl_better_end.biomes) do
@@ -223,11 +225,12 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
                 local noise = noises.l[x][y][z]
-                local noise2 = noises.l[x][y+1][z]
 
-                if mcl_better_end.api.is_free(noise) or mcl_better_end.api.is_island(noise2) then
+                if mcl_better_end.api.is_free(noise) then
                     goto keepitup
                 end
+
+                local noise2 = noises.l[x][y+1][z]
                 
                 local noise_center = noises.m[x][y][z]
 
