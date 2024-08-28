@@ -264,6 +264,6 @@ end
 minetest.register_on_generated(
     function(minp, maxp, seed)
         if maxp.y < YMIN or minp.y > YMAX then return end
-        mcl_better_end.mapgen.gen(minp - 1, maxp, seed)
+        mcl_better_end.mapgen.gen({x=minp.x, y=minp.y - 1,z=minp.z}, maxp, seed)
     end
 )
