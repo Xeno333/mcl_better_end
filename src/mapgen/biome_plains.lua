@@ -25,7 +25,7 @@ local function grow_chorus_branch(pos, height, pr, data, area)
         local vi = area:index(current_pos.x, current_pos.y, current_pos.z)
         data[vi] = chorus_plant
 
-        -- Randomly decide if we branch
+        -- Randomly decide if we branch  
         if pr:next(1, 2) == 1 then
             local branch_dir = pr:next(1, 4)
             local branch_pos
@@ -61,7 +61,7 @@ end
 mcl_better_end.api.register_biome({
     type = "island",
     gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
-        if pr:next(1, 100) == 5 then
+        if noise_center < -0.5 then
             data[vi] = sand
         else
             data[vi] = filler
