@@ -159,7 +159,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                if not noises.l[y+1][z][]] then
+                if not noises.l[y+1][z][x] then
                     noises.l[y+1][z][x] = perlin_l:get_3d({x = x, y = y + 1, z = z})
                 end
                 local noise2 = noises.l[y+1][z][x]
