@@ -82,9 +82,6 @@ minetest.register_on_joinplayer(
 
 
 --Gen
-local noises = {}
-noises.l = {}
-noises.m = {}
 
 -- Mapgen Generation Function
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
@@ -94,6 +91,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
+    local noises = {}
+    noises.l = {}
+    noises.m = {}
+    
 
     local function main_gen1()
         if minp.y > YMAX_biome then
@@ -280,8 +281,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         end
     end
 
-    noises.l = {}
-    noises.m = {}
+    noises.l = nil
+    noises.m = nil
 end
 
 
