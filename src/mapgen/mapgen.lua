@@ -168,42 +168,45 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     local noise_center = perlin:get_3d({x = x, y = y, z = z})
                     noises.m[x][y][z] = noise_center
 
-                    if mcl_better_end.api.is_island(noise) then
-                        data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
-                        if mcl_better_end.api.is_free(noise2) then
+                    local function do_parts()
+                        if mcl_better_end.api.is_island(noise) then
+                            data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
+                            if mcl_better_end.api.is_free(noise2) then
+                                for _, p in pairs(mcl_better_end.biomes) do
+                                    if p.type == "island" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                                        p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
+                                    end
+                                end
+                            end
+                        elseif mcl_better_end.api.is_cave(noise, noise2) then
+                            data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                            light_data[vi] = cave_light_level
                             for _, p in pairs(mcl_better_end.biomes) do
-                                if p.type == "island" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                                if p.type == "cave" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                                    p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
+                                end
+                            end
+                        elseif mcl_better_end.api.is_sea(noise) then
+                            data[vi] = mcl_better_end.mapgen.registered_nodes.sea
+                            for _, p in pairs(mcl_better_end.biomes) do
+                                if p.type == "sea" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
                                     p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
                                 end
                             end
                         end
-                        goto keepitup
-                    elseif mcl_better_end.api.is_cave(noise, noise2) then
-                        data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                        light_data[vi] = cave_light_level
-                        for _, p in pairs(mcl_better_end.biomes) do
-                            if p.type == "cave" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
-                            end
-                        end
-                        goto keepitup
-                    elseif mcl_better_end.api.is_sea(noise) then
-                        data[vi] = mcl_better_end.mapgen.registered_nodes.sea
-                        for _, p in pairs(mcl_better_end.biomes) do
-                            if p.type == "sea" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
-                            end
-                        end
-                        goto keepitup
                     end
+
+                    do_parts()
                     
                     ::keepitup::
-                    for _, f in pairs(mcl_better_end.mapgen.ores) do
-                        if y >= f.ymin and y <= f.ymax then
-                            f.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+                    local function do_map()
+                        for _, f in pairs(mcl_better_end.mapgen.ores) do
+                            if y >= f.ymin and y <= f.ymax then
+                                f.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+                            end
                         end
                     end
-                    
+                    do_map()
                     ::keepitup2::
                 end
             end
