@@ -76,6 +76,67 @@ minetest.register_on_joinplayer(
 )
 
 
+-- Hash function
+local function hash(x, y, z)
+    return math.abs((x * 73856093) ~ (y * 19349663) ~ (z * 83492791)) % 256
+end
+
+-- Linear interpolation function
+local function lerp(t, a, b)
+    return a + t * (b - a)
+end
+
+-- Gradient function
+local function grad(hash, x, y, z)
+    local h = hash % 16
+    local u = h < 8 and x or y
+    local v = h < 4 and y or (h == 12 or h == 14) and x or z
+    return ((h % 2 == 0) and u or -u) + ((h % 4 == 0) and v or -v)
+end
+
+-- Smoothstep function
+local function fade(t)
+    return t * t * t * (t * (t * 6 - 15) + 10)
+end
+
+-- 3D Noise function
+local function noise3D(x, y, z)
+    local X = math.floor(x) % 256
+    local Y = math.floor(y) % 256
+    local Z = math.floor(z) % 256
+
+    x = x - math.floor(x)
+    y = y - math.floor(y)
+    z = z - math.floor(z)
+
+    local u = fade(x)
+    local v = fade(y)
+    local w = fade(z)
+
+    local A = hash(X, Y, Z)
+    local AA = hash(X + 1, Y, Z)
+    local AB = hash(X, Y + 1, Z)
+    local B = hash(X + 1, Y + 1, Z)
+
+    local p0 = grad(A, x, y, z)
+    local p1 = grad(AA, x - 1, y, z)
+    local p2 = grad(AB, x, y - 1, z)
+    local p3 = grad(B, x - 1, y - 1, z)
+    local p4 = grad(A, x, y, z - 1)
+    local p5 = grad(AA, x - 1, y, z - 1)
+    local p6 = grad(AB, x, y - 1, z - 1)
+    local p7 = grad(B, x - 1, y - 1, z - 1)
+
+    local l0 = lerp(u, p0, p1)
+    local l1 = lerp(u, p2, p3)
+    local l2 = lerp(u, p4, p5)
+    local l3 = lerp(u, p6, p7)
+
+    local l4 = lerp(v, l0, l1)
+    local l5 = lerp(v, l2, l3)
+
+    return lerp(w, l4, l5)
+end
 
 
 
@@ -146,11 +207,11 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     noises.l[x][y + 1] = {}
                 end
                 if not noises.l[x][y + 1][z] then
-                    noises.l[x][y + 1][z] = perlin_l:get_3d({x = x, y = y + 1, z = z})
+                    noises.l[x][y + 1][z] = noise3D(x, y+1, z)
                 end
 
-                local noise_center = perlin:get_3d({x = x, y = y, z = z})
-                local noise = perlin_l:get_3d({x = x, y = y, z = z})
+                local noise_center = noise3D(x, y, z)
+                local noise = noise3D(x, y, z)
                 local noise2 = noises.l[x][y + 1][z]
 
                 noises.l[x][y][z] = noise
