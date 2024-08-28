@@ -69,8 +69,8 @@ minetest.register_on_joinplayer(
                 scale = 1,
                 spread = {x = 50, y = 20, z = 50},
                 seed = minetest.get_mapgen_setting("seed"),
-                octaves = 1,
-                persist = 1
+                octaves = 3,
+                persist = 0.5
             })
     end
 )
