@@ -158,7 +158,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 if not noises.l[x][y + 1][z] then
                     noises.l[x][y + 1][z] = perlin_l:get_3d({x = x, y = y + 1, z = z})
                 end
-
                 local noise2 = noises.l[x][y + 1][z]
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
                 noises.m[x][y][z] = noise_center
@@ -208,15 +207,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     vm:set_light_data(light_data)
     vm:write_to_map()
     vm:update_map()
-end
 
--- Mapgen Decoration Function
-function mcl_better_end.mapgen.dec(minp, maxp, seed)
-    local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
-    local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
-    local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
-
-    for y = minp.y, maxp.y do
+    if maxp.y < YMIN or minp.y > YMAX_biome then return endfor y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
                 local noise = noises.l[x][y][z]
@@ -226,7 +218,6 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                 end
 
                 local noise2 = noises.l[x][y+1][z]
-                
                 local noise_center = noises.m[x][y][z]
 
                 if mcl_better_end.api.is_island(noise) then
@@ -262,6 +253,8 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
             end
         end
     end
+    noises.l = {}
+    noises.m = {}
 
 end
 
