@@ -93,6 +93,12 @@ minetest.register_on_joinplayer(
 
 --Gen
 
+local is_free = mcl_better_end.api.is_free
+local is_island = mcl_better_end.api.is_island
+local is_cave = mcl_better_end.api.is_cave
+local is_sea = mcl_better_end.api.is_sea
+local biomes = mcl_better_end.biomes
+
 -- Mapgen Generation Function
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
@@ -100,12 +106,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local data = vm:get_data()
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
-
-    local is_free = mcl_better_end.api.is_free
-    local is_island = mcl_better_end.api.is_island
-    local is_cave = mcl_better_end.api.is_cave
-    local is_sea = mcl_better_end.api.is_sea
-    local biomes = mcl_better_end.biomes
 
     if minp.y > YMAX_biome then
         for y = maxp.y, minp.y, -1 do
@@ -200,12 +200,6 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
     local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
     local area = VoxelArea:new{MinEdge=emin, MaxEdge=emax}
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
-
-    local is_free = mcl_better_end.api.is_free
-    local is_island = mcl_better_end.api.is_island
-    local is_cave = mcl_better_end.api.is_cave
-    local is_sea = mcl_better_end.api.is_sea
-    local biomes = mcl_better_end.biomes
 
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
