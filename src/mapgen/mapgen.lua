@@ -129,8 +129,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     for y = maxp.y, minp.y, -1 do
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
-                data[vi] = mcl_better_end.mapgen.registered_nodes.air
                 local vi = area:index(x, y, z)
+                data[vi] = mcl_better_end.mapgen.registered_nodes.air
                 if not noises.l[x] then
                     noises.l[x] = {}
                     noises.m[x] = {}
