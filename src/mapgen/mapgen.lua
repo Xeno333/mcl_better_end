@@ -1,7 +1,7 @@
 
 local YMAX = -10000--mcl_vars.mg_end_max
 local YMAX_biome = -25000--mcl_vars.mg_end_max
-local YMIN = -27051--mcl_vars.mg_end_min
+local YMIN = -27050--mcl_vars.mg_end_min
 
 local cave_light_level = 4
 local light_level = 10
@@ -129,6 +129,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     for y = maxp.y, minp.y, -1 do
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
+                data[vi] = mcl_better_end.mapgen.registered_nodes.air
                 local vi = area:index(x, y, z)
                 if not noises.l[x] then
                     noises.l[x] = {}
@@ -150,7 +151,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 noises.l[x][y][z] = noise
 
                 if mcl_better_end.api.is_free(noise) then
-                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
                     light_data[vi] = light_level
                     goto keepitup2
                 end
@@ -174,7 +174,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     end
                     goto keepitup
                 elseif mcl_better_end.api.is_cave(noise, noise2) then
-                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
                     light_data[vi] = cave_light_level
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
@@ -190,10 +189,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         end
                     end
                     goto keepitup
-                else
-                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                    light_data[vi] = light_level
-                    goto keepitup2
                 end
                 
                 ::keepitup::
