@@ -6,18 +6,25 @@ mcl_better_end.mapgen.registered_nodes.oasis_filler = minetest.get_content_id("m
 mcl_better_end.mapgen.registered_nodes.oasis_topper = minetest.get_content_id("mcl_better_end:end_oasis_grass")
 --mcl_better_end.mapgen.registered_nodes.oasis_water = minetest.get_content_id("mcl_better_end:ender_water_real")
 mcl_better_end.mapgen.registered_nodes.oasis_glow_berry_plant = minetest.get_content_id("mcl_better_end:end_glow_berry_plant")
+mcl_better_end.mapgen.registered_nodes.sand = minetest.get_content_id("mcl_better_end:end_sand")
 
 
 local topper = mcl_better_end.mapgen.registered_nodes.oasis_topper
 local filler = mcl_better_end.mapgen.registered_nodes.oasis_filler
 local water = mcl_better_end.mapgen.registered_nodes.oasis_water
 local glow_berry_plant = mcl_better_end.mapgen.registered_nodes.oasis_glow_berry_plant
+local sand = mcl_better_end.mapgen.registered_nodes.sand
 
 
 mcl_better_end.api.register_biome({
     type = "island",
     gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
-        data[vi] = filler
+        if pr:next(1, 100) == 5 then
+            data[vi] = sand
+        else
+            data[vi] = filler
+        end
+        
 
         --add topww
         if pr:next(1, 20) == 3 then

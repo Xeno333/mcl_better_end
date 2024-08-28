@@ -12,25 +12,6 @@ minetest.register_node("mcl_better_end:end_sand", {
     _mcl_cooking_output = "mcl_better_end:end_glass"
 })
 
-
-local YMAX = -27020
-local YMIN = -27100
-
-mcl_better_end.mapgen.registered_nodes.sand = minetest.get_content_id("mcl_better_end:end_sand")
-
-mcl_better_end.mapgen.ores.enderite = {
-    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
-        --enderite
-        if data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone then
-            if pr:next(1, 100) == 5 then
-                data[vi] = mcl_better_end.mapgen.registered_nodes.sand
-            end
-        end
-    end,
-    ymax = YMAX,
-    ymin = YMIN,
-}
-
 minetest.register_node("mcl_better_end:end_glass", {
     description = "End Glass",
     tiles = {"end_glass.png"},
