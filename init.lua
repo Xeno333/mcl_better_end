@@ -38,3 +38,5 @@ dofile(mcl_better_end.code_loc .. "/nightite/nightite.lua")
 dofile(mcl_better_end.code_loc .. "/nightite/nightite_craft.lua")
 
 dofile(mcl_better_end.code_loc .. "/physics.lua")
+
+dofile(mcl_better_end.code_loc .. "/mobs.lua")

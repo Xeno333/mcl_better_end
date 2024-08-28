@@ -22,6 +22,10 @@ mcl_better_end.api.register_biome({
         if mcl_better_end.api.is_island(x, y-1, z) then
             data[vi] = filler
 
+            if pr:next(1, 100) == 2 then 
+                minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:endermite", minetest.serialize({}))
+            end
+
             --add topww
             if pr:next(1, 20) == 3 then
                 if mcl_better_end.api.is_cave(x, y+1, z) then
@@ -50,11 +54,6 @@ mcl_better_end.api.register_biome({
             else
                 data[vi] = night_vines_bottom
             end
-        end
-    end,
-    dec = function(pr, x, y, z, perlin_l, noise_center)
-        if pr:next(1, 600) == 2 then 
-            minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:endermite", minetest.serialize({}))
         end
     end,
     noise_high = 1,
