@@ -126,24 +126,24 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         return
     end
 
-    for y = maxp.y, minp.y, -1 do
-        for z = maxp.z, minp.z, -1 do
-            for x = maxp.x, minp.x, -1 do
+    for x = maxp.x, minp.x, -1 do
+        if not noises.l[x] then
+            noises.l[x] = {}
+            noises.m[x] = {}
+        end
+        for y = maxp.y, minp.y, -1 do
+            if not noises.l[x][y] then
+                noises.l[x][y] = {}
+                noises.m[x][y] = {}
+            end
+            if not noises.l[x][y + 1] then
+                noises.l[x][y + 1] = {}
+            end
+            for z = maxp.z, minp.z, -1 do
                 local vi = area:index(x, y, z)
-                if not noises.l[x] then
-                    noises.l[x] = {}
-                    noises.m[x] = {}
-                end
-                if not noises.l[x][y] then
-                    noises.l[x][y] = {}
-                    noises.m[x][y] = {}
-                end
                 if not noises.l[x][y][z] then
                     noises.l[x][y][z] = {}
                     noises.m[x][y][z] = {}
-                end
-                if not noises.l[x][y + 1] then
-                    noises.l[x][y + 1] = {}
                 end
 
                 local noise = perlin_l:get_3d({x = x, y = y, z = z})
@@ -264,7 +264,6 @@ end
 minetest.register_on_generated(
     function(minp, maxp, seed)
         if maxp.y < YMIN or minp.y > YMAX then return end
-        minp.y = minp.y - 1
-        mcl_better_end.mapgen.gen(minp, maxp, seed)
+        mcl_better_end.mapgen.gen(minp - 1, maxp, seed)
     end
 )
