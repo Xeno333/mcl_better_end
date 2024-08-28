@@ -133,10 +133,14 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
         for x = maxp.x, minp.x, -1 do
             if not noises.l[x] then
+                local function l1()
                 noises.l[x] = {}
                 noises.m[x] = {}
+                end
+                l1()
             end
             for y = maxp.y, minp.y, -1 do
+                local function l2()
                 if not noises.l[x][y] then
                     noises.l[x][y] = {}
                     noises.m[x][y] = {}
@@ -144,12 +148,17 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 if not noises.l[x][y + 1] then
                     noises.l[x][y + 1] = {}
                 end
+            end
+            l2()
                 for z = maxp.z, minp.z, -1 do
                     local vi = area:index(x, y, z)
+                    local function l3()
                     if not noises.l[x][y][z] then
                         noises.l[x][y][z] = {}
                         noises.m[x][y][z] = {}
                     end
+                end
+                l3()
 
                     local noise = perlin_l:get_3d({x = x, y = y, z = z})
                     noises.l[x][y][z] = noise
