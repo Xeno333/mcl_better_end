@@ -82,6 +82,9 @@ minetest.register_on_joinplayer(
 
 
 --Gen
+local noises = {}
+noises.l = {}
+noises.m = {}
 
 -- Mapgen Generation Function
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
@@ -91,12 +94,25 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
+
     if minp.y > YMAX_biome then
         for y = maxp.y, minp.y, -1 do
             for z = maxp.z, minp.z, -1 do
                 for x = maxp.x, minp.x, -1 do
                     local vi = area:index(x, y, z)
                     local noise = perlin_l:get_3d({x = x, y = y, z = z})
+                    
+                    if noises.l[x] == nil then
+                        noises.l[x] = {}
+                        noises.l[x][y] = {}
+                        noises.l[x][y][z] = {}
+                    elseif noises.l[x][y] == nil then
+                        noises.l[x][y] = {}
+                        noises.l[x][y][z] = {}
+                    elseif noises.l[x][y][z] == nil then
+                        noises.l[x][y][z] = {}
+                    end
+                    noises.l[x][y][z] = noise
 
                     if mcl_better_end.api.is_free(noise) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -127,6 +143,24 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 local vi = area:index(x, y, z)
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
                 local noise = perlin_l:get_3d({x = x, y = y, z = z})
+                if noises.l[x] == nil then
+                    noises.l[x] = {}
+                    noises.l[x][y] = {}
+                    noises.l[x][y][z] = {}
+                    noises.m[x] = {}
+                    noises.m[x][y] = {}
+                    noises.m[x][y][z] = {}
+                elseif noises.l[x][y] == nil then
+                    noises.l[x][y] = {}
+                    noises.l[x][y][z] = {}
+                    noises.m[x][y] = {}
+                    noises.m[x][y][z] = {}
+                elseif noises.l[x][y][z] == nil then
+                    noises.l[x][y][z] = {}
+                    noises.m[x][y][z] = {}
+                end
+                noises.l[x][y][z] = noise
+                noises.m[x][y][z] = noise_center
 
                 if mcl_better_end.api.is_free(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -135,6 +169,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 end
 
                 local noise2 = perlin_l:get_3d({x = x, y = y+1, z = z})
+                noises.l[x][y+1][z] = noise2
 
                 if mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
@@ -192,13 +227,13 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
-                local noise = perlin_l:get_3d({x = x, y = y, z = z})
-                local noise2 = perlin_l:get_3d({x = x, y = y+1, z = z})
+                local noise = noises.l[x][y][z]--perlin_l:get_3d({x = x, y = y, z = z})
+                local noise2 = noises.l[x][y+1][z]--perlin_l:get_3d({x = x, y = y+1, z = z})
                 if mcl_better_end.api.is_free(noise) or mcl_better_end.api.is_island(noise2) then
                     goto keepitup
                 end
                 
-                local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                local noise_center = noises.m[x][y][z]--perlin:get_3d({x = x, y = y, z = z})
 
                 if mcl_better_end.api.is_island(noise) then
                     if mcl_better_end.api.is_free(noise2) then

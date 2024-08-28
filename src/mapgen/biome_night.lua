@@ -30,8 +30,7 @@ mcl_better_end.api.register_biome({
 
             --add topww
             if pr:next(1, 20) == 3 then
-                local noise3 = perlin_l:get_3d({x = x, y = y, z = z})
-                if mcl_better_end.api.is_cave(noise3, plnoise_1) then
+                if mcl_better_end.api.is_cave(plnoise, plnoise_1) then
                     local vi = area:index(x, y+1, z)
                     if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
                         data[vi] = topper
@@ -39,8 +38,7 @@ mcl_better_end.api.register_biome({
                 end
 
             elseif pr:next(1, 200) == 3 then
-                local noise3 = perlin_l:get_3d({x = x, y = y, z = z})
-                if mcl_better_end.api.is_cave(noise3, plnoise_1) then
+                if mcl_better_end.api.is_cave(plnoise, plnoise_1) then
                     local vi = area:index(x, y+1, z)
                     if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
                         data[vi] = night_candle_plant
