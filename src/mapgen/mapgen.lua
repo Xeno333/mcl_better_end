@@ -215,6 +215,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         vm:update_map()
     end
 
+    main_gen()
+
     local function dec()
         for y = minp.y, maxp.y do
             for z = minp.z, maxp.z do
