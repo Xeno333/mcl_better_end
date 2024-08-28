@@ -142,7 +142,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                if is_island(x, y, z) then
+                if mcl_better_end.api.is_island(x, y, z) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                     if mcl_better_end.api.is_free(x, y + 1, z) then
                         for _, p in pairs(mcl_better_end.biomes) do
