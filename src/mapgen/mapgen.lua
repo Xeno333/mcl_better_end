@@ -208,48 +208,50 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     vm:write_to_map()
     vm:update_map()
 
-    if maxp.y < YMIN or minp.y > YMAX_biome then return endfor y = minp.y, maxp.y do
-        for z = minp.z, maxp.z do
-            for x = minp.x, maxp.x do
-                local noise = noises.l[x][y][z]
+    if maxp.y < YMIN or minp.y > YMAX_biome then return end
+        for y = minp.y, maxp.y do
+            for z = minp.z, maxp.z do
+                for x = minp.x, maxp.x do
+                    local noise = noises.l[x][y][z]
 
-                if mcl_better_end.api.is_free(noise) then
-                    goto keepitup
-                end
+                    if mcl_better_end.api.is_free(noise) then
+                        goto keepitup
+                    end
 
-                local noise2 = noises.l[x][y+1][z]
-                local noise_center = noises.m[x][y][z]
+                    local noise2 = noises.l[x][y+1][z]
+                    local noise_center = noises.m[x][y][z]
 
-                if mcl_better_end.api.is_island(noise) then
-                    if mcl_better_end.api.is_free(noise2) then
+                    if mcl_better_end.api.is_island(noise) then
+                        if mcl_better_end.api.is_free(noise2) then
+                            for _, p in pairs(mcl_better_end.biomes) do
+                                if p.type == "island" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                                    p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
+                                end
+                            end
+                        end
+                        goto keepitup
+
+                    elseif mcl_better_end.api.is_cave(noise, noise2) then
+                        local vi = area:index(x, y, z)
                         for _, p in pairs(mcl_better_end.biomes) do
-                            if p.type == "island" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                            if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
                                 p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
                             end
                         end
-                    end
-                    goto keepitup
+                        goto keepitup
 
-                elseif mcl_better_end.api.is_cave(noise, noise2) then
-                    local vi = area:index(x, y, z)
-                    for _, p in pairs(mcl_better_end.biomes) do
-                        if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
+                    elseif mcl_better_end.api.is_sea(noise) then
+                        for _, p in pairs(mcl_better_end.biomes) do
+                            if p.type == "sea" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                                p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
+                            end
                         end
-                    end
-                    goto keepitup
+                        goto keepitup
 
-                elseif mcl_better_end.api.is_sea(noise) then
-                    for _, p in pairs(mcl_better_end.biomes) do
-                        if p.type == "sea" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
-                        end
                     end
-                    goto keepitup
 
+                    ::keepitup::
                 end
-
-                ::keepitup::
             end
         end
     end
