@@ -61,7 +61,7 @@ end
 
 mcl_better_end.api.register_biome({
     type = "island",
-    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center, plnoise, plnoise_1)
         if noise_center < -0.5 then
             data[vi] = sand
         else
@@ -78,8 +78,7 @@ mcl_better_end.api.register_biome({
 
 
         if pr:next(1, 20) == 5 then
-            local noise2 = perlin_l:get_3d({x = x, y = y+1, z = z})
-            if not mcl_better_end.api.is_island(noise2) then
+            if not mcl_better_end.api.is_island(plnoise_1) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = topper
             end
@@ -89,8 +88,7 @@ mcl_better_end.api.register_biome({
             grow_chorus_branch({x = x, y = y, z = z}, pr:next(1, 20), pr, data, area, perlin_l)
 
         elseif pr:next(1, 200) == 46 then
-            local noise2 = perlin_l:get_3d({x = x, y = y+1, z = z})
-            if not mcl_better_end.api.is_island(noise2) then
+            if not mcl_better_end.api.is_island(plnoise_1) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = magibulb
             end

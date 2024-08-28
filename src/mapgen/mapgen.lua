@@ -141,7 +141,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     if mcl_better_end.api.is_free(noise2) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+                                p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
                             end
                         end
                     end
@@ -151,7 +151,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     light_data[vi] = cave_light_level
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+                            p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup
@@ -159,7 +159,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "sea" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+                            p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup
@@ -204,7 +204,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                     if mcl_better_end.api.is_free(noise2) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.dec(pr, x, y, z, perlin_l, noise_center)
+                                p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
                             end
                         end
                     end
@@ -214,7 +214,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                     local vi = area:index(x, y, z)
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.dec(pr, x, y, z, perlin_l, noise_center)
+                            p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup
@@ -222,7 +222,7 @@ function mcl_better_end.mapgen.dec(minp, maxp, seed)
                 elseif mcl_better_end.api.is_sea(noise) then
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "sea" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.dec(pr, x, y, z, perlin_l, noise_center)
+                            p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup

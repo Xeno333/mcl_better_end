@@ -18,9 +18,8 @@ local night_vines_bottom = mcl_better_end.mapgen.registered_nodes.night_vines_bo
 
 mcl_better_end.api.register_biome({
     type = "cave",
-    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center, plnoise, plnoise_1)
         local noise = perlin_l:get_3d({x = x, y = y-1, z = z})
-        local noise2 = perlin_l:get_3d({x = x, y = y+1, z = z})
         
         if mcl_better_end.api.is_island(noise) then
             data[vi] = filler
@@ -32,7 +31,7 @@ mcl_better_end.api.register_biome({
             --add topww
             if pr:next(1, 20) == 3 then
                 local noise3 = perlin_l:get_3d({x = x, y = y, z = z})
-                if mcl_better_end.api.is_cave(noise3, noise2) then
+                if mcl_better_end.api.is_cave(noise3, plnoise_1) then
                     local vi = area:index(x, y+1, z)
                     if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
                         data[vi] = topper
@@ -41,7 +40,7 @@ mcl_better_end.api.register_biome({
 
             elseif pr:next(1, 200) == 3 then
                 local noise3 = perlin_l:get_3d({x = x, y = y, z = z})
-                if mcl_better_end.api.is_cave(noise3, noise2) then
+                if mcl_better_end.api.is_cave(noise3, plnoise_1) then
                     local vi = area:index(x, y+1, z)
                     if data[vi] == mcl_better_end.mapgen.registered_nodes.air then
                         data[vi] = night_candle_plant
@@ -49,7 +48,7 @@ mcl_better_end.api.register_biome({
                 end
                 
             end
-        elseif mcl_better_end.api.is_island(noise2) then
+        elseif mcl_better_end.api.is_island(plnoise_1) then
             if pr:next(1, 5) == 1 then
                 data[vi] = night_vines
             end
