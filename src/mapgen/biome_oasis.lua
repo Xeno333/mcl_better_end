@@ -19,15 +19,17 @@ mcl_better_end.api.register_biome({
     gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
         data[vi] = filler
 
+        local noise = perlin_l:get_3d({x = x, y = y+1, z = z})
+
         --add topww
         if pr:next(1, 20) == 3 then
-            if not mcl_better_end.api.is_island(x, y+1, z) then
+            if not mcl_better_end.api.is_island(noise) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = topper
             end
 
         elseif pr:next(1, 200) == 3 then
-            if not mcl_better_end.api.is_island(x, y+1, z) then
+            if not mcl_better_end.api.is_island(noise) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = glow_berry_plant
             end
