@@ -98,7 +98,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
             for z = maxp.z, minp.z, -1 do
                 for x = maxp.x, minp.x, -1 do
                     local vi = area:index(x, y, z)
-                    local noise = 0.4
+                    local noise = perlin_l:get_3d({x = x, y = y, z = z})
                     
                     if not mcl_better_end.api.is_island(noise) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -146,11 +146,11 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     noises.l[x][y + 1] = {}
                 end
                 if not noises.l[x][y + 1][z] then
-                    noises.l[x][y + 1][z] = 0.4
+                    noises.l[x][y + 1][z] = perlin_l:get_3d({x = x, y = y + 1, z = z})
                 end
 
-                local noise_center = 0.4
-                local noise = 0.4
+                local noise_center = noises.l[x][y + 1][z]
+                local noise = noise_center
                 local noise2 = noises.l[x][y + 1][z]
 
                 noises.l[x][y][z] = noise
