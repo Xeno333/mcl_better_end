@@ -169,6 +169,12 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 end
 
                 local noise2 = perlin_l:get_3d({x = x, y = y+1, z = z})
+                if noises.l[x][y+1] == nil then
+                    noises.l[x][y+1] = {}
+                    noises.l[x][y+1][z] = {}
+                elseif noises.l[x][y+1][z] == nil then
+                    noises.l[x][y+1][z] = {}
+                end
                 noises.l[x][y+1][z] = noise2
 
                 if mcl_better_end.api.is_island(noise) then
