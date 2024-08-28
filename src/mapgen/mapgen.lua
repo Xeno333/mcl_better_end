@@ -266,7 +266,5 @@ minetest.register_on_generated(
         if maxp.y < YMIN or minp.y > YMAX then return end
         minp.y = minp.y - 1
         mcl_better_end.mapgen.gen(minp, maxp, seed)
-        if maxp.y < YMIN or minp.y > YMAX_biome then return end
-        mcl_better_end.mapgen.dec(minp, maxp, seed)
     end
 )
