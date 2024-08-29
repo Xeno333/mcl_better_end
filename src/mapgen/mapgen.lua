@@ -123,16 +123,15 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     end
 
     local noises = {}
-    local noises_l = 0
 
+    local function dec()
     for y = maxp.y, minp.y, -1 do
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
                 local vi = area:index(x, y, z)
 
                 local noise = perlin_l:get_3d({x = x, y = y, z = z})
-                noises_l = noises_l + 1
-                noises[noises_l] = noise
+                noises[#noises+1] = noise
 
                 if mcl_better_end.api.is_free(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -140,12 +139,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                noises_l = noises_l + 1
-                noises[noises_l] = perlin_l:get_3d({x = x, y = y + 1, z = z})
-                local noise2 = noises[noises_l]
+                local noise2 = perlin_l:get_3d({x = x, y = y + 1, z = z})
+                noises[#noises+1] = noise2
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
-                noises_l = noises_l + 1
-                noises[noises_l] = noise_center
+                noises[#noises+1] = noise_center
 
                 if mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
@@ -187,26 +184,29 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
             end
         end
     end
+    end
+    dec()
 
     vm:set_data(data)
     vm:set_light_data(light_data)
     vm:write_to_map()
     vm:update_map()
 
+    local function dec2()
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
-                local noise = noises[noises_l]
-                noises_l = noises_l - 1
+                local noise = noises[#noises]
+                noises[noises] = nil
 
                 if mcl_better_end.api.is_free(noise) then
                     goto keepitup
                 end
 
-                local noise2 = noises[noises_l]
-                noises_l = noises_l - 1
-                local noise_center = noises[noises_l]
-                noises_l = noises_l - 1
+                local noise2 = noises[#noises]
+                noises[noises] = nil
+                local noise_center = noises[#noises]
+                noises[noises] = nil
 
                 if mcl_better_end.api.is_island(noise) then
                     if mcl_better_end.api.is_free(noise2) then
@@ -241,6 +241,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
             end
         end
     end
+end
+dec()
 
 end
 
