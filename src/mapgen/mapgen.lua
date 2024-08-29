@@ -140,8 +140,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                local noise2 = perlin_l:get_3d({x = x, y = y + 1, z = z})
-                noises[{x=x,y=y+1,z=z}] = noise2
+                if not noises[{x=x,y=y+1,z=z}] then
+                    noises[{x=x,y=y+1,z=z}] = perlin_l:get_3d({x = x, y = y + 1, z = z})
+                end
+                local noise2 = noises[{x=x,y=y+1,z=z}]
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
                 noises2[{x=x,y=y,z=z}] = noise_center
 
