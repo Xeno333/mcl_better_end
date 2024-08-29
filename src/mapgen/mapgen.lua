@@ -122,10 +122,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         return
     end
     
-    local noises = {}
-        
-    noises.l = {}
-    noises.m = {}
+    local noises = {l={}, m={}}
 
     for y = maxp.y, minp.y, -1 do
         if not noises.l[y] then
@@ -257,9 +254,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
             end
         end
     end
-    noises.l = {}
-    noises.m = {}
-
 end
 
 
