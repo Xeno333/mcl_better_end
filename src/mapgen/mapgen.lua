@@ -123,7 +123,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     end
 
     local noises = {}
-    local noises2 = {}
 
     local function dec()
     for y = maxp.y, minp.y, -1 do
@@ -132,7 +131,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 local vi = area:index(x, y, z)
 
                 local noise = perlin_l:get_3d({x = x, y = y, z = z})
-                noises[{x=x,y=y,z=z}] = noise
+                noises[#noises+1] = noise
 
                 if mcl_better_end.api.is_free(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -140,12 +139,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                if not noises[{x=x,y=y+1,z=z}] then
-                    noises[{x=x,y=y+1,z=z}] = perlin_l:get_3d({x = x, y = y + 1, z = z})
-                end
-                local noise2 = noises[{x=x,y=y+1,z=z}]
+                local noise2 = perlin_l:get_3d({x = x, y = y + 1, z = z})
+                noises[#noises+1] = noise2
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
-                noises2[{x=x,y=y,z=z}] = noise_center
+                noises[#noises+1] = noise_center
 
                 if mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
@@ -195,18 +192,22 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     vm:write_to_map()
     vm:update_map()
 
+    local i = #noises
+
     local function dec2()
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
-                local noise = noises[{x=x,y=y,z=z}]
+                local noise = noises[i]
+                i = i - 1
 
                 if mcl_better_end.api.is_free(noise) then
                     goto keepitup
                 end
 
-                local noise2 = noises[{x=x,y=y+1,z=z}]
-                local noise_center = noises2[{x=x,y=y,z=z}]
+                local noise2 = noises[i]
+                local noise_center = noises[i-1]
+                i = i - 2
 
                 if mcl_better_end.api.is_island(noise) then
                     if mcl_better_end.api.is_free(noise2) then
