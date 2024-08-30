@@ -1,5 +1,5 @@
-local YMAX = -26820
-local YMIN = -26920
+local YMAX = -25500
+local YMIN = -26000
 
 --oasis
 local noise_high = 1
@@ -15,7 +15,7 @@ mcl_better_end.mapgen.ores.nephrite = {
         --nephrite
         if data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone then
             if pr:next(1, 1000) == 5 then
-                if pr:next(1, 40) == 5 then
+                if pr:next(1, 10) == 5 then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.nephrite_ore
                 end
             end

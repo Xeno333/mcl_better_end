@@ -16,18 +16,18 @@ local glow_berry_plant = mcl_better_end.mapgen.registered_nodes.oasis_glow_berry
 
 mcl_better_end.api.register_biome({
     type = "island",
-    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center, plnoise, plnoise_1)
         data[vi] = filler
 
         --add topww
         if pr:next(1, 20) == 3 then
-            if not mcl_better_end.api.is_island(x, y+1, z) then
+            if not mcl_better_end.api.is_island(plnoise_1) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = topper
             end
 
         elseif pr:next(1, 200) == 3 then
-            if not mcl_better_end.api.is_island(x, y+1, z) then
+            if not mcl_better_end.api.is_island(plnoise_1) then
                 local vi = area:index(x, y+1, z)
                 data[vi] = glow_berry_plant
             end
