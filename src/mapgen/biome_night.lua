@@ -24,7 +24,7 @@ mcl_better_end.api.register_biome({
         if mcl_better_end.api.is_island(noise) then
             data[vi] = filler
 
-            if pr:next(1, 40) == 2 then 
+            if pr:next(1, 60) == 2 then 
                 minetest.add_entity({x = x, y = y+1, z = z}, "mobs_mc:endermite", minetest.serialize({}))
             end
 
