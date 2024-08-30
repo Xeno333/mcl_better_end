@@ -52,28 +52,25 @@ end
 
 
 --mapgen
-
-
-minetest.register_on_joinplayer(
-    function() 
-        perlin = minetest.get_perlin({
+minetest.register_on_mapgen_init(function()
+    perlin = minetest.get_perlin({
+        offset = 0,
+        scale = 1,
+        spread = {x = biome_size, y = biome_size/2, z = biome_size},
+        seed = minetest.get_mapgen_setting("seed"),
+        octaves = 3,
+        persist = 0.5
+    })
+    perlin_l = minetest.get_perlin({
             offset = 0,
             scale = 1,
-            spread = {x = biome_size, y = biome_size/2, z = biome_size},
+            spread = {x = 50, y = 20, z = 50},
             seed = minetest.get_mapgen_setting("seed"),
             octaves = 3,
             persist = 0.5
         })
-        perlin_l = minetest.get_perlin({
-                offset = 0,
-                scale = 1,
-                spread = {x = 50, y = 20, z = 50},
-                seed = minetest.get_mapgen_setting("seed"),
-                octaves = 3,
-                persist = 0.5
-            })
-    end
-)
+end)
+
 
 
 
