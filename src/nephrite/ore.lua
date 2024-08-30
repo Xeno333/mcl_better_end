@@ -16,7 +16,6 @@ mcl_better_end.mapgen.ores.nephrite = {
         if data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone then
             if pr:next(1, 1000) == 5 then
                 if pr:next(1, 10) == 5 then
-                    print("A")
                     data[vi] = mcl_better_end.mapgen.registered_nodes.nephrite_ore
                 end
             end
