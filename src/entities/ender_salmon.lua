@@ -40,12 +40,10 @@ local ender_salmon = {
 	makes_footstep_sound = false,
 	swim = true,
 	fly = true,
-	fly_in = "mcl_core:water_source",
-	breathes_in_water = true,
+	fly_in = "mcl_better_end:ender_water",
 	jump = false,
 	view_range = 16,
 	runaway = true,
-	fear_height = 4,
 
 	on_punch = function(self, hitter)
 		local pos = self.object:get_pos()
@@ -63,7 +61,7 @@ local ender_salmon = {
 			local node_at_new_pos = minetest.get_node(new_pos).name
 			local node_under_new_pos = minetest.get_node({x = new_pos.x, y = new_pos.y + -1, z = new_pos.z}).name
 
-			if node_at_new_pos == "mcl_core:water_source" or (node_under_new_pos ~= "air" and node_at_new_pos == "air") then
+			if node_at_new_pos == "mcl_better_end:ender_water" or (node_under_new_pos ~= "air" and node_at_new_pos == "air") then
 				self.object:set_pos(new_pos)
 				minetest.add_particle({
 					pos = pos,
@@ -97,3 +95,23 @@ mcl_mobs.spawn_setup({
 
 -- spawn egg
 mcl_mobs.register_egg("mcl_better_end:ender_salmon", S("Ender Salmon"), "#a00f10", "#0e8474", 0)
+
+ender_salmon.on_step = function(self, dtime)
+    -- Custom swimming logic
+    local pos = self.object:get_pos()
+
+    -- Make the salmon move in a sine wave pattern for more natural movement
+    local wave_amplitude = 1.5  -- How much it deviates from the path
+    local wave_frequency = 2.0  -- How fast it "wiggles"
+    
+    local new_x = pos.x + math.sin(minetest.get_gametime() * wave_frequency) * wave_amplitude
+    local new_z = pos.z + math.cos(minetest.get_gametime() * wave_frequency) * wave_amplitude
+    local new_y = pos.y + math.sin(minetest.get_gametime() * wave_frequency * 0.5) * (wave_amplitude / 2)
+
+    -- Apply new position
+    self.object:set_velocity({
+        x = (new_x - pos.x) * dtime * 10,
+        y = (new_y - pos.y) * dtime * 10,
+        z = (new_z - pos.z) * dtime * 10,
+    })
+end
