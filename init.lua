@@ -37,6 +37,4 @@ dofile(mcl_better_end.code_loc .. "/nephrite/ore.lua")
 dofile(mcl_better_end.code_loc .. "/nightite/nightite.lua")
 dofile(mcl_better_end.code_loc .. "/nightite/nightite_craft.lua")
 
-dofile(mcl_better_end.code_loc .. "/entities/ender_salmon.lua")
-
 dofile(mcl_better_end.code_loc .. "/physics.lua")
