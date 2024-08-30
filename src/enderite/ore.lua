@@ -1,4 +1,4 @@
-local YMAX = -27020
+local YMAX = -26500
 local YMIN = -27100
 
 mcl_better_end.mapgen.registered_nodes.enderite_ore = minetest.get_content_id("mcl_better_end:enderite_ore")
@@ -9,6 +9,7 @@ mcl_better_end.mapgen.ores.enderite = {
         if data[vi] == mcl_better_end.mapgen.registered_nodes.end_stone then
             if pr:next(1, 1000) == 5 then
                 if pr:next(1, 10) == 5 then
+                    print("AA")
                     data[vi] = mcl_better_end.mapgen.registered_nodes.enderite_ore
                 end
             end

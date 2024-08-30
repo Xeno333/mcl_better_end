@@ -1,5 +1,5 @@
-local YMAX = -26820
-local YMIN = -26920
+local YMAX = -25500
+local YMIN = -26900
 
 --oasis
 local noise_high = 1
