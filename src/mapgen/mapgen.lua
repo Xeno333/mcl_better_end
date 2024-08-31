@@ -209,7 +209,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 if mcl_better_end.api.is_island(noise) then
                     if mcl_better_end.api.is_free(noise2) then
                         for _, p in pairs(mcl_better_end.biomes) do
-                            if p.type == "island" and p.dec and noisesnoise_center >= p.noise_low and noise_center <= p.noise_high then
+                            if p.type == "island" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
                                 p.dec(pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
                             end
                         end
@@ -219,6 +219,9 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 elseif mcl_better_end.api.is_cave(noise, noise2) then
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
+                            print(lx)
+                            print(ly-1)
+                            print(lz)
                             p.dec(pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
                         end
                     end
