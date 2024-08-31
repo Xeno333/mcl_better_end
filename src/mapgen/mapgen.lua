@@ -102,7 +102,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
             for z = minp.z, maxp.z do
                 local vi = area:index(minp.x, y, z)
                 for x = minp.x, maxp.x do
-                    local noise = noise_map[x-minp.x+1][y-minp.y+1][z-minp.z+1]
+                    local noise = noise_map[x-minp.x+1][y-minp.y+2][z-minp.z+1]
                     
                     if not mcl_better_end.api.is_island(noise) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -132,7 +132,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
             local vi = area:index(minp.x, y, z)
             for x = minp.x, maxp.x do
                 local lx = x-minp.x+1
-                local ly = y-minp.y+1
+                local ly = y-minp.y+2
                 local lz = x-minp.z+1
                 local noise = noise_map[lx][ly][ly]
                 local noise2
