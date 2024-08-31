@@ -39,7 +39,7 @@ minetest.register_node("mcl_better_end:night_vines", {
 	sunlight_propagates = true,
     walkable = false,
     is_ground_content = false,
-	climbable = false,
+	climbable = true,
 	buildable_to = false,
     light_source = 4,
 	groups = {shearsy=1, destroy_by_lava_flow=1, dig_by_piston=1, deco_block=1, compostability=50},
