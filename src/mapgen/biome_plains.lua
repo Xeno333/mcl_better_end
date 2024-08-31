@@ -85,7 +85,7 @@ mcl_better_end.api.register_biome({
 
         elseif pr:next(1, 100) == 5 then
             data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone    
-            grow_chorus_branch({x = x, y = y, z = z}, 80-(pr:next(1, 20)+ly), pr, data, area, noise_map)
+            grow_chorus_branch({x = x, y = y, z = z}, pr:next(1, 80-ly)), pr, data, area, noise_map)
 
         elseif pr:next(1, 200) == 46 then
             if not mcl_better_end.api.is_island(plnoise_1) then
