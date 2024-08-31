@@ -135,6 +135,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 local ly = y-minp.y+1
                 local lz = x-minp.z+1
                 local noise = noise_map[lz][ly][lz]
+                local noise2
 
                 if mcl_better_end.api.is_free(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -142,7 +143,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                local noise2 = noise_map[lz][ly+1][lz]
+                noise2 = noise_map[lz][ly+1][lz]
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
 
                 if mcl_better_end.api.is_island(noise) then
