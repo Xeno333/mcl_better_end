@@ -133,8 +133,8 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
             for x = minp.x, maxp.x do
                 local lx = x-minp.x+1
                 local ly = y-minp.y+2
-                local lz = x-minp.z+1
-                local noise = noise_map[lx][ly][ly]
+                local lz = z-minp.z+1
+                local noise = noise_map[lx][ly][lz]
                 local noise2
                 local noise_center
 
@@ -144,7 +144,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                noise2 = noise_map[lx][ly+1][ly]
+                noise2 = noise_map[lx][ly+1][lz]
                 noise_center = perlin:get_3d({x = x, y = y, z = z})
 
                 if mcl_better_end.api.is_island(noise) then
@@ -197,13 +197,16 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
-                local noise = noise_map[lx][ly][ly]
+                local lx = x-minp.x+1
+                local ly = y-minp.y+2
+                local lz = z-minp.z+1
+                local noise = noise_map[lx][ly][lz]
 
                 if mcl_better_end.api.is_free(noise) then
                     goto keepitup
                 end
 
-                local noise2 = noise_map[lx][ly+1][ly]
+                local noise2 = noise_map[lx][ly+1][lz]
                 local noise_center = perlin:get_3d({x = x, y = y, z = z})
 
                 if mcl_better_end.api.is_island(noise) then
