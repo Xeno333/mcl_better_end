@@ -105,7 +105,7 @@ if minp.y > YMAX_biome then
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
                 local vi = area:index(x, y, z)
-                local noise = noise_map[x-minp.x+1][y-minp.y+1][z-minp.z+1]
+                local noise = noise_map[minp.x-x+1][minp.y-y+1][minp.z-z+1]
                 
                 if not mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
