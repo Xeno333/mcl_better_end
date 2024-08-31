@@ -111,7 +111,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                         for _, f in pairs(mcl_better_end.mapgen.ores) do
                             if y >= f.ymin and y <= f.ymax then
-                                --f.gen(data, vi, area, pr, x, y, z, noise_map)
+                                f.gen(data, vi, area, pr, x, y, z, noise_map, noise_center, lx,ly,lz)
                             end
                         end
                     end
@@ -127,7 +127,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     end
     
 
-    for y = maxp.y, minp.y, -1 do
+    for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
             local vi = area:index(minp.x, y, z)
             for x = minp.x, maxp.x do
