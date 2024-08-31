@@ -74,6 +74,7 @@ minetest.register_on_joinplayer(
             persist = 0.5
         }
         noise_size = {x = 80, y = 80, z = 80}
+        perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
         
     end
 )
@@ -96,17 +97,18 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     maxp.y = maxp.y - 1
     
         -- Create the PerlinNoiseMap object
-        perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
         
         -- Calculate the 3D noise map
         noise_map = perlin_map:get_3d_map({x=minp.x,y=minp.y,z=minp.z})
+        local i = 0
 -- Main generation loop
 if minp.y > YMAX_biome then
     for y = maxp.y, minp.y, -1 do
         for z = maxp.z, minp.z, -1 do
             for x = maxp.x, minp.x, -1 do
                 local vi = area:index(x, y, z)
-                local noise = noise_map[x-minp.x+1][y-minp.y+1][z-minp.z+1]
+                i = i + 1 
+                local noise = noise_map[i]
                 
                 if not mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
