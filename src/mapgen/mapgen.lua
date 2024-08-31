@@ -90,31 +90,49 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local data = vm:get_data()
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
+-- Define the Perlin noise parameters
+local np_perlin_3d = {
+    offset = 0,
+    scale = 1,
+    spread = {x = 100, y = 100, z = 100}, -- Defines the scale of the noise
+    seed = 12345, -- Change this seed as needed
+    octaves = 3,
+    persist = 0.5,
+}
 
+-- Calculate the size of the noise map
+local noise_size = {x = maxp.x - minp.x + 1, y = maxp.y - minp.y + 1, z = maxp.z - minp.z + 1}
 
-    if minp.y > YMAX_biome then
-        for y = maxp.y, minp.y, -1 do
-            for z = maxp.z, minp.z, -1 do
-                for x = maxp.x, minp.x, -1 do
-                    local vi = area:index(x, y, z)
-                    local noise = perlin_l:get_3d({x = x, y = y, z = z})
-                    
-                    if not mcl_better_end.api.is_island(noise) then
-                        data[vi] = mcl_better_end.mapgen.registered_nodes.air
-                        light_data[vi] = light_level
-                    else
-                        data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
-                        for _, f in pairs(mcl_better_end.mapgen.ores) do
-                            if y >= f.ymin and y <= f.ymax then
-                                f.gen(data, vi, area, pr, x, y, z, perlin_l)
-                            end
+-- Create the PerlinNoiseMap object
+local perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
+
+-- Calculate the 3D noise map
+local noise_map = perlin_map:get_3d_map_flat(minp)
+
+-- Main generation loop
+if minp.y > YMAX_biome then
+    local index = 1
+    for y = maxp.y, minp.y, -1 do
+        for z = maxp.z, minp.z, -1 do
+            for x = maxp.x, minp.x, -1 do
+                local vi = area:index(x, y, z)
+                local noise = noise_map[index]
+                index = index + 1
+                
+                if not mcl_better_end.api.is_island(noise) then
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.air
+                    light_data[vi] = light_level
+                else
+                    data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
+                    for _, f in pairs(mcl_better_end.mapgen.ores) do
+                        if y >= f.ymin and y <= f.ymax then
+                            --f.gen(data, vi, area, pr, x, y, z, noise_map)
                         end
                     end
-                    
                 end
             end
         end
-    
+    end
         vm:set_data(data)
         vm:set_light_data(light_data)
         vm:write_to_map()
