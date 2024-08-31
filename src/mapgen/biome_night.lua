@@ -18,11 +18,9 @@ local night_vines_bottom = mcl_better_end.mapgen.registered_nodes.night_vines_bo
 
 mcl_better_end.api.register_biome({
     type = "cave",
-    gen = function(data, vi, area, pr, x, y, z, noise_map, noise_center, plnoise, plnoise_1, lx,ly,lz)
-        local noise = noise_map[lx][ly-1][lz]
-        print(lx)
-        print(ly-1)
-        print(lz)
+    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center, plnoise, plnoise_1)
+        local noise = perlin_l:get_3d({x = x, y = y-1, z = z})
+        
         if mcl_better_end.api.is_island(noise) then
             data[vi] = filler
 

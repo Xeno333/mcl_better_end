@@ -52,7 +52,7 @@ end
 
 
 --mapgen
-local np_perlin_3d, noise_size, perlin_map, noise_map
+
 
 minetest.register_on_joinplayer(
     function() 
@@ -64,16 +64,14 @@ minetest.register_on_joinplayer(
             octaves = 3,
             persist = 0.5
         })
-        -- Define the Perlin noise parameters
-        np_perlin_3d = {
-            offset = 0,
-            scale = 1,
-            spread = {x = 50, y = 20, z = 50},
-            seed = minetest.get_mapgen_setting("seed"),
-            octaves = 3,
-            persist = 0.5
-        }
-        
+        perlin_l = minetest.get_perlin({
+                offset = 0,
+                scale = 1,
+                spread = {x = 50, y = 20, z = 50},
+                seed = minetest.get_mapgen_setting("seed"),
+                octaves = 3,
+                persist = 0.5
+            })
     end
 )
 
@@ -83,7 +81,7 @@ minetest.register_on_joinplayer(
 
 
 
---Genwe 
+--Gen
 
 -- Mapgen Generation Function
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
@@ -92,17 +90,14 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local data = vm:get_data()
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
-    
-    noise_size = {x = maxp.x-minp.x+1, y = maxp.y-minp.y+4, z = maxp.z-minp.z +1}
-    perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
-    noise_map = perlin_map:get_3d_map({x=minp.x,y=minp.y-1,z=minp.z})
+
 
     if minp.y > YMAX_biome then
-        for y = minp.y, maxp.y do
-            for z = minp.z, maxp.z do
-                local vi = area:index(minp.x, y, z)
-                for x = minp.x, maxp.x do
-                    local noise = noise_map[x-minp.x+1][y-minp.y+2][z-minp.z+1]
+        for y = maxp.y, minp.y, -1 do
+            for z = maxp.z, minp.z, -1 do
+                for x = maxp.x, minp.x, -1 do
+                    local vi = area:index(x, y, z)
+                    local noise = perlin_l:get_3d({x = x, y = y, z = z})
                     
                     if not mcl_better_end.api.is_island(noise) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -111,14 +106,15 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                         for _, f in pairs(mcl_better_end.mapgen.ores) do
                             if y >= f.ymin and y <= f.ymax then
-                                f.gen(data, vi, area, pr, x, y, z, noise_map, noise_center, lx,ly,lz)
+                                f.gen(data, vi, area, pr, x, y, z, perlin_l)
                             end
                         end
                     end
-                    vi = vi + 1
+                    
                 end
             end
         end
+    
         vm:set_data(data)
         vm:set_light_data(light_data)
         vm:write_to_map()
@@ -126,17 +122,33 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         return
     end
     
+    local noises = {l={}, m={}}
 
-    for y = minp.y, maxp.y do
-        for z = minp.z, maxp.z do
-            local vi = area:index(minp.x, y, z)
-            for x = minp.x, maxp.x do
-                local lx = x-minp.x+1
-                local ly = y-minp.y+2
-                local lz = z-minp.z+1
-                local noise = noise_map[lx][ly][lz]
-                local noise2
-                local noise_center
+    for y = maxp.y, minp.y, -1 do
+        if not noises.l[y] then
+            noises.l[y] = {}
+            noises.m[y] = {}
+        end
+        if not noises.l[y + 1] then
+            noises.l[y + 1] = {}
+        end
+        for z = maxp.z, minp.z, -1 do
+            if not noises.l[y][z] then
+                noises.l[y][z] = {}
+                noises.m[y][z] = {}
+            end
+            if not noises.l[y+1][z] then
+                noises.l[y+1][z] = {}
+            end
+            for x = maxp.x, minp.x, -1 do
+                if not noises.l[y][z][x] then
+                    noises.l[y][z][x] = {}
+                    noises.m[y][z][x] = {}
+                end
+                local vi = area:index(x, y, z)
+
+                local noise = perlin_l:get_3d({x = x, y = y, z = z})
+                noises.l[y][z][x] = noise
 
                 if mcl_better_end.api.is_free(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -144,15 +156,19 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     goto keepitup2
                 end
 
-                noise2 = noise_map[lx][ly+1][lz]
-                noise_center = perlin:get_3d({x = x, y = y, z = z})
+                if not noises.l[y+1][z][x] then
+                    noises.l[y+1][z][x] = perlin_l:get_3d({x = x, y = y + 1, z = z})
+                end
+                local noise2 = noises.l[y+1][z][x]
+                local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                noises.m[y][z][x] = noise_center
 
                 if mcl_better_end.api.is_island(noise) then
                     data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                     if mcl_better_end.api.is_free(noise2) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.gen(data, vi, area, pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
+                                p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
                             end
                         end
                     end
@@ -162,7 +178,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     light_data[vi] = cave_light_level
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.gen(data, vi, area, pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
+                            p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup
@@ -170,7 +186,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                     data[vi] = mcl_better_end.mapgen.registered_nodes.sea
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "sea" and p.gen and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.gen(data, vi, area, pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
+                            p.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup
@@ -179,12 +195,11 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 ::keepitup::
                 for _, f in pairs(mcl_better_end.mapgen.ores) do
                     if y >= f.ymin and y <= f.ymax then
-                        f.gen(data, vi, area, pr, x, y, z, noise_map, noise_center, lx,ly,lz)
+                        f.gen(data, vi, area, pr, x, y, z, perlin_l, noise_center)
                     end
                 end
                 
                 ::keepitup2::
-                vi = vi + 1
             end
         end
     end
@@ -197,35 +212,30 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     for y = minp.y, maxp.y do
         for z = minp.z, maxp.z do
             for x = minp.x, maxp.x do
-                local lx = x-minp.x+1
-                local ly = y-minp.y+2
-                local lz = z-minp.z+1
-                local noise = noise_map[lx][ly][lz]
+                local noise = noises.l[y][z][x]
 
                 if mcl_better_end.api.is_free(noise) then
                     goto keepitup
                 end
 
-                local noise2 = noise_map[lx][ly+1][lz]
-                local noise_center = perlin:get_3d({x = x, y = y, z = z})
+                local noise2 = noises.l[y+1][z][x]
+                local noise_center = noises.m[y][z][x]
 
                 if mcl_better_end.api.is_island(noise) then
                     if mcl_better_end.api.is_free(noise2) then
                         for _, p in pairs(mcl_better_end.biomes) do
                             if p.type == "island" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                                p.dec(pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
+                                p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
                             end
                         end
                     end
                     goto keepitup
 
                 elseif mcl_better_end.api.is_cave(noise, noise2) then
+                    local vi = area:index(x, y, z)
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "cave" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            print(lx)
-                            print(ly-1)
-                            print(lz)
-                            p.dec(pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
+                            p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup
@@ -233,7 +243,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 elseif mcl_better_end.api.is_sea(noise) then
                     for _, p in pairs(mcl_better_end.biomes) do
                         if p.type == "sea" and p.dec and noise_center >= p.noise_low and noise_center <= p.noise_high then
-                            p.dec(pr, x, y, z, noise_map, noise_center, noise, noise2, lx,ly,lz)
+                            p.dec(pr, x, y, z, perlin_l, noise_center, noise, noise2)
                         end
                     end
                     goto keepitup
