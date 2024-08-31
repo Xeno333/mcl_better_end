@@ -99,7 +99,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         -- Create the PerlinNoiseMap object
         
         -- Calculate the 3D noise map
-        noise_map = perlin_map:get_3d_map({x=minp.x,y=minp.y,z=minp.z})
+        noise_map = perlin_map:get_3d_map_flat({x=minp.x,y=minp.y,z=minp.z})
         local i = 0
 -- Main generation loop
 if minp.y > YMAX_biome then
