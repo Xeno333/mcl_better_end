@@ -101,13 +101,16 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         -- Calculate the 3D noise map
         noise_map = perlin_map:get_3d_map_flat({x=minp.x,y=minp.y,z=minp.z})
         local i = 0
--- Main generation loop
-if minp.y > YMAX_biome then
-    for y = maxp.y, minp.y, -1 do
-        for z = maxp.z, minp.z, -1 do
-            for x = maxp.x, minp.x, -1 do
-                local vi = area:index(x, y, z)
-                i = i + 1 
+
+    for z = minp.z, maxp.z do
+        for y = minp.y, maxp.y do
+            -- Voxelmanip index for the flat array of content IDs.
+            -- Initialise to first node in this x row.
+            local vi = area:index(minp.x, y, z)
+            for x = minp.x, maxp.x do
+                -- Consider a 'solidness' value for each node,
+                -- let's call it 'density', where
+                -- density = density noise + density gradient.
                 local noise = noise_map[i]
                 
                 if not mcl_better_end.api.is_island(noise) then
@@ -121,9 +124,16 @@ if minp.y > YMAX_biome then
                         end
                     end
                 end
+                -- Increment noise index.
+                i = i + 1
+                -- Increment voxelmanip index along x row.
+                -- The voxelmanip index increases by 1 when
+                -- moving by 1 node in the +x direction.
+                vi = vi + 1
             end
         end
-    end
+        end
+        
         vm:set_data(data)
         vm:set_light_data(light_data)
         vm:write_to_map()
