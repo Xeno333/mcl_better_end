@@ -75,7 +75,7 @@ minetest.register_on_joinplayer(
         }
         
         -- Calculate the size of the noise map
-        noise_size = {x = maxp.x - minp.x + 1, y = maxp.y - minp.y + 1, z = maxp.z - minp.z + 1}
+        noise_size = {x = 80, y= 80, z = 80}
         
         -- Create the PerlinNoiseMap object
         perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
@@ -101,6 +101,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local data = vm:get_data()
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
+
 -- Main generation loop
 if minp.y > YMAX_biome then
     local index = 1
