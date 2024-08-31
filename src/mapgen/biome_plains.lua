@@ -18,7 +18,7 @@ local chorus_plant = mcl_better_end.mapgen.registered_nodes.plains_chorus_plant
 local chorus_plant_top = mcl_better_end.mapgen.registered_nodes.plains_chorus_flower_dead
 
 
-local function grow_chorus_branch(pos, height, pr, data, area, perlin_l)
+local function grow_chorus_branch(pos, height, pr, data, area)
     local current_pos = {x = pos.x, y = pos.y, z = pos.z}
     for i = 0, height do
         current_pos.y = current_pos.y + 1
@@ -29,8 +29,10 @@ local function grow_chorus_branch(pos, height, pr, data, area, perlin_l)
         if pr:next(1, 2) == 1 then
             local branch_dir = pr:next(1, 4)
             local branch_pos
-            local noise = perlin_l:get_3d({x=current_pos.x, y=current_pos.y, z=current_pos.z})
-            if not mcl_better_end.api.is_free(noise) then
+            vi = area:index(current_pos.x, current_pos.y+1, current_pos.z)
+            if data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
+                vi = area:index(current_pos.x, current_pos.y, current_pos.z)
+                data[vi] = chorus_plant_top
                 return 
             end
             if branch_dir == 1 then
@@ -48,8 +50,10 @@ local function grow_chorus_branch(pos, height, pr, data, area, perlin_l)
 
             -- Potentially grow a flower on the branch
             if pr:next(1, 2) == 1 then
-                local vi = area:index(branch_pos.x, branch_pos.y + 1, branch_pos.z)
-                data[vi] = chorus_plant_top
+                vi = area:index(branch_pos.x, branch_pos.y + 1, branch_pos.z)
+                if data[vi] ~= mcl_better_end.mapgen.registered_nodes.air then
+                    data[vi] = chorus_plant_top
+                end
             end
             current_pos = branch_pos
         end
@@ -59,9 +63,10 @@ local function grow_chorus_branch(pos, height, pr, data, area, perlin_l)
 end
 
 
+
 mcl_better_end.api.register_biome({
     type = "island",
-    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center, plnoise, plnoise_1)
+    gen = function(data, vi, area, pr, x, y, z, noise_map, noise_center, plnoise, plnoise_1, lx,ly,lz)
         if noise_center < -0.5 then
             data[vi] = sand
         else
@@ -85,7 +90,7 @@ mcl_better_end.api.register_biome({
 
         elseif pr:next(1, 100) == 5 then
             data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone    
-            grow_chorus_branch({x = x, y = y, z = z}, pr:next(1, 20), pr, data, area, perlin_l)
+            grow_chorus_branch({x = x, y = y, z = z}, pr:next(1, 20), pr, data, area)
 
         elseif pr:next(1, 200) == 46 then
             if not mcl_better_end.api.is_island(plnoise_1) then

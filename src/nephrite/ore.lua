@@ -8,7 +8,7 @@ local noise_low = 0
 mcl_better_end.mapgen.registered_nodes.nephrite_ore = minetest.get_content_id("mcl_better_end:nephrite_ore")
 
 mcl_better_end.mapgen.ores.nephrite = {
-    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center)
+    gen = function(data, vi, area, pr, x, y, z, noise_map, noise_center, lx,ly,lz)
         if not (noise_center < noise_high and noise_center > noise_low) then 
             return
         end

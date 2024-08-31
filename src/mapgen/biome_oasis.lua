@@ -16,7 +16,7 @@ local glow_berry_plant = mcl_better_end.mapgen.registered_nodes.oasis_glow_berry
 
 mcl_better_end.api.register_biome({
     type = "island",
-    gen = function(data, vi, area, pr, x, y, z, perlin_l, noise_center, plnoise, plnoise_1)
+    gen = function(data, vi, area, pr, x, y, z, noise_map, noise_center, plnoise, plnoise_1, lx,ly,lz)
         data[vi] = filler
 
         --add topww
@@ -34,7 +34,7 @@ mcl_better_end.api.register_biome({
             
         end
     end,
-    dec = function(pr, x, y, z, perlin_l, noise_center)
+    dec = function(pr, x, y, z, noise_map, noise_center, lx,ly,lz)
         if pr:next(1, 100) == 5 then
             minetest.place_schematic({x=x,y=y,z=z}, mcl_better_end.schematic_loc .. mcl_better_end.biomes.oasis.tree_schem[pr:next(1, #mcl_better_end.biomes.oasis.tree_schem)], "0", nil, false)
         end

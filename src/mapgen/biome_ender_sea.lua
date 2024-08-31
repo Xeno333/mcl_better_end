@@ -63,7 +63,7 @@ end
 
 mcl_better_end.api.register_biome({
     type = "sea",
-    dec = function(pr, x, y, z, perlin_l, noise_center, plnoise, plnoise_1)
+    dec = function(pr, x, y, z, noise_map, noise_center, plnoise, plnoise_1, lx,ly,lz)
         if pr:next(1, 4000) == 5 then
             if plnoise < (mcl_better_end.api.consts.sea_ends + 0.00001) then
                 make_sub({x=x,y=y,z=z}, pr)
