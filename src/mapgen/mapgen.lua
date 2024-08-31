@@ -68,10 +68,10 @@ minetest.register_on_joinplayer(
         np_perlin_3d = {
             offset = 0,
             scale = 1,
-            spread = {x = 100, y = 100, z = 100}, -- Defines the scale of the noise
-            seed = 12345, -- Change this seed as needed
+            spread = {x = 50, y = 20, z = 50},
+            seed = minetest.get_mapgen_setting("seed"),
             octaves = 3,
-            persist = 0.5,
+            persist = 0.5
         }
         
     end
@@ -83,7 +83,7 @@ minetest.register_on_joinplayer(
 
 
 
---Gen
+--Genwe 
 
 -- Mapgen Generation Function
 function mcl_better_end.mapgen.gen(minp, maxp, seed)
