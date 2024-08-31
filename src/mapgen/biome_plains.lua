@@ -19,7 +19,9 @@ local chorus_plant_top = mcl_better_end.mapgen.registered_nodes.plains_chorus_fl
 
 
 local function grow_chorus_branch(pos, height, pr, data, area, noise_map, lx,ly,lz)
-    local current_pos = {x = pos.x, y = pos.y, z = pos.z}
+    y = ly
+    x = lx
+    z = lz
     for i = 0, height do
         y = y + 1
         if ly+y > 80 or ly-y < 0 or lz+z > 80 or lz-z < 0 or lz+z > 80 or lz-z < 0 then break end
