@@ -74,16 +74,16 @@ minetest.register_on_joinplayer(
             persist = 0.5
         }
         
+        -- Calculate the size of the noise map
+        noise_size = {x=31000, y=31000,z=31000}
+        
+        -- Create the PerlinNoiseMap object
+        perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
     end
 )
 
 
     
-        -- Calculate the size of the noise map
-        local noise_size = {x=31000, y=31000,z=31000}
-        
-        -- Create the PerlinNoiseMap object
-        local perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
 
 
 
