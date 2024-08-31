@@ -103,12 +103,12 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         local i = 0
 
         if true then
-    for z = minp.z, maxp.z do
-        for y = minp.y, maxp.y do
+    for z = 1, 80 do
+        for y = 1, 80 do
             -- Voxelmanip index for the flat array of content IDs.
             -- Initialise to first node in this x row.
             local vi = area:index(minp.x, y, z)
-            for x = minp.x, maxp.x do
+            for x = 1, 80 do
                 -- Consider a 'solidness' value for each node,
                 -- let's call it 'density', where
                 -- density = density noise + density gradient.
