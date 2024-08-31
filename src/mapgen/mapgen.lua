@@ -100,7 +100,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     if minp.y > YMAX_biome then
         for y = minp.y, maxp.y do
             for z = minp.z, maxp.z do
-                local vi = area:index(x, y, z)
+                local vi = area:index(minp.x, y, z)
                 for x = minp.x, maxp.x do
                     local noise = noise_map[x-minp.x+1][y-minp.y+1][z-minp.z+1]
                     
@@ -129,7 +129,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
 
     for y = maxp.y, minp.y, -1 do
         for z = minp.z, maxp.z do
-            local vi = area:index(x, y, z)
+            local vi = area:index(minp.x, y, z)
             for x = minp.x, maxp.x do
                 local lx = x-minp.x+1
                 local ly = y-minp.y+1
