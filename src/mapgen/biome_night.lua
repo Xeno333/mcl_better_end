@@ -20,7 +20,7 @@ mcl_better_end.api.register_biome({
     type = "cave",
     gen = function(data, vi, area, pr, x, y, z, noise_map, noise_center, plnoise, plnoise_1, lx,ly,lz)
         local noise = noise_map[lx][ly-1][lz]
-        
+        print(ly-1)
         if mcl_better_end.api.is_island(noise) then
             data[vi] = filler
 
