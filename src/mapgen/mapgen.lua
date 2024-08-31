@@ -64,14 +64,14 @@ minetest.register_on_joinplayer(
             octaves = 3,
             persist = 0.5
         })
-        perlin_l = minetest.get_perlin({
+        perlin_l = 
+            minetest.get_perlin_map({
                 offset = 0,
                 scale = 1,
                 spread = {x = 50, y = 20, z = 50},
                 seed = minetest.get_mapgen_setting("seed"),
                 octaves = 3,
-                persist = 0.5
-            })
+                persist = 0.5}, 80)
     end
 )
 
@@ -92,12 +92,13 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
 
 
+    local noisem = perlin_l:get_3d_map()
     if minp.y > YMAX_biome then
         for y = maxp.y, minp.y, -1 do
             for z = maxp.z, minp.z, -1 do
                 for x = maxp.x, minp.x, -1 do
                     local vi = area:index(x, y, z)
-                    local noise = perlin_l:get_3d({x = x, y = y, z = z})
+                    local noise = noisem[x][y][z]
                     
                     if not mcl_better_end.api.is_island(noise) then
                         data[vi] = mcl_better_end.mapgen.registered_nodes.air
@@ -106,7 +107,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                         data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone
                         for _, f in pairs(mcl_better_end.mapgen.ores) do
                             if y >= f.ymin and y <= f.ymax then
-                                f.gen(data, vi, area, pr, x, y, z, perlin_l)
+                               -- f.gen(data, vi, area, pr, x, y, z, perlin_l)
                             end
                         end
                     end
