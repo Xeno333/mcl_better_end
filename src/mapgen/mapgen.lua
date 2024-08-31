@@ -132,14 +132,13 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
                 vi = vi + 1
             end
         end
-        end
-        
+    end
+
         vm:set_data(data)
         vm:set_light_data(light_data)
         vm:write_to_map()
         vm:update_map()
         return
-    end
     
     local noises = {l={}, m={}}
 
