@@ -57,7 +57,7 @@ local function grow_chorus_branch(pos, height, pr, data, area, noise_map, lx,ly,
             z = branch_pos.z
         end
     end
-    local vi = area:index(current_pos.x, current_pos.y, current_pos.z)
+    local vi = area:index(x, y, z)
     data[vi] = chorus_plant_top
 end
 
