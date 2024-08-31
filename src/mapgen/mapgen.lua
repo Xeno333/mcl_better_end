@@ -102,6 +102,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         noise_map = perlin_map:get_3d_map_flat({x=minp.x,y=minp.y,z=minp.z})
         local i = 0
 
+        if true then
     for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
             -- Voxelmanip index for the flat array of content IDs.
@@ -139,6 +140,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         vm:write_to_map()
         vm:update_map()
         return
+    end
     
     local noises = {l={}, m={}}
 
