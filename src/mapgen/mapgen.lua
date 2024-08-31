@@ -52,7 +52,7 @@ end
 
 
 --mapgen
-
+local np_perlin_3d, noise_size, perlin_map, noise_map
 
 minetest.register_on_joinplayer(
     function() 
@@ -64,14 +64,25 @@ minetest.register_on_joinplayer(
             octaves = 3,
             persist = 0.5
         })
-        perlin_l = minetest.get_perlin({
-                offset = 0,
-                scale = 1,
-                spread = {x = 50, y = 20, z = 50},
-                seed = minetest.get_mapgen_setting("seed"),
-                octaves = 3,
-                persist = 0.5
-            })
+        -- Define the Perlin noise parameters
+        np_perlin_3d = {
+            offset = 0,
+            scale = 1,
+            spread = {x = 100, y = 100, z = 100}, -- Defines the scale of the noise
+            seed = 12345, -- Change this seed as needed
+            octaves = 3,
+            persist = 0.5,
+        }
+        
+        -- Calculate the size of the noise map
+        noise_size = {x = maxp.x - minp.x + 1, y = maxp.y - minp.y + 1, z = maxp.z - minp.z + 1}
+        
+        -- Create the PerlinNoiseMap object
+        perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
+        
+        -- Calculate the 3D noise map
+        noise_map = perlin_map:get_3d_map_flat(minp)
+        
     end
 )
 
@@ -90,25 +101,6 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local data = vm:get_data()
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
--- Define the Perlin noise parameters
-local np_perlin_3d = {
-    offset = 0,
-    scale = 1,
-    spread = {x = 100, y = 100, z = 100}, -- Defines the scale of the noise
-    seed = 12345, -- Change this seed as needed
-    octaves = 3,
-    persist = 0.5,
-}
-
--- Calculate the size of the noise map
-local noise_size = {x = maxp.x - minp.x + 1, y = maxp.y - minp.y + 1, z = maxp.z - minp.z + 1}
-
--- Create the PerlinNoiseMap object
-local perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
-
--- Calculate the 3D noise map
-local noise_map = perlin_map:get_3d_map_flat(minp)
-
 -- Main generation loop
 if minp.y > YMAX_biome then
     local index = 1
