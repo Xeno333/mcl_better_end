@@ -93,7 +93,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     local data = vm:get_data()
     local light_data = vm:get_light_data()
     local pr = PseudoRandom((seed + minp.x + maxp.z) / 3)
-    minp.y = minp.y - 1
+    max.y = max.y - 1
     
         -- Create the PerlinNoiseMap object
         perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
