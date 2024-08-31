@@ -73,8 +73,6 @@ minetest.register_on_joinplayer(
             octaves = 3,
             persist = 0.5
         }
-        noise_size = {x = 80, y = 80, z = 80}
-        perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
         
     end
 )
@@ -101,14 +99,16 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         -- Calculate the 3D noise map
         noise_map = perlin_map:get_3d_map_flat({x=minp.x,y=minp.y,z=minp.z})
         local i = 0
+        noise_size = {x = 80, y = maxp.y-minp.y+1, z = 80}
+        perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
 
         if true then
-    for z = 1, 80 do
-        for y = 1, 80 do
+    for z = minp.z, maxp.z do
+        for y = minp.y, maxp.y do
             -- Voxelmanip index for the flat array of content IDs.
             -- Initialise to first node in this x row.
             local vi = area:index(minp.x, y, z)
-            for x = 1, 80 do
+            for x = minp.x, maxp.x do
                 -- Consider a 'solidness' value for each node,
                 -- let's call it 'density', where
                 -- density = density noise + density gradient.
