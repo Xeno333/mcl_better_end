@@ -95,7 +95,7 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
     
     noise_size = {x = maxp.x-minp.x+1, y = maxp.y-minp.y+3, z = maxp.z-minp.z +1}
     perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
-    noise_map = perlin_map:get_3d_map({x=minp.x,y=minp.y,z=minp.z})
+    noise_map = perlin_map:get_3d_map({y=minp.x,x=minp.y,z=minp.z})
 
     if minp.y > YMAX_biome then
         for y = minp.y, maxp.y do
