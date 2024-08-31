@@ -97,10 +97,10 @@ function mcl_better_end.mapgen.gen(minp, maxp, seed)
         -- Create the PerlinNoiseMap object
         
         -- Calculate the 3D noise map
-        noise_map = perlin_map:get_3d_map_flat({x=minp.x,y=minp.y,z=minp.z})
-        local i = 0
         noise_size = {x = 80, y = maxp.y-minp.y+1, z = 80}
         perlin_map = minetest.get_perlin_map(np_perlin_3d, noise_size)
+        noise_map = perlin_map:get_3d_map_flat({x=minp.x,y=minp.y,z=minp.z})
+        local i = 0
 
         if true then
     for z = minp.z, maxp.z do
