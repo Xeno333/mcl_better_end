@@ -2,7 +2,7 @@
 minetest.register_node("mcl_better_end:enderite_ore", {
     description = "Enderite Ore",
     tiles = {
-        "mcl_end_end_stone.png^enderite_ore.png",
+        "mcl_end_end_stone.png^mcl_better_end_enderite_ore.png",
     },
     drop = 'mcl_better_end:enderite_raw', -- Le minerai laisse tomber un morceau brut
 
@@ -22,14 +22,14 @@ minetest.register_node("mcl_better_end:enderite_ore", {
 minetest.register_craftitem("mcl_better_end:enderite_raw", {
     stack_max = 64,
     description = "Raw enderite",
-    inventory_image = "raw_enderite.png",
+    inventory_image = "mcl_better_end_raw_enderite.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:enderite_ingot", {
     stack_max = 64,
     description = "Enderite Ingot",
-    inventory_image = "enderite_ingot.png",
+    inventory_image = "mcl_better_end_enderite_ingot.png",
 })
 
 -- Recette de cuisson pour obtenir le lingot
@@ -46,7 +46,7 @@ minetest.register_craft({
 minetest.register_node("mcl_better_end:enderite_block", {
     description = "Enderite Blocke",
     tiles = {
-        "enderite_block.png",
+        "mcl_better_end_enderite_block.png",
     },
     stack_max = 64,
 
@@ -71,7 +71,7 @@ minetest.register_craft({
 
 minetest.register_tool("mcl_better_end:enderite_axe", {
     description = "Enderite Axe",
-    inventory_image = "enderite_axe.png",
+    inventory_image = "mcl_better_end_enderite_axe.png",
     _mcl_toollike_wield = true,
 	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
@@ -91,7 +91,7 @@ minetest.register_tool("mcl_better_end:enderite_axe", {
 
 minetest.register_tool("mcl_better_end:enderite_sword", {
     description = "Enderite Sword",
-    inventory_image = "enderite_sword.png",
+    inventory_image = "mcl_better_end_enderite_sword.png",
     _mcl_toollike_wield = true,
 	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { weapon=1, sword=1, dig_speed_class=5, enchantability=10 },

@@ -5,14 +5,14 @@
 minetest.register_craftitem("mcl_better_end:nightite_raw", {
     stack_max = 64,
     description = "Raw Nightite",
-    inventory_image = "raw_nightite.png",
+    inventory_image = "mcl_better_end_raw_nightite.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:nightite_ingot", {
     stack_max = 64,
     description = "Nightite Ingot",
-    inventory_image = "nightite_ingot.png",
+    inventory_image = "mcl_better_end_nightite_ingot.png",
 })
 
 
@@ -28,7 +28,7 @@ minetest.register_craft({
 minetest.register_node("mcl_better_end:nightite_block", {
     description = "Nightite Blocke",
     tiles = {
-        "nightite_block.png",
+        "mcl_better_end_nightite_block.png",
     },
     stack_max = 64,
 
@@ -54,7 +54,7 @@ minetest.register_craft({
 
 minetest.register_tool("mcl_better_end:nightite_axe", {
     description = "Nightite Axe",
-    inventory_image = "nightite_axe.png",
+    inventory_image = "mcl_better_end_nightite_axe.png",
     _mcl_toollike_wield = true,
 	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
@@ -74,7 +74,7 @@ minetest.register_tool("mcl_better_end:nightite_axe", {
 
 minetest.register_tool("mcl_better_end:nightite_sword", {
     description = "Nightite Sword",
-    inventory_image = "nightite_sword.png",
+    inventory_image = "mcl_better_end_nightite_sword.png",
     _mcl_toollike_wield = true,
 	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { weapon=1, sword=1, dig_speed_class=5, enchantability=10 },

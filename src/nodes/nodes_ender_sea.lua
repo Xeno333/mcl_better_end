@@ -9,7 +9,7 @@ minetest.register_node("mcl_better_end:ender_water", {
 	post_effect_color = {a = 64, r = 100, g = 100, b = 200},
     
 	tiles = {{
-		name = "ender_water.png", 
+		name = "mcl_better_end_ender_water.png", 
 		animation = {
 			type = "vertical_frames", 
 			aspect_w = 32, 
@@ -18,7 +18,7 @@ minetest.register_node("mcl_better_end:ender_water", {
 		},
 	}, },
 	special_tiles = { {
-		name = "ender_water.png", 
+		name = "mcl_better_end_ender_water.png", 
 		animation = {
 			type = "vertical_frames", 
 			aspect_w = 32, 

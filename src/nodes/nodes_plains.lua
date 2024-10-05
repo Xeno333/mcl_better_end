@@ -1,12 +1,12 @@
 minetest.register_node("mcl_better_end:end_stone_plains_turf", {
     description = "End Stone with Ender Slime",
     tiles = {
-        "end_stone_plains_turf_top.png",   -- Top texture
+        "mcl_better_end_end_stone_plains_turf_top.png",   -- Top texture
         "mcl_end_end_stone.png",   -- Bottom texture
-        "mcl_end_end_stone.png^end_stone_plains_turf_side.png",   -- Side texture 1
-        "mcl_end_end_stone.png^end_stone_plains_turf_side.png",   -- Side texture 2
-        "mcl_end_end_stone.png^end_stone_plains_turf_side.png",   -- Side texture 3
-        "mcl_end_end_stone.png^end_stone_plains_turf_side.png",   -- Side texture 4
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_plains_turf_side.png",   -- Side texture 1
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_plains_turf_side.png",   -- Side texture 2
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_plains_turf_side.png",   -- Side texture 3
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_plains_turf_side.png",   -- Side texture 4
     },
     stack_max = 64,
 
@@ -27,9 +27,9 @@ minetest.register_node("mcl_better_end:end_plains_magibulb_plant", {
 	drawtype = "plantlike",
 	waving = 1,
 	is_ground_content = true,
-	tiles = {"end_plains_magibulb_plant.png"},
-	inventory_image = "end_plains_magibulb_plant.png",
-	wield_image = "end_plains_magibulb_plant.png",
+	tiles = {"mcl_better_end_end_plains_magibulb_plant.png"},
+	inventory_image = "mcl_better_end_end_plains_magibulb_plant.png",
+	wield_image = "mcl_better_end_end_plains_magibulb_plant.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,
@@ -48,9 +48,9 @@ minetest.register_node("mcl_better_end:end_plains_grass", {
 	description = ("Ender Slime Grass"),
 	drawtype = "plantlike",
 	waving = 1,
-	tiles = {"end_plains_grass.png"},
-	inventory_image = "end_plains_grass.png",
-	wield_image = "end_plains_grass.png",
+	tiles = {"mcl_better_end_end_plains_grass.png"},
+	inventory_image = "mcl_better_end_end_plains_grass.png",
+	wield_image = "mcl_better_end_end_plains_grass.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,

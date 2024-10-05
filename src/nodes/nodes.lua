@@ -14,7 +14,7 @@ minetest.register_node("mcl_better_end:end_sand", {
 
 minetest.register_node("mcl_better_end:end_glass", {
     description = "End Glass",
-    tiles = {"end_glass.png"},
+    tiles = {"mcl_better_end_end_glass.png"},
     drawtype = "glasslike_framed_optional",
     sunlight_propagates = true,
     stack_max = 64,
@@ -38,7 +38,7 @@ minetest.register_node("mcl_better_end:end_glass", {
 
 minetest.register_node("mcl_better_end:end_berry_rock", {
     description = "End Berry Rock",
-    tiles = {"end_berry_rock.png"},
+    tiles = {"mcl_better_end_end_berry_rock.png"},
     stack_max = 64,
 
     groups = {pickaxey=1, building_block=1, material_stone=1},
@@ -60,7 +60,7 @@ minetest.register_craft({
 
 minetest.register_node("mcl_better_end:end_berry_rock_bricks", {
     description = "End Berry Rock Bricks",
-    tiles = {"end_berry_rock_bricks.png"},
+    tiles = {"mcl_better_end_end_berry_rock_bricks.png"},
     stack_max = 64,
 
     groups = {pickaxey=1, building_block=1, material_stone=1},
@@ -81,7 +81,7 @@ minetest.register_craft({
 
 minetest.register_node("mcl_better_end:end_berry_rock_tailled", {
     description = "End Berry Rock Tailled",
-    tiles = {"end_berry_rock_tailled.png"},
+    tiles = {"mcl_better_end_end_berry_rock_tailled.png"},
     stack_max = 64,
 
     groups = {pickaxey=1, building_block=1, material_stone=1},

@@ -2,7 +2,7 @@
 minetest.register_node("mcl_better_end:nephrite_ore", {
     description = "Nephrite Ore",
     tiles = {
-        "mcl_end_end_stone.png^nephrite_ore.png",
+        "mcl_end_end_stone.png^mcl_better_end_nephrite_ore.png",
     },
     drop = 'mcl_better_end:nephrite_raw', -- Le minerai laisse tomber un morceau brut
 
@@ -22,14 +22,14 @@ minetest.register_node("mcl_better_end:nephrite_ore", {
 minetest.register_craftitem("mcl_better_end:nephrite_raw", {
     stack_max = 64,
     description = "Raw Nephrite",
-    inventory_image = "raw_nephrite.png",
+    inventory_image = "mcl_better_end_raw_nephrite.png",
 })
 
 -- Enregistrement du lingot
 minetest.register_craftitem("mcl_better_end:nephrite_ingot", {
     stack_max = 64,
     description = "Nephrite Ingot",
-    inventory_image = "nephrite.png",
+    inventory_image = "mcl_better_end_nephrite.png",
 })
 
 
@@ -47,7 +47,7 @@ minetest.register_craft({
 minetest.register_node("mcl_better_end:nephrite_block", {
     description = "Nephrite Blocke",
     tiles = {
-        "nephrite_block.png",
+        "mcl_better_end_nephrite_block.png",
     },
     stack_max = 64,
 
@@ -82,7 +82,7 @@ minetest.register_craft({
 
 minetest.register_tool("mcl_better_end:nephrite_sword", {
     description = "Nephrite Axe",
-    inventory_image = "nephrite_axe.png",
+    inventory_image = "mcl_better_end_nephrite_axe.png",
     _mcl_toollike_wield = true,
 	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
@@ -102,7 +102,7 @@ minetest.register_tool("mcl_better_end:nephrite_sword", {
 
 minetest.register_tool("mcl_better_end:nephrite_sword", {
     description = "Nephrite Sword",
-    inventory_image = "nephrite_sword.png",
+    inventory_image = "mcl_better_end_nephrite_sword.png",
     _mcl_toollike_wield = true,
 	wield_scale = mcl_vars.tool_wield_scale,
 	groups = { weapon=1, sword=1, dig_speed_class=5, enchantability=10 },

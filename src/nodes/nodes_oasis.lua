@@ -4,12 +4,12 @@ mcl_better_end.biomes.oasis = {}
 minetest.register_node("mcl_better_end:end_stone_oasis_turf", {
     description = "End Stone with Blue Mold",
     tiles = {
-        "end_stone_oasis_turf_top.png",   -- Top texture
+        "mcl_better_end_end_stone_oasis_turf_top.png",   -- Top texture
         "mcl_end_end_stone.png",   -- Bottom texture
-        "mcl_end_end_stone.png^end_stone_oasis_turf_side.png",   -- Side texture 1
-        "mcl_end_end_stone.png^end_stone_oasis_turf_side.png",   -- Side texture 2
-        "mcl_end_end_stone.png^end_stone_oasis_turf_side.png",   -- Side texture 3
-        "mcl_end_end_stone.png^end_stone_oasis_turf_side.png",   -- Side texture 4
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_oasis_turf_side.png",   -- Side texture 1
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_oasis_turf_side.png",   -- Side texture 2
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_oasis_turf_side.png",   -- Side texture 3
+        "mcl_end_end_stone.png^mcl_better_end_end_stone_oasis_turf_side.png",   -- Side texture 4
     },
     stack_max = 64,
 
@@ -35,7 +35,7 @@ mcl_better_end.biomes.oasis.tree_schem = {
 minetest.register_node("mcl_better_end:custom_sapling", {
     description = "Oasis Sapling",
     drawtype = "plantlike",
-    tiles = {"oasis_sapling.png"},
+    tiles = {"mcl_better_end_oasis_sapling.png"},
 
     groups = {snappy = 2, dig_immediate = 3, attached_node = 1, sapling = 1, flammable = 2},
 
@@ -73,7 +73,7 @@ minetest.register_node("mcl_better_end:custom_sapling", {
 minetest.register_node("mcl_better_end:end_oasis_trunk", {
     description = "Blue Trunk",
     tiles = {
-        "blue_end_trunk.png",
+        "mcl_better_end_blue_end_trunk.png",
     },
     stack_max = 64,
     paramtype2 = "facedir",
@@ -95,7 +95,7 @@ minetest.register_node("mcl_better_end:end_oasis_leaves", {
     paramtype = "light",
     is_ground_content = false,
     tiles = {
-        "blue_end_tree_leaves.png",   -- Top texture
+        "mcl_better_end_blue_end_tree_leaves.png",   -- Top texture
     },
     _mcl_silk_touch_drop = true,
     stack_max = 64,
@@ -120,9 +120,9 @@ minetest.register_node("mcl_better_end:end_oasis_grass", {
 	description = ("Ender Oasis Grass"),
 	drawtype = "plantlike",
 	waving = 1,
-	tiles = {"end_oasis_grass.png"},
-	inventory_image = "end_oasis_grass.png",
-	wield_image = "end_oasis_grass.png",
+	tiles = {"mcl_better_end_end_oasis_grass.png"},
+	inventory_image = "mcl_better_end_end_oasis_grass.png",
+	wield_image = "mcl_better_end_end_oasis_grass.png",
 	paramtype = "light",
 	is_ground_content = true,
 	sunlight_propagates = true,
@@ -153,9 +153,9 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant", {
 	description = ("Ender Glow Berry Plant"),
 	drawtype = "plantlike",
 	waving = 1,
-	tiles = {"end_glow_berry_plant.png"},
-	inventory_image = "end_glow_berry_plant.png",
-	wield_image = "end_glow_berry_plant.png",
+	tiles = {"mcl_better_end_end_glow_berry_plant.png"},
+	inventory_image = "mcl_better_end_end_glow_berry_plant.png",
+	wield_image = "mcl_better_end_end_glow_berry_plant.png",
 	paramtype = "light",
 	is_ground_content = true,
 	sunlight_propagates = true,
@@ -197,9 +197,9 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant_1", {
 	drawtype = "plantlike",
 	waving = 1,
 	is_ground_content = true,
-	tiles = {"end_glow_berry_plant_1.png"},
-	inventory_image = "end_glow_berry_plant_1.png",
-	wield_image = "end_glow_berry_plant_1.png",
+	tiles = {"mcl_better_end_end_glow_berry_plant_1.png"},
+	inventory_image = "mcl_better_end_end_glow_berry_plant_1.png",
+	wield_image = "mcl_better_end_end_glow_berry_plant_1.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,
@@ -220,9 +220,9 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant_2", {
 	drawtype = "plantlike",
 	waving = 1,
 	is_ground_content = true,
-	tiles = {"end_glow_berry_plant_2.png"},
-	inventory_image = "end_glow_berry_plant_2.png",
-	wield_image = "end_glow_berry_plant_2.png",
+	tiles = {"mcl_better_end_end_glow_berry_plant_2.png"},
+	inventory_image = "mcl_better_end_end_glow_berry_plant_2.png",
+	wield_image = "mcl_better_end_end_glow_berry_plant_2.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,
@@ -251,9 +251,9 @@ minetest.register_node("mcl_better_end:end_glow_berry_plant_3", {
 	drawtype = "plantlike",
 	waving = 1,
 	is_ground_content = true,
-	tiles = {"end_glow_berry_plant_3.png"},
-	inventory_image = "end_glow_berry_plant_3.png",
-	wield_image = "end_glow_berry_plant_3.png",
+	tiles = {"mcl_better_end_end_glow_berry_plant_3.png"},
+	inventory_image = "mcl_better_end_end_glow_berry_plant_3.png",
+	wield_image = "mcl_better_end_end_glow_berry_plant_3.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,
@@ -300,7 +300,7 @@ minetest.register_abm({
 
 minetest.register_craftitem("mcl_better_end:end_glow_berry", {
     description = "Glow Berry", -- The name of the food item
-    inventory_image = "end_glow_berry.png", -- The texture of the food item
+    inventory_image = "mcl_better_end_end_glow_berry.png", -- The texture of the food item
 	_mcl_saturation = 1,
 	on_place = function(itemstack, placer, pointed_thing)
             if pointed_thing.type == "node" then
@@ -343,7 +343,7 @@ minetest.register_node("mcl_better_end:ender_water_real", {
 	post_effect_color = {a = 64, r = 100, g = 100, b = 200},
     
 	tiles = {{
-		name = "ender_water.png", 
+		name = "mcl_better_end_ender_water.png", 
 		animation = {
 			type = "vertical_frames", 
 			aspect_w = 32, 
@@ -352,7 +352,7 @@ minetest.register_node("mcl_better_end:ender_water_real", {
 		},
 	}, },
 	special_tiles = { {
-		name = "ender_water.png", 
+		name = "mcl_better_end_ender_water.png", 
 		animation = {
 			type = "vertical_frames", 
 			aspect_w = 32, 
@@ -396,7 +396,7 @@ minetest.register_node("mcl_better_end:ender_water_real_flowing", {
 	post_effect_color = {a = 64, r = 100, g = 100, b = 200},
     
 	tiles = {{
-		name = "ender_water.png", 
+		name = "mcl_better_end_ender_water.png", 
 		animation = {
 			type = "vertical_frames", 
 			aspect_w = 32, 
@@ -405,7 +405,7 @@ minetest.register_node("mcl_better_end:ender_water_real_flowing", {
 		},
 	}, },
 	special_tiles = { {
-		name = "ender_water.png", 
+		name = "mcl_better_end_ender_water.png", 
 		animation = {
 			type = "vertical_frames", 
 			aspect_w = 32, 
@@ -440,7 +440,7 @@ minetest.register_node("mcl_better_end:ender_water_real_flowing", {
 minetest.register_node("mcl_better_end:blublu_block", {
     description = "Blublu Block",
     tiles = {
-        "blublu_block.png",
+        "mcl_better_end_blublu_block.png",
     },
     stack_max = 64,
 	paramtype2 = "facedir",
@@ -469,9 +469,9 @@ minetest.register_craft({
 minetest.register_node("mcl_better_end:blublu_pillar", {
     description = "Blublu Piller",
     tiles = {
-        "blublu_pillar_top.png",
-        "blublu_pillar_top.png",
-        "blublu_pillar.png",
+        "mcl_better_end_blublu_pillar_top.png",
+        "mcl_better_end_blublu_pillar_top.png",
+        "mcl_better_end_blublu_pillar.png",
     },
     stack_max = 64,
 	paramtype2 = "facedir",
@@ -490,13 +490,13 @@ minetest.register_node("mcl_better_end:blublu_pillar", {
 
 mcl_stairs.register_stair("blublu_block", "mcl_better_end:blublu_block",
                 {pickaxey=1, material_stone=1},
-                {"blublu_block.png"},
+                {"mcl_better_end_blublu_block.png"},
                 "Blublu Stairs",
                 mcl_sounds.node_sound_stone_defaults(), 6, 1.5,
                 nil)
 mcl_stairs.register_slab("blublu_block", "mcl_better_end:blublu_block",
                 {pickaxey=1, material_stone=1},
-                {"blublu_block.png"},
+                {"mcl_better_end_blublu_block.png"},
                 "Blublu Slab",
                 mcl_sounds.node_sound_stone_defaults(), 6, 2,
                 "Double Blublu Slab")

@@ -1,12 +1,12 @@
 minetest.register_node("mcl_better_end:end_stone_night_turf", {
     description = "End Stone with Night Mold",
     tiles = {
-        "night_turf_top.png",   -- Top texture
+        "mcl_better_end_night_turf_top.png",   -- Top texture
         "mcl_end_end_stone.png",   -- Bottom texture
-        "mcl_end_end_stone.png^night_turf_side.png",   -- Side texture 1
-        "mcl_end_end_stone.png^night_turf_side.png",   -- Side texture 2
-        "mcl_end_end_stone.png^night_turf_side.png",   -- Side texture 3
-        "mcl_end_end_stone.png^night_turf_side.png",   -- Side texture 4
+        "mcl_end_end_stone.png^mcl_better_end_night_turf_side.png",   -- Side texture 1
+        "mcl_end_end_stone.png^mcl_better_end_night_turf_side.png",   -- Side texture 2
+        "mcl_end_end_stone.png^mcl_better_end_night_turf_side.png",   -- Side texture 3
+        "mcl_end_end_stone.png^mcl_better_end_night_turf_side.png",   -- Side texture 4
     },
     stack_max = 64,
 
@@ -34,7 +34,7 @@ minetest.register_node("mcl_better_end:end_stone_night_turf", {
 minetest.register_node("mcl_better_end:night_vines", {
 	description = ("Night Vines"),
 	drawtype = "plantlike",
-	tiles = {"night_vines.png"},
+	tiles = {"mcl_better_end_night_vines.png"},
 	paramtype = "light",
 	sunlight_propagates = true,
     walkable = false,
@@ -54,7 +54,7 @@ minetest.register_node("mcl_better_end:night_vines", {
 minetest.register_node("mcl_better_end:night_vines_bottom", {
 	description = ("Night Vines"),
 	drawtype = "plantlike",
-	tiles = {"night_vines_bottom.png"},
+	tiles = {"mcl_better_end_night_vines_bottom.png"},
 	paramtype = "light",
 	sunlight_propagates = true,
     walkable = false,
@@ -77,10 +77,10 @@ minetest.register_node("mcl_better_end:night_grass", {
 	description = ("Night Grass"),
 	drawtype = "plantlike",
 	waving = 1,
-	tiles = {"night_grass.png"},
-	inventory_image = "night_grass.png",
+	tiles = {"mcl_better_end_night_grass.png"},
+	inventory_image = "mcl_better_end_night_grass.png",
 	is_ground_content = true,
-	wield_image = "night_grass.png",
+	wield_image = "mcl_better_end_night_grass.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,
@@ -99,9 +99,9 @@ minetest.register_node("mcl_better_end:night_grass", {
 minetest.register_node("mcl_better_end:night_candle", {
 	description = ("Night Candle"),
 	drawtype = "plantlike",
-	tiles = {"night_candle.png"},
-	inventory_image = "night_candle.png",
-	wield_image = "night_candle.png",
+	tiles = {"mcl_better_end_night_candle.png"},
+	inventory_image = "mcl_better_end_night_candle.png",
+	wield_image = "mcl_better_end_night_candle.png",
 	paramtype = "light",
 	sunlight_propagates = true,
 	walkable = false,
@@ -120,9 +120,9 @@ minetest.register_node("mcl_better_end:night_candle_plant", {
 	description = ("Night Candle Plant"),
 	drawtype = "plantlike",
 	waving = 1,
-	tiles = {"night_candle_plant.png"},
-	inventory_image = "night_candle_plant.png",
-	wield_image = "night_candle_plant.png",
+	tiles = {"mcl_better_end_night_candle_plant.png"},
+	inventory_image = "mcl_better_end_night_candle_plant.png",
+	wield_image = "mcl_better_end_night_candle_plant.png",
 	paramtype = "light",
 	is_ground_content = true,
 	sunlight_propagates = true,
