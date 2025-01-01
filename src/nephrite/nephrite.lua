@@ -80,7 +80,7 @@ minetest.register_craft({
 
 
 
-minetest.register_tool("mcl_better_end:nephrite_sword", {
+minetest.register_tool("mcl_better_end:nephrite_axe", {
     description = "Nephrite Axe",
     inventory_image = "mcl_better_end_nephrite_axe.png",
     _mcl_toollike_wield = true,
