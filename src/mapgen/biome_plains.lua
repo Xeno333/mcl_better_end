@@ -67,7 +67,9 @@ end
 mcl_better_end.api.register_biome({
     type = "island",
     gen = function(data, vi, area, pr, x, y, z, noise_map, noise_center, plnoise, plnoise_1, lx,ly,lz)
-        if noise_center < -0.5 then
+        local ratio = 100
+        if noise_center < 0 then
+            ratio = 40
             data[vi] = sand
         else
             data[vi] = filler
@@ -88,7 +90,7 @@ mcl_better_end.api.register_biome({
                 data[vi] = topper
             end
 
-        elseif pr:next(1, 100) == 5 then
+        elseif pr:next(1, ratio) == 1 then
             data[vi] = mcl_better_end.mapgen.registered_nodes.end_stone    
             grow_chorus_branch({x = x, y = y, z = z}, pr:next(1, 20), pr, data, area)
 
@@ -100,6 +102,6 @@ mcl_better_end.api.register_biome({
         end
         
     end,
-    noise_high = 0,
+    noise_high = 0.3,
     noise_low = -1
 })

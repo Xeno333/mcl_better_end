@@ -28,16 +28,18 @@ end
 
 
 
-mcl_better_end.api.consts.sea_starts = -0.5
+mcl_better_end.api.consts.sea_starts = -0.7
 mcl_better_end.api.consts.sea_ends = -1
 
 
+local cave_noise = 0.6
+
 mcl_better_end.api.is_cave = function(noise, noise2)
-    return (noise >= 0.8) or (noise2 >= 0.8)
+    return (noise >= cave_noise) or (noise2 >= cave_noise)
 end
 
 mcl_better_end.api.is_island = function(noise)
-    return (noise > 0.5 and noise < 0.8)
+    return (noise > 0.5 and noise < cave_noise)
 end
 
 mcl_better_end.api.is_sea = function(noise)
@@ -45,7 +47,7 @@ mcl_better_end.api.is_sea = function(noise)
 end
 
 mcl_better_end.api.is_free = function(noise)
-    return not (noise >= 0.8 or (noise > 0.5 and noise < 0.8) or noise < -0.5)
+    return not (noise >= cave_noise or (noise > 0.5 and noise < cave_noise) or noise < mcl_better_end.api.consts.sea_starts)
 end
 
 
@@ -66,7 +68,7 @@ minetest.register_on_joinplayer(
         np_perlin_3d = {
             offset = 0,
             scale = 1,
-            spread = {x = 50, y = 20, z = 50},
+            spread = {x = 200, y = 200/6, z = 200},
             seed = minetest.get_mapgen_setting("seed"),
             octaves = 3,
             persist = 0.5

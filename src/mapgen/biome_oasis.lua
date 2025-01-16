@@ -10,7 +10,7 @@ mcl_better_end.mapgen.registered_nodes.oasis_glow_berry_plant = minetest.get_con
 
 local topper = mcl_better_end.mapgen.registered_nodes.oasis_topper
 local filler = mcl_better_end.mapgen.registered_nodes.oasis_filler
-local water = mcl_better_end.mapgen.registered_nodes.oasis_water
+--local water = mcl_better_end.mapgen.registered_nodes.oasis_water
 local glow_berry_plant = mcl_better_end.mapgen.registered_nodes.oasis_glow_berry_plant
 
 
@@ -40,5 +40,5 @@ mcl_better_end.api.register_biome({
         end
     end,
     noise_high = 1,
-    noise_low = 0
+    noise_low = 0.3
 })
