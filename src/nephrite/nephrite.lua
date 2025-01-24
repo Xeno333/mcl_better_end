@@ -136,7 +136,7 @@ mcl_armor.register_set({
     },
     groups = { fire_immune=1 },
     toughness = 2,
-    craft_material = "mcl_better_end:nightite_ingot",
+    craft_material = "mcl_better_end:nephrite_ingot",
     sound_equip = "mcl_armor_equip_diamond",
     sound_unequip = "mcl_armor_unequip_diamond",
 })
