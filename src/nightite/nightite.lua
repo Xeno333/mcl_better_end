@@ -50,49 +50,32 @@ minetest.register_craft({
     }
 })
 
-
-
-minetest.register_tool("mcl_better_end:nightite_axe", {
-    description = "Nightite Axe",
-    inventory_image = "mcl_better_end_nightite_axe.png",
-    _mcl_toollike_wield = true,
-	wield_scale = mcl_vars.tool_wield_scale,
-	groups = { tool=1, axe=1, dig_speed_class=6, enchantability=10, fire_immune=1 },
-	tool_capabilities = {
-		full_punch_interval = 1.0,
-		max_drop_level=5,
-		damage_groups = {fleshy=15},
-		punch_attack_uses = 3000,
-	},
-	on_place = mcl_tools.tool_place_funcs.axe,
-	sound = { breaks = "default_tool_breaks" },
-	_repair_material = "mcl_better_end:nightite_ingot",
-	_mcl_diggroups = {
-		axey = { speed = 9, level = 6, uses = 3000 }
-	},
-})
-
-minetest.register_tool("mcl_better_end:nightite_sword", {
-    description = "Nightite Sword",
-    inventory_image = "mcl_better_end_nightite_sword.png",
-    _mcl_toollike_wield = true,
-	wield_scale = mcl_vars.tool_wield_scale,
-	groups = { weapon=1, sword=1, dig_speed_class=5, enchantability=10 },
-	tool_capabilities = {
-		full_punch_interval = 0.600,
-		max_drop_level=5,
-		damage_groups = {fleshy=14},
-		punch_attack_uses = 3000,
-	},
-	sound = { breaks = "default_tool_breaks" },
-	on_place = mcl_tools.tool_place_funcs.sword,
-	_repair_material = "mcl_better_end:nightite_ingot",
-	_mcl_diggroups = {
-		swordy = { speed = 8, level = 5, uses = 3000 },
-		swordy_cobweb = { speed = 8, level = 5, uses = 3000 }
-	},
-})
-
+mcl_tools.register_set("nightite", {
+    craftable = true,
+    material = "mcl_better_end:nightite_ingot",
+    uses = 2000,
+    level = 15,
+    speed = 9,
+    max_drop_level = 5,
+    groups = { dig_class_speed = 18, enchantability = 60}
+}, {
+    ["sword"] = {
+        description = ("Nightite Sword"),
+        inventory_image = "nightite_sword.png",
+        tool_capabilities = {
+            full_punch_interval = 0.625,
+            damage_groups = { fleshy = 10 }
+        }
+    },
+    ["axe"] = {
+        description = ("Nightite Axe"),
+        inventory_image = "nightite_axe.png",
+        tool_capabilities = {
+            full_punch_interval = 1,
+            damage_groups = { fleshy = 8 }
+        }
+    }
+}, { _mcl_cooking_output = "mcl_better_end:nightite_raw" })
 
 
 mcl_armor.register_set({
